@@ -49,9 +49,10 @@ class AppSettings:
     show_gem_rewards: bool = False
     show_variants: bool = False
 
-    # Persistent Labyrinth Trial states (trial_id strings)
+    # Persistent Labyrinth Trial states (trial_id strings) & completed route step IDs
     unlocked_trials: List[str] = field(default_factory=list)
     completed_trials: List[str] = field(default_factory=list)
+    completed_steps: List[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         if not self.client_log_path:
@@ -59,6 +60,7 @@ class AppSettings:
         self.opacity = max(0.25, min(1.0, float(self.opacity)))
         self.unlocked_trials = list(self.unlocked_trials or [])
         self.completed_trials = list(self.completed_trials or [])
+        self.completed_steps = list(self.completed_steps or [])
 
 
 class SettingsManager:
@@ -122,4 +124,31 @@ class SettingsManager:
         else:
             if trial_id in self.settings.completed_trials:
                 self.settings.completed_trials.remove(trial_id)
+        self.save()
+
+    def mark_step_completed(self, step_id: str) -> bool:
+        """Mark a campaign step as completed if not already completed."""
+        if step_id and step_id not in self.settings.completed_steps:
+            self.settings.completed_steps.append(step_id)
+            self.save()
+            return True
+        return False
+
+    def set_step_completed(self, step_id: str, completed: bool) -> None:
+        """Explicitly set a campaign step's completed state and save."""
+        if not step_id:
+            return
+        if completed:
+            if step_id not in self.settings.completed_steps:
+                self.settings.completed_steps.append(step_id)
+        else:
+            if step_id in self.settings.completed_steps:
+                self.settings.completed_steps.remove(step_id)
+        self.save()
+
+    def reset_progress(self) -> None:
+        """Reset all completed steps and all unlocked/completed Labyrinth Trials."""
+        self.settings.completed_steps.clear()
+        self.settings.unlocked_trials.clear()
+        self.settings.completed_trials.clear()
         self.save()

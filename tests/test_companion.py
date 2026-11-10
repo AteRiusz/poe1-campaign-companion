@@ -421,5 +421,108 @@ def test_global_hotkeys_trigger_overlay_and_step_navigation(
     dash.close()
 
 
+def test_automatic_step_checkmarks_and_reset_progress_button(
+    qapp: QApplication, tmp_path: Path
+) -> None:
+    cfg_file = tmp_path / "settings.json"
+    log_file = tmp_path / "Client.txt"
+    log_file.write_text("", encoding="utf-8")
+
+    sm = SettingsManager(cfg_file)
+    engine = RouteEngine()
+    tailer = ClientLogTailer(log_file)
+    dash = DashboardWindow(engine, sm, tailer)
+    dash.show()
+    qapp.processEvents()
+
+    # 1. Manual browsing in the Route Timeline should NEVER unlock trials or complete steps
+    dash.on_route_list_selected(20)
+    assert sm.settings.completed_steps == []
+    assert sm.settings.unlocked_trials == []
+    for trial in engine.trials:
+        assert engine.get_trial_status(trial, sm.settings.unlocked_trials, sm.settings.completed_trials) == "locked"
+
+    # Reset back to start
+    dash.on_route_list_selected(0)
+
+    # 2. Simulate entering Twilight Strand -> killing Hillock -> entering Lioneye's Watch -> The Coast -> Tidal Island
+    with open(log_file, "a", encoding="utf-8") as fh:
+        fh.write("2026/11/10 12:00:01 100 cffb065b [INFO Client 100] : You have entered The Twilight Strand.\n")
+        fh.write("2026/11/10 12:01:00 101 cffb065b [INFO Client 100] : You have entered Lioneye's Watch.\n")
+        fh.write("2026/11/10 12:01:30 102 cffb065b [INFO Client 100] : You have entered The Coast.\n")
+        fh.write("2026/11/10 12:02:10 103 cffb065b [INFO Client 100] : You have entered The Tidal Island.\n")
+    dash.poll_client_log()
+
+    assert "a1_s01_twilight_strand" in sm.settings.completed_steps
+    assert "a1_s02_lioneyes_watch" in sm.settings.completed_steps
+    assert "a1_s03_the_coast" in sm.settings.completed_steps
+    assert dash.route_list.item(0).text().startswith("✅ ")
+    assert dash.route_list.item(1).text().startswith("✅ ")
+    assert dash.route_list.item(2).text().startswith("✅ ")
+
+    # 3. Leaving Tidal Island via Logout to Lioneye's Watch (after Hailrake + Medicine Chest) marks Tidal Island done
+    with open(log_file, "a", encoding="utf-8") as fh:
+        fh.write("2026/11/10 12:03:00 104 cffb065b [INFO Client 100] : You have entered Lioneye's Watch.\n")
+    dash.poll_client_log()
+    assert "a1_s04_tidal_island" in sm.settings.completed_steps
+    assert dash.route_list.item(3).text().startswith("✅ ")
+
+    # 4. Entering Mud Flats (3 Glyphs quest items) and backtracking to The Coast does NOT complete Mud Flats;
+    #    exiting forward into The Submerged Passage DOES complete Mud Flats
+    with open(log_file, "a", encoding="utf-8") as fh:
+        fh.write("2026/11/10 12:04:00 105 cffb065b [INFO Client 100] : You have entered The Mud Flats.\n")
+        fh.write("2026/11/10 12:04:20 106 cffb065b [INFO Client 100] : You have entered The Coast.\n")
+    dash.poll_client_log()
+    assert "a1_s05_mud_flats" not in sm.settings.completed_steps
+
+    with open(log_file, "a", encoding="utf-8") as fh:
+        fh.write("2026/11/10 12:05:00 107 cffb065b [INFO Client 100] : You have entered The Mud Flats.\n")
+        fh.write("2026/11/10 12:06:00 108 cffb065b [INFO Client 100] : You have entered The Submerged Passage.\n")
+    dash.poll_client_log()
+    assert "a1_s05_mud_flats" in sm.settings.completed_steps
+
+    # 5. Entering Upper Prison: leaving before entering Warden's Quarters (Brutus) does NOT complete it;
+    #    entering Warden's Quarters and then leaving to Prisoner's Gate DOES complete it!
+    with open(log_file, "a", encoding="utf-8") as fh:
+        fh.write("2026/11/10 12:07:00 109 cffb065b [INFO Client 100] : You have entered The Lower Prison.\n")
+        fh.write("2026/11/10 12:08:00 110 cffb065b [INFO Client 100] : You have entered The Upper Prison.\n")
+        fh.write("2026/11/10 12:08:15 111 cffb065b [INFO Client 100] : You have entered Lioneye's Watch.\n")
+    dash.poll_client_log()
+    assert "norm_1_lower_prison" in sm.settings.unlocked_trials
+    assert "a1_s11_upper_prison" not in sm.settings.completed_steps
+
+    with open(log_file, "a", encoding="utf-8") as fh:
+        fh.write("2026/11/10 12:09:00 112 cffb065b [INFO Client 100] : You have entered The Upper Prison.\n")
+        fh.write("2026/11/10 12:09:40 113 cffb065b [INFO Client 100] : You have entered The Warden's Quarters.\n")
+        fh.write("2026/11/10 12:10:20 114 cffb065b [INFO Client 100] : You have entered Prisoner's Gate.\n")
+    dash.poll_client_log()
+    assert "a1_s11_upper_prison" in sm.settings.completed_steps
+
+    # 6. Clicking 'Reset Progress' clears all completed steps and all unlocked/completed Lab Trials
+    dash.set_trial_completed_state = sm.set_trial_completed("norm_1_lower_prison", True)
+    assert len(sm.settings.completed_steps) > 0
+    assert len(sm.settings.unlocked_trials) > 0
+    assert len(sm.settings.completed_trials) > 0
+
+    dash.btn_reset_progress.click()
+    qapp.processEvents()
+
+    assert sm.settings.completed_steps == []
+    assert sm.settings.unlocked_trials == []
+    assert sm.settings.completed_trials == []
+    assert engine.completed_steps == set()
+    assert engine.current_index == 0
+    assert not dash.route_list.item(0).text().startswith("✅ ")
+    for trial in engine.trials:
+        assert engine.get_trial_status(trial, sm.settings.unlocked_trials, sm.settings.completed_trials) == "locked"
+
+    # Polling again with no new lines after Reset Progress keeps everything locked/reset
+    dash.poll_client_log()
+    assert sm.settings.completed_steps == []
+    assert sm.settings.unlocked_trials == []
+
+    dash.close()
+
+
 
 

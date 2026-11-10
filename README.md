@@ -24,6 +24,7 @@ Instead of alt-tabbing to read long paragraphs from a walkthrough, this app tail
   * **Collision-Free Vector Topology Map:** Antialiased live QPainter vector schematic showing `N / S / W / E` compass guides, directional path arrows, non-overlapping tooltip pills, and on-graph **procedural / multi-seed layout warnings** when a zone's layout varies heavily by seed.
 * **Complete Acts 1–10 Campaign Route & Dedicated Labyrinth Trials Tracker:**
   * **Modular Per-Act Route (`data/acts/act1.json` .. `act10.json`):** `112` zone-by-zone steps (plus sub-zone `zone_aliases`) covering all 10 Acts, all Town Hubs, all 24 Passive Skill Point quests, and major Pantheon bosses.
+  * **Automatic Step Completion Checkmarks (`✅`) & Reset Progress:** Steps automatically receive a green `✅` checkmark in the Campaign Route Timeline when you leave the area (verifying required boss/quest sub-zones and gated forward exits before marking boss/quest steps complete), with a **`⬜ Mark Done` / `✅ Completed`** toggle and a one-click **`🔄 Reset Progress`** button to reset all completed steps and Labyrinth Trials for a new run.
   * **Run-Anytime Labyrinth Trials Tracker (`Normal 0/6`, `Cruel 0/3`, `Merciless 0/3`):** Tracks `🔒 Locked` → `🔓 Unlocked — Ready to Run` → `✅ Completed` states across all 12 campaign trials, displaying the exact **Waypoint Hint** and **Trap Type** for any unlocked/skipped trials.
 * **Overlay-Only Opacity Slider & Optional Extra Info (Off by Default):**
   * Window mode (`DashboardWindow`) is always locked at **100% opacity** for maximum readability.

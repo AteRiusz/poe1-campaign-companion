@@ -192,7 +192,9 @@ class OverlayWindow(QWidget):
         cfg = settings or self.settings_mgr.settings
         self.set_overlay_opacity(cfg.opacity)
 
-        self.act_badge.setText(f"ACT {step.act} • STEP {step.step_number}")
+        is_done = step.step_id in cfg.completed_steps
+        done_prefix = "✅ " if is_done else ""
+        self.act_badge.setText(f"{done_prefix}ACT {step.act} • STEP {step.step_number}")
         self.zone_title.setText(step.zone_name)
         self.level_label.setText(f"(Lvl {step.area_level})" if step.area_level else "")
         self.compass_badge.setText(step.compass)

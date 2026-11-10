@@ -23,7 +23,7 @@ from typing import Dict, Optional
 logger = logging.getLogger("poe_companion")
 
 from PyQt6.QtCore import QTimer, Qt
-from PyQt6.QtGui import QGuiApplication, QKeySequence, QShortcut
+from PyQt6.QtGui import QColor, QGuiApplication, QKeySequence, QShortcut
 from PyQt6.QtWidgets import (
     QCheckBox,
     QFileDialog,
@@ -67,6 +67,7 @@ class DashboardWindow(QMainWindow):
         super().__init__()
         self.engine = engine
         self.settings_mgr = settings_mgr
+        self.engine.completed_steps = set(self.settings_mgr.settings.completed_steps)
         self.tailer = tailer or ClientLogTailer(self.settings_mgr.settings.client_log_path)
         self.overlay = OverlayWindow(self.settings_mgr)
         self.selected_lab_tier: str = "Normal"
@@ -434,9 +435,25 @@ class DashboardWindow(QMainWindow):
         route_layout.setContentsMargins(12, 10, 12, 10)
         route_layout.setSpacing(6)
 
-        lbl_route = QLabel("CAMPAIGN ROUTE TIMELINE (ACTS 1–10)")
-        lbl_route.setStyleSheet("font-size: 11px; font-weight: bold; color: #9ca3af;")
-        route_layout.addWidget(lbl_route)
+        route_header = QHBoxLayout()
+        self.lbl_route = QLabel("CAMPAIGN ROUTE TIMELINE (ACTS 1–10)")
+        self.lbl_route.setStyleSheet("font-size: 11px; font-weight: bold; color: #9ca3af;")
+        route_header.addWidget(self.lbl_route)
+        route_header.addStretch(1)
+
+        self.btn_reset_progress = QPushButton("🔄 Reset Progress")
+        self.btn_reset_progress.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_reset_progress.setToolTip(
+            "Reset all completed steps (✅) and all unlocked/completed Labyrinth Trials back to Act 1 Step 1"
+        )
+        self.btn_reset_progress.setStyleSheet(
+            "QPushButton { background-color: #2a1215; color: #fda4af; border: 1px solid #be123c; "
+            "border-radius: 5px; padding: 3px 8px; font-size: 11px; font-weight: bold; }"
+            "QPushButton:hover { background-color: #4c0519; border-color: #f43f5e; }"
+        )
+        self.btn_reset_progress.clicked.connect(self.on_reset_progress)
+        route_header.addWidget(self.btn_reset_progress)
+        route_layout.addLayout(route_header)
 
         self.route_list = QListWidget()
         self.route_list.setStyleSheet(
@@ -469,9 +486,14 @@ class DashboardWindow(QMainWindow):
         nav_row = QHBoxLayout()
         btn_prev = QPushButton("← Prev (Alt+[)")
         btn_prev.clicked.connect(self.on_prev_step)
+        self.btn_toggle_step_done = QPushButton("⬜ Mark Done")
+        self.btn_toggle_step_done.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_toggle_step_done.setToolTip("Toggle completion checkmark (✅) for the current step")
+        self.btn_toggle_step_done.clicked.connect(self.on_toggle_current_step_done)
         btn_next = QPushButton("Next (Alt+]) →")
         btn_next.clicked.connect(self.on_next_step)
         nav_row.addWidget(btn_prev)
+        nav_row.addWidget(self.btn_toggle_step_done)
         nav_row.addWidget(btn_next)
         route_layout.addLayout(nav_row)
 
@@ -527,6 +549,10 @@ class DashboardWindow(QMainWindow):
         for evt in events:
             if self.engine.process_log_event(evt):
                 changed = True
+                if self.engine.newly_completed_steps:
+                    for done_sid in self.engine.newly_completed_steps:
+                        self.settings_mgr.mark_step_completed(done_sid)
+                    self.engine.newly_completed_steps.clear()
                 # Persist newly unlocked trials when entering their unlock_zone or trial zone
                 if evt.event_type == "ZONE_ENTERED" and evt.zone_name:
                     self._check_trial_unlocks_on_zone(evt.zone_name)
@@ -543,6 +569,41 @@ class DashboardWindow(QMainWindow):
         for t in self.engine.trials:
             if t.act == current_act and norm in (t.unlock_zone.lower(), t.zone_name.lower()):
                 self.settings_mgr.mark_trial_unlocked(t.trial_id)
+
+    def _refresh_route_timeline(self) -> None:
+        """Update the Route Timeline list items with green checkmarks (✅) for completed steps."""
+        completed_set = set(self.settings_mgr.settings.completed_steps)
+        self.engine.completed_steps = set(completed_set)
+        done_total = 0
+
+        self.route_list.blockSignals(True)
+        for idx, s in enumerate(self.engine.steps):
+            item = self.route_list.item(idx)
+            if item is None:
+                continue
+            is_done = s.step_id in completed_set
+            if is_done:
+                done_total += 1
+                item.setText(f"✅ A{s.act}.{s.step_number} — {s.zone_name}  [{s.compass}]")
+                item.setForeground(QColor("#34d399"))
+            else:
+                item.setText(f"A{s.act}.{s.step_number} — {s.zone_name}  [{s.compass}]")
+                item.setForeground(QColor("#f5f5f4"))
+        self.route_list.setCurrentRow(self.engine.current_index)
+        self.route_list.blockSignals(False)
+
+        self.lbl_route.setText(f"CAMPAIGN ROUTE TIMELINE ({done_total}/{len(self.engine.steps)} DONE)")
+
+        curr_done = self.engine.current_step.step_id in completed_set
+        if curr_done:
+            self.btn_toggle_step_done.setText("✅ Completed")
+            self.btn_toggle_step_done.setStyleSheet(
+                "background-color: #064e3b; color: #a7f3d0; border: 1px solid #10b981; "
+                "border-radius: 6px; padding: 6px 10px; font-size: 12px; font-weight: bold;"
+            )
+        else:
+            self.btn_toggle_step_done.setText("⬜ Mark Done")
+            self.btn_toggle_step_done.setStyleSheet("")
 
     def refresh_ui(self) -> None:
         """Synchronize DashboardWindow, OverlayWindow, and Lab Trials Tracker."""
@@ -563,7 +624,9 @@ class DashboardWindow(QMainWindow):
             else:
                 self.selected_lab_tier = "Merciless"
 
-        self.act_header_label.setText(f"ACT {step.act} • STEP {step.step_number}")
+        step_done = step.step_id in cfg.completed_steps
+        done_badge = "  •  ✅ COMPLETED" if step_done else ""
+        self.act_header_label.setText(f"ACT {step.act} • STEP {step.step_number}{done_badge}")
         lvl_suffix = f" (Lvl {step.area_level})" if step.area_level else ""
         self.zone_header_label.setText(f"{step.zone_name}{lvl_suffix}")
         self.next_exit_label.setText(f"🎯 Primary Exit: {step.next_exit}")
@@ -620,10 +683,8 @@ class DashboardWindow(QMainWindow):
 
         self.map_canvas.set_topology(step.topology, compass_label=step.compass)
 
-        # Sync timeline selection without recursive signal loop
-        self.route_list.blockSignals(True)
-        self.route_list.setCurrentRow(self.engine.current_index)
-        self.route_list.blockSignals(False)
+        # Sync timeline checkmarks & selection without recursive signal loop
+        self._refresh_route_timeline()
 
         # Refresh Dedicated Labyrinth Trials Tracker
         self._refresh_trials_tracker()
@@ -759,6 +820,28 @@ class DashboardWindow(QMainWindow):
 
     def on_prev_step(self) -> None:
         self.engine.prev_step()
+        self.refresh_ui()
+
+    def on_toggle_current_step_done(self) -> None:
+        """Manually toggle the completion checkmark (✅) on the currently selected step."""
+        step = self.engine.current_step
+        is_currently_done = step.step_id in self.settings_mgr.settings.completed_steps
+        new_state = not is_currently_done
+        self.settings_mgr.set_step_completed(step.step_id, new_state)
+        if new_state:
+            self.engine.completed_steps.add(step.step_id)
+        else:
+            self.engine.completed_steps.discard(step.step_id)
+        self.refresh_ui()
+
+    def on_reset_progress(self) -> None:
+        """Reset all completed steps and all unlocked/completed Labyrinth Trials back to Act 1 Step 1."""
+        logger.info("Resetting all campaign step progress and Labyrinth Trials")
+        self.settings_mgr.reset_progress()
+        self.engine.reset_progress()
+        self.tailer.skip_to_end()
+        self._user_overrode_lab_tier = False
+        self.selected_lab_tier = "Normal"
         self.refresh_ui()
 
     def on_route_list_selected(self, row: int) -> None:

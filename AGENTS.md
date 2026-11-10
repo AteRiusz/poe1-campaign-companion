@@ -83,12 +83,16 @@ C:\Projects\poe1-campaign-companion\
     * `show_boss_info: bool = False`
     * `show_gem_rewards: bool = False`
     * `show_variants: bool = False`
-  * **Labyrinth Trial Tracking:**
-    * `unlocked_trials: List[str]` and `completed_trials: List[str]` persist across sessions via `mark_trial_unlocked()` and `set_trial_completed()`.
+  * **Labyrinth Trial & Step Completion Tracking:**
+    * `unlocked_trials: List[str]`, `completed_trials: List[str]`, and `completed_steps: List[str]` persist across sessions via `mark_trial_unlocked()`, `set_trial_completed()`, `mark_step_completed()`, `set_step_completed()`, and `reset_progress()`.
 
 ### C. `src/route_engine.py`
 * Loads all per-Act JSON files (`data/acts/act1.json` .. `act10.json`, `112` steps total) in numerical Act order and all 12 Labyrinth Trials (`data/labyrinth_trials.json`).
 * **`RouteStep.matches_zone(normalized_zone: str)`**: Matches either `step.zone_name` or any sub-zone alias in `step.zone_aliases` (e.g., `"The Warden's Quarters"`, `"Merveil's Caverns"`, `"The Fellshrine Ruins"`, `"The Ancient Pyramid"`).
+* **`RouteEngine._can_complete_step_on_exit(prev_idx, new_idx, new_zone_norm) -> bool`**:
+  Automatically marks `prev_step` as completed (`✅`) when leaving its area via `Client.txt`, enforcing required boss/quest sub-zone visits (`REQUIRED_SUBZONES_BY_STEP_ID`), NPC/boss dialogue detection, and forward progression / Town turn-in exit rules so backtracking early does not falsely complete a boss or quest step.
+* **`RouteEngine.reset_progress() -> RouteStep`**:
+  Resets `current_index`, `max_reached_index`, `completed_steps`, and active log progression back to Act 1 Step 1 (`The Twilight Strand`).
 * **`RouteEngine.on_zone_entered(zone_name: str) -> RouteStep`**:
   1. Searches forward up to 16 steps from `current_index` first (so revisiting town hubs like `The Forest Encampment` or hubs like `The Submerged Passage` / `The Crossroads` advances to the next logical pass).
   2. Falls back to the nearest matching step across the campaign.
