@@ -201,10 +201,10 @@
       "step_number": 3,
       "zone_name": "The Coast",
       "area_level": 2,
-      "compass": "NE ↗",
-      "summary": "Hug coastline North-East → Tag Waypoint at end → Enter The Tidal Island (or Mud Flats)",
-      "layout_tell": "Stay near the beach edge; the Waypoint always spawns right in front of the Mud Flats & Tidal Island exits.",
-      "next_exit": "Tag WP → Enter The Tidal Island (SE) or The Mud Flats (NE)",
+      "compass": "NE ↗ (EXIT NW ↖)",
+      "summary": "Hug coastline North-East → Tag Waypoint at end → Enter The Tidal Island (SE) or The Mud Flats (NW)",
+      "layout_tell": "Hug the coastline NE to the Waypoint; at the Waypoint, The Mud Flats exit is inland North-West (NW) up the cliff gap and The Tidal Island is South-East (SE) across the water.",
+      "next_exit": "Tag WP → Enter The Tidal Island (SE) or The Mud Flats (NW)",
       "portal_tip": "Tag The Coast Waypoint so you can teleport straight back after Hailrake!",
       "badges": [
         {
@@ -246,32 +246,33 @@
         }
       ],
       "topology": {
+        "procedural_note": "2 coastal seeds: Direct beach (CoastA) or brief inland cliff detour (CoastB); Mud Flats is NW of WP",
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
+            "label": "Start (SW)",
             "x": 0.14,
-            "y": 0.84,
+            "y": 0.82,
             "type": "start"
           },
           {
             "id": "wp",
             "label": "Waypoint",
-            "x": 0.68,
-            "y": 0.34,
+            "x": 0.66,
+            "y": 0.38,
             "type": "wp"
           },
           {
             "id": "tidal",
-            "label": "→ Tidal Island",
+            "label": "↘ Tidal Island",
             "x": 0.86,
-            "y": 0.56,
+            "y": 0.62,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "→ Mud Flats",
-            "x": 0.82,
+            "label": "↖ Mud Flats (NW)",
+            "x": 0.44,
             "y": 0.16,
             "type": "exit"
           }
@@ -385,9 +386,9 @@
       "step_number": 5,
       "zone_name": "The Mud Flats",
       "area_level": 4,
-      "compass": "NE ↗",
-      "summary": "Collect 3 Glyphs (follow water streams between nests) → Open Glyph Wall NE",
-      "layout_tell": "The 3 Rhoa Nests are ALWAYS connected by shallow water streams on the ground!",
+      "compass": "NW ↖ / NE ↗ (STREAMS)",
+      "summary": "Collect 3 Glyphs (follow water streams between nests) → Open Strange Glyph Wall along NW/NE cliff",
+      "layout_tell": "The 3 Rhoa Nests spawn in randomized central spots but are ALWAYS connected by shallow water streams; the Strange Glyph Wall spawns along the NW-to-NE cliff wall.",
       "next_exit": "Touch Strange Glyph Wall → Enter The Submerged Passage",
       "portal_tip": "Ignore Fetid Pool (optional respec quest) during speed leveling",
       "badges": [
@@ -488,8 +489,12 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural: 3 Rhoa Nests & Strange Glyph Wall positions vary by seed (follow water streams)"
+      },
+      "zone_aliases": [
+        "The Fetid Pool"
+      ]
     },
     {
       "step_id": "a1_s06_submerged_passage",
@@ -497,9 +502,9 @@
       "step_number": 6,
       "zone_name": "The Submerged Passage",
       "area_level": 5,
-      "compass": "NW ↖ / NE ↗",
+      "compass": "PROCEDURAL CAVE",
       "summary": "Tag Waypoint → Find Long Wooden Bridge → Drop Portal at Bridge → Exit to Ledge",
-      "layout_tell": "When you reach the long wooden bridge: The Ledge is ACROSS the bridge; Flooded Depths (+1 Skill Point) is BELOW the bridge.",
+      "layout_tell": "Procedural cave where room directions vary by seed: explore main caverns until you find the long wooden bridge. The Ledge is ALWAYS across the bridge; Flooded Depths spawns on the side branch before/below the bridge.",
       "next_exit": "Drop Portal at Bridge → Cross Bridge → Enter The Ledge",
       "portal_tip": "⚡ DROP PORTAL right before crossing the wooden bridge (use it from Ledge WP later!)",
       "badges": [
@@ -588,7 +593,8 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural cave: Room directions vary heavily by seed — look for the long wooden bridge"
       }
     },
     {
@@ -597,9 +603,9 @@
       "step_number": 7,
       "zone_name": "The Ledge",
       "area_level": 6,
-      "compass": "LINEAR ↖",
-      "summary": "Check 3 Stones at Waypoint (points to Exit) → Take WP to Town for Portal Trick OR Run to Climb",
-      "layout_tell": "Look at the 3 tiny stones next to the Waypoint: they ALWAYS point toward The Climb exit!",
+      "compass": "3 STONES (NW ↖ / NE ↗)",
+      "summary": "Reach Waypoint & check 3 small stones (point to The Climb) → Take WP to Town for Bridge Portal OR run to Climb",
+      "layout_tell": "The Ledge spawns in 2 seed orientations (SE→NW or SW→NE). Look at the 3 tiny stones next to the Waypoint: they ALWAYS point toward The Climb exit!",
       "next_exit": "Follow cliff ridge → Enter The Climb (or take WP to Town → Bridge Portal)",
       "portal_tip": "From Ledge WP (or Climb WP), teleport to Town and take your Portal back to the Submerged Bridge!",
       "badges": [
@@ -633,30 +639,42 @@
       "gem_reward": "No new gems yet — Level 8 support/aura gems unlock upon entering Lower Prison.",
       "variants": [
         {
-          "title": "100% Linear Ridge",
-          "desc": "Single narrow cliff path; 3 stones next to WP point toward The Climb."
+          "title": "NW Orientation (Seed A)",
+          "desc": "Ridge runs SE to NW; 3 stones by WP point NW."
+        },
+        {
+          "title": "NE Orientation (Seed B)",
+          "desc": "Ridge runs SW to NE; 3 stones by WP point NE."
         }
       ],
       "topology": {
+        "procedural_note": "2 seed orientations (NW or NE): Check the 3 small stones next to the Waypoint",
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.85,
+            "label": "Start (S)",
+            "x": 0.5,
             "y": 0.84,
             "type": "start"
           },
           {
             "id": "wp",
-            "label": "WP (3 Stones ↖)",
-            "x": 0.52,
+            "label": "WP (Check 3 Stones)",
+            "x": 0.5,
             "y": 0.52,
             "type": "wp"
           },
           {
-            "id": "exit",
-            "label": "↖ The Climb",
-            "x": 0.16,
+            "id": "exit_nw",
+            "label": "↖ Climb (Seed A)",
+            "x": 0.2,
+            "y": 0.2,
+            "type": "exit"
+          },
+          {
+            "id": "exit_ne",
+            "label": "↗ Climb (Seed B)",
+            "x": 0.8,
             "y": 0.2,
             "type": "exit"
           }
@@ -669,8 +687,13 @@
           },
           {
             "from": "wp",
-            "to": "exit",
+            "to": "exit_nw",
             "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "exit_ne",
+            "style": "branch"
           }
         ]
       }
@@ -681,7 +704,7 @@
       "step_number": 8,
       "zone_name": "The Flooded Depths",
       "area_level": 6,
-      "compass": "EXPLORE",
+      "compass": "PROCEDURAL CAVE",
       "summary": "Find & Kill The Dweller of the Deep (+1 Skill Point) → Logout to Town",
       "layout_tell": "Look for a mossy/gold-lit cavern room; if you hit a dead end, backtrack immediately to the main artery.",
       "next_exit": "Kill Dweller of the Deep → Relog to Town → Take WP to Ledge/Climb",
@@ -756,7 +779,8 @@
             "to": "boss",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural cave: Insufficient fixed layout data — Dweller location varies heavily by seed"
       }
     },
     {
@@ -765,9 +789,9 @@
       "step_number": 9,
       "zone_name": "The Climb",
       "area_level": 7,
-      "compass": "NW ↖ / N ↑",
+      "compass": "UPHILL (NE ↗ / NW ↖)",
       "summary": "Follow stone path uphill past Waypoint → Defeat Navali cage guards → Enter Lower Prison",
-      "layout_tell": "Always walk UPHILL along the stone cobbles; the exit is always at the highest northern cliff.",
+      "layout_tell": "Always walk UPHILL along the stone cobbles; the ridge curves toward either North-East or North-West depending on seed.",
       "next_exit": "Follow uphill path → Enter The Lower Prison",
       "portal_tip": "Tag Waypoint only if you haven't done Flooded Depths yet",
       "badges": [
@@ -840,7 +864,8 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "2 seed orientations: Ridge curves NE or NW — always follow the rising cobblestone path uphill"
       }
     },
     {
@@ -849,9 +874,9 @@
       "step_number": 10,
       "zone_name": "The Lower Prison",
       "area_level": 8,
-      "compass": "CLOCKWISE ↻",
+      "compass": "GRID / CLOCKWISE ↻",
       "summary": "Tag Waypoint → Complete Lab Trial #1 → Take Stairs to The Upper Prison",
-      "layout_tell": "From the Waypoint room, Upper Prison stairs and Lab Trial usually spawn in opposite corners of the grid.",
+      "layout_tell": "Procedural indoor grid: Lab Trial #1 usually spawns in the East / South-East wing, while stairs to The Upper Prison spawn in an outer corner (NW, NE, or SE).",
       "next_exit": "Complete Trial of Ascendancy → Enter The Upper Prison",
       "portal_tip": "Take WP to Town briefly if you need your Lvl 8 Support Gems before Brutus!",
       "badges": [
@@ -894,26 +919,27 @@
         }
       ],
       "topology": {
+        "procedural_note": "Procedural grid: Trial (usually E/SE) & Upper Prison stairs vary across seeds",
         "nodes": [
           {
             "id": "start",
             "label": "Start + WP",
-            "x": 0.22,
-            "y": 0.78,
+            "x": 0.2,
+            "y": 0.76,
             "type": "wp"
           },
           {
             "id": "trial",
-            "label": "Lab Trial #1",
-            "x": 0.28,
-            "y": 0.28,
+            "label": "Lab Trial #1 (E/SE)",
+            "x": 0.78,
+            "y": 0.68,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "→ Upper Prison",
-            "x": 0.8,
-            "y": 0.24,
+            "x": 0.76,
+            "y": 0.22,
             "type": "exit"
           }
         ],
@@ -937,9 +963,9 @@
       "step_number": 11,
       "zone_name": "The Upper Prison",
       "area_level": 9,
-      "compass": "OUTER WALL",
+      "compass": "PROCEDURAL GRID",
       "summary": "Hug outer walls to find The Warden's Quarters → Follow blood trail → Kill Brutus",
-      "layout_tell": "Once inside The Warden's Quarters, follow the red blood carpet/smears on the floor straight to Brutus!",
+      "layout_tell": "Upper Prison has 8 procedural grid seeds — hug outer perimeter walls to find stairs to The Warden's Quarters. Inside Warden's Quarters, follow the red blood trail on the floor straight to Brutus!",
       "next_exit": "Kill Brutus → Exit to Prisoner's Gate (or Logout to Town)",
       "portal_tip": "After killing Brutus, logging out puts you in Town AND automatically unlocks Prisoner's Gate WP!",
       "badges": [
@@ -1012,8 +1038,12 @@
             "to": "boss",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural (8 seeds): Upper Prison has no fixed tell — follow blood trail in Warden's Quarters"
+      },
+      "zone_aliases": [
+        "The Warden's Quarters"
+      ]
     },
     {
       "step_id": "a1_s12_prisoners_gate",
@@ -1021,9 +1051,9 @@
       "step_number": 12,
       "zone_name": "Prisoner's Gate",
       "area_level": 10,
-      "compass": "VALLEY ↓",
-      "summary": "Follow road until Piety blocks it → Turn toward the DOWNHILL cliff ledge → Enter Ship Graveyard",
-      "layout_tell": "From Piety's barricade, look at both sides: one side goes UPHILL (dead end), the other goes DOWNHILL into a valley (always the exit!).",
+      "compass": "VALLEY (SW ↙ / SE ↘)",
+      "summary": "Follow road until Piety blocks it → Turn toward the DOWNHILL valley cliff (Left SW or Right SE) → Enter Ship Graveyard",
+      "layout_tell": "From Piety's barricade, check both sides of the road: one side goes UPHILL (dead end), the other goes DOWNHILL into a valley (Left SW in Seed A, Right SE in Seed B — always leads to Ship Graveyard!).",
       "next_exit": "Follow valley cliff edge → Enter The Ship Graveyard",
       "portal_tip": "No portal needed — Ship Graveyard Waypoint is right near its entrance",
       "badges": [
@@ -1066,32 +1096,33 @@
         }
       ],
       "topology": {
+        "procedural_note": "2 seed variants: Downhill valley exit can spawn on the Left (SW) or Right (SE) of the road",
         "nodes": [
           {
             "id": "start",
             "label": "Start + WP",
-            "x": 0.2,
-            "y": 0.24,
+            "x": 0.5,
+            "y": 0.18,
             "type": "wp"
           },
           {
             "id": "piety",
-            "label": "Blocked Road",
-            "x": 0.48,
-            "y": 0.45,
+            "label": "Blocked Road (Piety)",
+            "x": 0.5,
+            "y": 0.48,
             "type": "quest"
           },
           {
-            "id": "valley",
-            "label": "Downhill Valley",
-            "x": 0.65,
-            "y": 0.72,
-            "type": "quest"
+            "id": "valley_l",
+            "label": "↙ Valley Left (Seed A)",
+            "x": 0.2,
+            "y": 0.78,
+            "type": "exit"
           },
           {
-            "id": "exit",
-            "label": "→ Ship Graveyard",
-            "x": 0.86,
+            "id": "valley_r",
+            "label": "↘ Valley Right (Seed B)",
+            "x": 0.8,
             "y": 0.78,
             "type": "exit"
           }
@@ -1104,13 +1135,13 @@
           },
           {
             "from": "piety",
-            "to": "valley",
+            "to": "valley_l",
             "style": "main"
           },
           {
-            "from": "valley",
-            "to": "exit",
-            "style": "main"
+            "from": "piety",
+            "to": "valley_r",
+            "style": "branch"
           }
         ]
       }
@@ -1121,10 +1152,10 @@
       "step_number": 13,
       "zone_name": "The Ship Graveyard",
       "area_level": 11,
-      "compass": "WALL HUG",
-      "summary": "Tag Waypoint → Drop Portal at Ship Graveyard Cave → Enter Cavern of Wrath first!",
-      "layout_tell": "Hug the inland mountain wall from the Waypoint to find Cavern of Wrath; the Cave is inside a wrecked ship hull nearby.",
-      "next_exit": "Drop Portal at Ship Graveyard Cave → Tag Cavern of Wrath WP → Return for Fairgraves (+1 Pt)",
+      "compass": "NE ↗ CLIFF + CAVE",
+      "summary": "Tag WP → Drop Portal outside Ship Graveyard Cave (where Fairgraves stands) → Tag Cavern of Wrath WP → Return for Cave & Fairgraves",
+      "layout_tell": "Captain Fairgraves stands right outside The Ship Graveyard Cave entrance! Hug the inland cliff wall (NE/NW) to find Cavern of Wrath; drop a Portal at the Cave so you can return via WP.",
+      "next_exit": "Drop Portal at Cave (Fairgraves) → Tag Cavern of Wrath WP → Portal back for Allflame + Fairgraves",
       "portal_tip": "⚡ Drop Portal outside Ship Graveyard Cave (or enter Cave, grab Allflame, and exit to Cavern of Wrath)",
       "badges": [
         {
@@ -1143,14 +1174,14 @@
           "text": "Tag Waypoint near entrance"
         },
         {
-          "tag": "QUEST",
-          "color": "amber",
-          "text": "Find Ship Graveyard Cave → Loot Allflame at end of Cave"
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Drop Portal outside Ship Graveyard Cave (where Fairgraves stands) OR grab Allflame now"
         },
         {
           "tag": "EXIT",
           "color": "emerald",
-          "text": "Tag Cavern of Wrath WP → Kill Fairgraves by WP (+1 Skill Pt)"
+          "text": "Hug inland cliff wall to tag Cavern of Wrath WP → Take WP to Town → Portal back to kill Fairgraves (+1 Pt)"
         }
       ],
       "boss_info": "Captain Fairgraves: Uses Spectral Throw & summons Ghost Pirates. High Cold/Lightning damage.",
@@ -1162,33 +1193,27 @@
         }
       ],
       "topology": {
+        "procedural_note": "Procedural coast: Cave + Fairgraves spawn randomly inland; Cavern of Wrath is in the NE/NW cliff",
         "nodes": [
           {
             "id": "start",
             "label": "Start + WP",
             "x": 0.18,
-            "y": 0.78,
+            "y": 0.8,
             "type": "wp"
           },
           {
             "id": "cave",
-            "label": "Graveyard Cave",
-            "x": 0.54,
-            "y": 0.62,
-            "type": "quest"
-          },
-          {
-            "id": "fair",
-            "label": "Fairgraves (+1 Pt)",
-            "x": 0.36,
-            "y": 0.44,
-            "type": "boss"
+            "label": "Cave + Fairgraves (Portal)",
+            "x": 0.52,
+            "y": 0.54,
+            "type": "portal"
           },
           {
             "id": "exit",
-            "label": "→ Cavern of Wrath",
+            "label": "↗ Cavern of Wrath",
             "x": 0.82,
-            "y": 0.22,
+            "y": 0.2,
             "type": "exit"
           }
         ],
@@ -1199,14 +1224,14 @@
             "style": "branch"
           },
           {
-            "from": "cave",
+            "from": "start",
             "to": "exit",
             "style": "main"
           },
           {
-            "from": "start",
-            "to": "fair",
-            "style": "branch"
+            "from": "cave",
+            "to": "exit",
+            "style": "main"
           }
         ]
       }
@@ -1280,7 +1305,8 @@
             "to": "allflame",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural oval cave: Hug left or right perimeter wall to reach the Slave Girl (Allflame)"
       }
     },
     {
@@ -1364,7 +1390,8 @@
             "to": "exit",
             "style": "river"
           }
-        ]
+        ],
+        "procedural_note": "Procedural cave: Winding passages vary by seed — follow the main underground water stream"
       }
     },
     {
@@ -1448,8 +1475,12 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural cave: Insufficient fixed layout data — cross wooden bridges generally NE/NW toward Merveil's Lair"
+      },
+      "zone_aliases": [
+        "Merveil's Caverns"
+      ]
     }
   ]
 }

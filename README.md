@@ -21,9 +21,9 @@ Instead of alt-tabbing to read long paragraphs from a walkthrough, this app tail
     * 🔵 **Sky (`[WP]` / `[PORTAL]`):** Waypoints & speedrunner portal/logout tricks
     * 🔴 **Rose (`[BOSS]`):** Required boss fights
   * **Speedrunner "Layout Tell":** 1-line heuristic explaining how to read the zone's random seed generation (e.g., *"The 3 small stones next to The Ledge Waypoint always point toward The Climb exit"*).
-  * **Collision-Free Vector Topology Map:** Antialiased live QPainter vector schematic showing `N / S / W / E` compass guides, directional path arrows, and non-overlapping tooltip pills at native widget resolution.
+  * **Collision-Free Vector Topology Map:** Antialiased live QPainter vector schematic showing `N / S / W / E` compass guides, directional path arrows, non-overlapping tooltip pills, and on-graph **procedural / multi-seed layout warnings** when a zone's layout varies heavily by seed.
 * **Complete Acts 1–10 Campaign Route & Dedicated Labyrinth Trials Tracker:**
-  * **Modular Per-Act Route (`data/acts/act1.json` .. `act10.json`):** `104` zone-by-zone steps covering all 10 Acts, town hubs, all 24 Passive Skill Point quests, and major Pantheon bosses.
+  * **Modular Per-Act Route (`data/acts/act1.json` .. `act10.json`):** `112` zone-by-zone steps (plus sub-zone `zone_aliases`) covering all 10 Acts, all Town Hubs, all 24 Passive Skill Point quests, and major Pantheon bosses.
   * **Run-Anytime Labyrinth Trials Tracker (`Normal 0/6`, `Cruel 0/3`, `Merciless 0/3`):** Tracks `🔒 Locked` → `🔓 Unlocked — Ready to Run` → `✅ Completed` states across all 12 campaign trials, displaying the exact **Waypoint Hint** and **Trap Type** for any unlocked/skipped trials.
 * **Overlay-Only Opacity Slider & Optional Extra Info (Off by Default):**
   * Window mode (`DashboardWindow`) is always locked at **100% opacity** for maximum readability.

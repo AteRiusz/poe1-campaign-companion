@@ -79,13 +79,93 @@
             "to": "exit",
             "style": "main"
           }
+        ],
+        "procedural_note": "Procedural pens: Always work generally North/NW toward Overseer Krow"
+      }
+    },
+    {
+      "step_id": "a5_s02_overseers_tower",
+      "act": 5,
+      "step_number": 2,
+      "zone_name": "Overseer's Tower",
+      "area_level": 41,
+      "compass": "TOWN (EXIT NE ↗)",
+      "summary": "Act 5 Town Hub → Claim Free Ring from Lani → Exit North-East into The Control Blocks",
+      "layout_tell": "Circular tower hub: Waypoint is in the center; exit to The Control Blocks is at the top-right (NE).",
+      "next_exit": "Exit NE → Enter The Control Blocks",
+      "portal_tip": "Return to Lani after killing Justiciar Casticus & High Templar Avarius for Flask/Jewel rewards!",
+      "badges": [
+        {
+          "label": "TOWN HUB",
+          "color": "sky"
+        },
+        {
+          "label": "EXIT NE ↗ CONTROL BLOCKS",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Talk to Lani, Vilenta & Utula"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Exit top-right (NE) into The Control Blocks"
+        }
+      ],
+      "boss_info": "Safe Town Hub (Lani, Utula, Vilenta, Bannon).",
+      "gem_reward": "Lani rewards a rare ring and later a Silver/Granite/Stibnite Flask + Unique Threshold Jewel.",
+      "variants": [
+        {
+          "title": "Fixed Tower Hub",
+          "desc": "Center WP; NE door enters The Control Blocks."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "↙ Slave Pens Stairs",
+            "x": 0.22,
+            "y": 0.76,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Town WP + Lani",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↗ Control Blocks",
+            "x": 0.8,
+            "y": 0.22,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
         ]
       }
     },
     {
       "step_id": "a5_s02_control_blocks",
       "act": 5,
-      "step_number": 2,
+      "step_number": 3,
       "zone_name": "The Control Blocks",
       "area_level": 42,
       "compass": "LEFT (MIASMETER) → NE",
@@ -163,13 +243,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural prison: Miasmeter is on the Left (NW/W) edge; Justiciar Casticus is NE"
       }
     },
     {
       "step_id": "a5_s03_oriath_square",
       "act": 5,
-      "step_number": 3,
+      "step_number": 4,
       "zone_name": "Oriath Square",
       "area_level": 43,
       "compass": "HUG LEFT/NE WALL ↗",
@@ -244,7 +325,7 @@
     {
       "step_id": "a5_s04_templar_courts",
       "act": 5,
-      "step_number": 4,
+      "step_number": 5,
       "zone_name": "The Templar Courts",
       "area_level": 43,
       "compass": "CLOCKWISE ↻",
@@ -331,7 +412,7 @@
     {
       "step_id": "a5_s05_chamber_of_innocence",
       "act": 5,
-      "step_number": 5,
+      "step_number": 6,
       "zone_name": "The Chamber of Innocence",
       "area_level": 43,
       "compass": "CCW SPIRAL ↺",
@@ -427,7 +508,7 @@
     {
       "step_id": "a5_s06_torched_courts",
       "act": 5,
-      "step_number": 6,
+      "step_number": 7,
       "zone_name": "The Torched Courts",
       "area_level": 44,
       "compass": "COUNTER-CLOCKWISE ↺",
@@ -514,7 +595,7 @@
     {
       "step_id": "a5_s07_ruined_square",
       "act": 5,
-      "step_number": 7,
+      "step_number": 8,
       "zone_name": "The Ruined Square",
       "area_level": 44,
       "compass": "NW (WP + OSSUARY) → S → NE",
@@ -600,12 +681,15 @@
             "style": "main"
           }
         ]
-      }
+      },
+      "zone_aliases": [
+        "The Reliquary"
+      ]
     },
     {
       "step_id": "a5_s08_ossuary_and_reliquary",
       "act": 5,
-      "step_number": 8,
+      "step_number": 9,
       "zone_name": "The Ossuary",
       "area_level": 44,
       "compass": "CLOCKWISE LOOP → SIGN OF PURITY",
@@ -695,13 +779,17 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Ossuary is a figure-8 loop; Reliquary (3 Kitava's Torments) spawns them in random outer corners"
+      },
+      "zone_aliases": [
+        "The Reliquary"
+      ]
     },
     {
       "step_id": "a5_s09_cathedral_rooftop",
       "act": 5,
-      "step_number": 9,
+      "step_number": 10,
       "zone_name": "The Cathedral Rooftop",
       "area_level": 45,
       "compass": "NW ↖ TO KITAVA",
@@ -780,7 +868,10 @@
             "style": "main"
           }
         ]
-      }
+      },
+      "zone_aliases": [
+        "The Cathedral Apex"
+      ]
     }
   ]
 }

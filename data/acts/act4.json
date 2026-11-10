@@ -79,9 +79,100 @@
       }
     },
     {
-      "step_id": "a4_s02_dried_lake",
+      "step_id": "a4_s02_highgate",
       "act": 4,
       "step_number": 2,
+      "zone_name": "Highgate",
+      "area_level": 33,
+      "compass": "TOWN (SW ↙ 1ST)",
+      "summary": "Act 4 Town Hub → Exit South-West (bottom-left) to The Dried Lake first → Open North Mines later",
+      "layout_tell": "Highgate has 2 exits: SW (bottom-left) = The Dried Lake (go here 1st for Deshret's Banner); North (top) = The Mines Level 1 (unlocked by using Deshret's Banner on the seal).",
+      "next_exit": "Take SW Exit → Enter The Dried Lake",
+      "portal_tip": "After killing Voll in The Dried Lake, return to Highgate and click the Deshret Seal at the North gate!",
+      "badges": [
+        {
+          "label": "1ST EXIT: SW ↙ DRIED LAKE",
+          "color": "emerald"
+        },
+        {
+          "label": "2ND EXIT: N ↑ THE MINES",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "1st Route: Exit South-West (bottom-left) into The Dried Lake"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "2nd Route (with Deshret's Banner): Open Seal at North gate → Enter The Mines Level 1"
+        }
+      ],
+      "boss_info": "Safe Town Hub (Oyun, Petarus & Vanja, Tasuni, Kira, Dialla).",
+      "gem_reward": "Completing The Eternal Nightmare unlocks Level 38 Multistrike, Spell Echo, Cast when Damage Taken, and Golems.",
+      "variants": [
+        {
+          "title": "2-Exit Town Hub",
+          "desc": "SW = Dried Lake (1st), N = The Mines Level 1 (2nd)."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "↘ Aqueduct Entry",
+            "x": 0.78,
+            "y": 0.78,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Town WP + Tasuni",
+            "x": 0.5,
+            "y": 0.52,
+            "type": "wp"
+          },
+          {
+            "id": "lake",
+            "label": "↙ Dried Lake (1st)",
+            "x": 0.18,
+            "y": 0.78,
+            "type": "exit"
+          },
+          {
+            "id": "mines",
+            "label": "↑ The Mines (2nd)",
+            "x": 0.5,
+            "y": 0.18,
+            "type": "quest"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "lake",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "mines",
+            "style": "branch"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s02_dried_lake",
+      "act": 4,
+      "step_number": 3,
       "zone_name": "The Dried Lake",
       "area_level": 34,
       "compass": "WALL LOOP",
@@ -159,13 +250,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural desert loop: Voll's camp spawns along one of the outer perimeter walls"
       }
     },
     {
       "step_id": "a4_s03_mines_1",
       "act": 4,
-      "step_number": 3,
+      "step_number": 4,
       "zone_name": "The Mines Level 1",
       "area_level": 34,
       "compass": "NORTH ↑",
@@ -234,13 +326,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural mine: General direction is North/NW, but tunnel branches vary by seed"
       }
     },
     {
       "step_id": "a4_s04_mines_2",
       "act": 4,
-      "step_number": 4,
+      "step_number": 5,
       "zone_name": "The Mines Level 2",
       "area_level": 35,
       "compass": "SPIRIT (+1 PT) → NORTH",
@@ -313,13 +406,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural mine: Deshret's Spirit (+1 Skill Pt) spawns in a side room before Crystal Veins"
       }
     },
     {
       "step_id": "a4_s05_crystal_veins",
       "act": 4,
-      "step_number": 5,
+      "step_number": 6,
       "zone_name": "The Crystal Veins",
       "area_level": 36,
       "compass": "NW ↖ TO DIALLA + WP",
@@ -398,7 +492,7 @@
     {
       "step_id": "a4_s06_daressos_dream",
       "act": 4,
-      "step_number": 6,
+      "step_number": 7,
       "zone_name": "Daresso's Dream",
       "area_level": 37,
       "compass": "NE ↗ (ARENAS)",
@@ -471,13 +565,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural pit rooms: Locked arena cages block progress until cleared"
       }
     },
     {
       "step_id": "a4_s07_grand_arena",
       "act": 4,
-      "step_number": 7,
+      "step_number": 8,
       "zone_name": "The Grand Arena",
       "area_level": 38,
       "compass": "TOP-RIGHT EXIT ↗",
@@ -561,7 +656,7 @@
     {
       "step_id": "a4_s08_kaoms_dream",
       "act": 4,
-      "step_number": 8,
+      "step_number": 9,
       "zone_name": "Kaom's Dream",
       "area_level": 37,
       "compass": "WALK UPHILL ↑",
@@ -630,13 +725,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural volcanic ridge: Always climb uphill toward the upper-center/NE exit"
       }
     },
     {
       "step_id": "a4_s09_kaoms_stronghold",
       "act": 4,
-      "step_number": 9,
+      "step_number": 10,
       "zone_name": "Kaom's Stronghold",
       "area_level": 38,
       "compass": "NORTH ↑ TO CALDERA",
@@ -720,7 +816,7 @@
     {
       "step_id": "a4_s10_belly_of_the_beast",
       "act": 4,
-      "step_number": 10,
+      "step_number": 11,
       "zone_name": "The Belly of the Beast Level 1",
       "area_level": 38,
       "compass": "NW ↖ → KILL PIETY",
@@ -798,13 +894,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural organic tunnels: Winds generally NW/NE through Level 1 & Level 2 to Piety"
+      },
+      "zone_aliases": [
+        "The Belly of the Beast Level 2",
+        "The Bowels of the Beast"
+      ]
     },
     {
       "step_id": "a4_s11_the_harvest",
       "act": 4,
-      "step_number": 11,
+      "step_number": 12,
       "zone_name": "The Harvest",
       "area_level": 40,
       "compass": "1 LEFT / 2 RIGHT → MALACHAI",

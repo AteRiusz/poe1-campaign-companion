@@ -79,9 +79,88 @@
       }
     },
     {
-      "step_id": "a8_s02_toxic_conduits_doedre",
+      "step_id": "a8_s02_sarn_encampment_act8",
       "act": 8,
       "step_number": 2,
+      "zone_name": "The Sarn Encampment",
+      "area_level": 55,
+      "compass": "TOWN (EXIT W ←)",
+      "summary": "Act 8 Town Hub → Tag Waypoint → Exit West (left by Clarissa) into The Toxic Conduits",
+      "layout_tell": "Enter from Sarn Ramparts at bottom-right; exit to The Toxic Conduits is on the far Left (West) below Clarissa.",
+      "next_exit": "Exit West (left) → Enter The Toxic Conduits",
+      "portal_tip": "After killing Doedre in Doedre's Cesspool, the valve opens both Left (Lunaris) and Right (Solaris) routes!",
+      "badges": [
+        {
+          "label": "TOWN HUB",
+          "color": "sky"
+        },
+        {
+          "label": "EXIT WEST ← TOXIC CONDUITS",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Act 8 Sarn Encampment Waypoint"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Exit West (far left gate) into The Toxic Conduits"
+        }
+      ],
+      "boss_info": "Safe Town Hub (Clarissa, Hargan, Maramoa).",
+      "gem_reward": "Clarissa & Hargan reward Skill Points and Rings.",
+      "variants": [
+        {
+          "title": "Fixed Town Hub",
+          "desc": "West gate enters The Toxic Conduits."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "↘ Sarn Ramparts",
+            "x": 0.8,
+            "y": 0.76,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Town WP + Hargan",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "← Toxic Conduits (W)",
+            "x": 0.16,
+            "y": 0.5,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a8_s02_toxic_conduits_doedre",
+      "act": 8,
+      "step_number": 3,
       "zone_name": "The Toxic Conduits",
       "area_level": 56,
       "compass": "BLACK SPLASH TELL → DOEDRE",
@@ -159,13 +238,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Follow the black ink/sludge splash on the ground at the start of Toxic Conduits toward Doedre's Cesspool"
+      },
+      "zone_aliases": [
+        "Doedre's Cesspool",
+        "The Cauldron"
+      ]
     },
     {
       "step_id": "a8_s03_the_quay",
       "act": 8,
-      "step_number": 3,
+      "step_number": 4,
       "zone_name": "The Quay",
       "area_level": 56,
       "compass": "LONG WALL → ANKH + TOLMAN (+1 PT)",
@@ -243,13 +327,14 @@
             "to": "exit",
             "style": "river"
           }
-        ]
+        ],
+        "procedural_note": "Long linear dock: Ankh of Eternity & Resurrection Site (+1 Pt) are in side alcoves along the main wall"
       }
     },
     {
       "step_id": "a8_s04_grain_gate",
       "act": 8,
-      "step_number": 4,
+      "step_number": 5,
       "zone_name": "The Grain Gate",
       "area_level": 57,
       "compass": "CORPSE DOOR TELL (+1 PT GEMLINGS)",
@@ -327,13 +412,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural warehouse maze: Follow dead Imperial Guard corpses outside warehouse doorways!"
       }
     },
     {
       "step_id": "a8_s05_imperial_fields_solaris",
       "act": 8,
-      "step_number": 5,
+      "step_number": 6,
       "zone_name": "The Imperial Fields",
       "area_level": 57,
       "compass": "FOLLOW ROAD NW ↖ → SOLARIS",
@@ -420,7 +506,7 @@
     {
       "step_id": "a8_s06_solaris_temple_act8",
       "act": 8,
-      "step_number": 6,
+      "step_number": 7,
       "zone_name": "The Solaris Temple Level 1",
       "area_level": 58,
       "compass": "TAG WP → SUN ORB → CONCOURSE",
@@ -510,13 +596,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural temple: Tag WP in Level 1, find Level 2 for Dawn & Sun Orb, then return to WP"
+      },
+      "zone_aliases": [
+        "The Solaris Temple Level 2",
+        "The Solaris Concourse"
+      ]
     },
     {
       "step_id": "a8_s07_solaris_concourse_bath_house",
       "act": 8,
-      "step_number": 7,
+      "step_number": 8,
       "zone_name": "The Bath House",
       "area_level": 58,
       "compass": "MERCILESS TRIAL #1 + YUGUL (+1 PT)",
@@ -594,13 +685,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural bathhouse: Merciless Trial #1 & High Gardens (Yugul +1 Pt) spawn on the outer NW/NE walls"
+      },
+      "zone_aliases": [
+        "The High Gardens",
+        "The Pools of Terror"
+      ]
     },
     {
       "step_id": "a8_s08_lunaris_concourse_and_temple",
       "act": 8,
-      "step_number": 8,
+      "step_number": 9,
       "zone_name": "The Lunaris Concourse",
       "area_level": 59,
       "compass": "TAG WP → MOON ORB IN LUNARIS 2",
@@ -678,13 +774,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural temple: Ascend Levels 1 & 2 to kill Dusk and grab the Moon Orb"
+      },
+      "zone_aliases": [
+        "The Lunaris Temple Level 1",
+        "The Lunaris Temple Level 2"
+      ]
     },
     {
       "step_id": "a8_s09_harbour_bridge",
       "act": 8,
-      "step_number": 9,
+      "step_number": 10,
       "zone_name": "The Harbour Bridge",
       "area_level": 60,
       "compass": "STRAIGHT TO CENTER → SOLARIS & LUNARIS",
@@ -759,7 +860,10 @@
             "style": "main"
           }
         ]
-      }
+      },
+      "zone_aliases": [
+        "The Sky Shrine"
+      ]
     }
   ]
 }

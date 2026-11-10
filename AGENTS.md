@@ -22,15 +22,15 @@ C:\Projects\poe1-campaign-companion\
 ├── data\
 │   ├── acts\
 │   │   ├── act1.json             # Act 1 zone-by-zone route & topology maps (16 steps)
-│   │   ├── act2.json             # Act 2 zone-by-zone route & topology maps (14 steps)
-│   │   ├── act3.json             # Act 3 zone-by-zone route & topology maps (12 steps)
-│   │   ├── act4.json             # Act 4 zone-by-zone route & topology maps (11 steps)
-│   │   ├── act5.json             # Act 5 zone-by-zone route & topology maps (9 steps)
+│   │   ├── act2.json             # Act 2 zone-by-zone route & topology maps (15 steps)
+│   │   ├── act3.json             # Act 3 zone-by-zone route & topology maps (13 steps)
+│   │   ├── act4.json             # Act 4 zone-by-zone route & topology maps (12 steps)
+│   │   ├── act5.json             # Act 5 zone-by-zone route & topology maps (10 steps)
 │   │   ├── act6.json             # Act 6 zone-by-zone route & topology maps (11 steps)
-│   │   ├── act7.json             # Act 7 zone-by-zone route & topology maps (9 steps)
-│   │   ├── act8.json             # Act 8 zone-by-zone route & topology maps (9 steps)
-│   │   ├── act9.json             # Act 9 zone-by-zone route & topology maps (6 steps)
-│   │   └── act10.json            # Act 10 zone-by-zone route & topology maps (7 steps)
+│   │   ├── act7.json             # Act 7 zone-by-zone route & topology maps (10 steps)
+│   │   ├── act8.json             # Act 8 zone-by-zone route & topology maps (10 steps)
+│   │   ├── act9.json             # Act 9 zone-by-zone route & topology maps (7 steps)
+│   │   └── act10.json            # Act 10 zone-by-zone route & topology maps (8 steps)
 │   └── labyrinth_trials.json     # All 12 Campaign Labyrinth Trials (6 Normal, 3 Cruel, 3 Merciless)
 ├── src\
 │   ├── __init__.py
@@ -87,7 +87,8 @@ C:\Projects\poe1-campaign-companion\
     * `unlocked_trials: List[str]` and `completed_trials: List[str]` persist across sessions via `mark_trial_unlocked()` and `set_trial_completed()`.
 
 ### C. `src/route_engine.py`
-* Loads all per-Act JSON files (`data/acts/act1.json` .. `act10.json`, `104` steps total) in numerical Act order and all 12 Labyrinth Trials (`data/labyrinth_trials.json`).
+* Loads all per-Act JSON files (`data/acts/act1.json` .. `act10.json`, `112` steps total) in numerical Act order and all 12 Labyrinth Trials (`data/labyrinth_trials.json`).
+* **`RouteStep.matches_zone(normalized_zone: str)`**: Matches either `step.zone_name` or any sub-zone alias in `step.zone_aliases` (e.g., `"The Warden's Quarters"`, `"Merveil's Caverns"`, `"The Fellshrine Ruins"`, `"The Ancient Pyramid"`).
 * **`RouteEngine.on_zone_entered(zone_name: str) -> RouteStep`**:
   1. Searches forward up to 16 steps from `current_index` first (so revisiting town hubs like `The Forest Encampment` or hubs like `The Submerged Passage` / `The Crossroads` advances to the next logical pass).
   2. Falls back to the nearest matching step across the campaign.
@@ -106,8 +107,8 @@ C:\Projects\poe1-campaign-companion\
 * **Live Vector Rendering (`paintEvent` on step change / resize):**
   * On startup, `RouteEngine` loads the lightweight `topology` dicts (`nodes` and `edges`) from `data/acts/act1.json` .. `act10.json` into memory with zero graphics pre-rendering overhead.
   * When the active step changes (`set_topology`) or the window resizes, `paintEvent` dynamically maps normalized `0.0 .. 1.0` coordinates to the widget's exact current pixel dimensions using `QPainter` vector graphics (`< 0.5ms`), keeping node circles perfectly round and pill text crisp at any aspect ratio.
-  * Renders `N / S / W / E` cardinal compass markers, a subtle center crosshair grid, and directional edge arrowheads.
-* **`compute_label_rects(w: float, h: float)`**: 2D collision-avoiding tooltip placement solver that guarantees **0.0px overlap** between any two tooltip pills and **0.0px overlap** with any node circle in both full Dashboard and compact Overlay modes.
+  * Renders `N / S / W / E` cardinal compass markers, a subtle center crosshair grid, directional edge arrowheads, and an optional bottom **procedural layout warning banner** when `topology["procedural_note"]` is present.
+* **`compute_label_rects(w: float, h: float)`**: 2D collision-avoiding tooltip placement solver that guarantees **0.0px overlap** between any two tooltip pills, **0.0px overlap** with any node circle, and **0.0px overlap** with the bottom procedural warning banner in both full Dashboard and compact Overlay modes.
 * Supported `node["type"]` values and colors:
   * `"start"` (`#a8a29e` Stone)
   * `"wp"` (`#38bdf8` Sky Blue)

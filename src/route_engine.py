@@ -36,6 +36,13 @@ class RouteStep:
     gem_reward: str = ""
     variants: List[Dict[str, str]] = field(default_factory=list)
     topology: Dict[str, Any] = field(default_factory=dict)
+    zone_aliases: List[str] = field(default_factory=list)
+
+    def matches_zone(self, normalized_zone: str) -> bool:
+        """Return True if `normalized_zone` matches `zone_name` or any entry in `zone_aliases`."""
+        if self.zone_name.strip().lower() == normalized_zone:
+            return True
+        return any(a.strip().lower() == normalized_zone for a in self.zone_aliases)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "RouteStep":
@@ -56,6 +63,7 @@ class RouteStep:
             gem_reward=str(data.get("gem_reward", "")),
             variants=list(data.get("variants", [])),
             topology=dict(data.get("topology", {"nodes": [], "edges": []})),
+            zone_aliases=list(data.get("zone_aliases", [])),
         )
 
 
@@ -216,7 +224,7 @@ class RouteEngine:
             zone_norm = trial.zone_name.strip().lower()
             for idx in range(0, max(self.current_index, self.max_reached_index) + 1):
                 s = self.steps[idx]
-                if s.act == trial.act and s.zone_name.strip().lower() in (unlock_norm, zone_norm):
+                if s.act == trial.act and (s.matches_zone(unlock_norm) or s.matches_zone(zone_norm)):
                     return "unlocked"
 
         return "locked"
@@ -259,7 +267,7 @@ class RouteEngine:
         # 1. Forward lookahead window (handles revisiting zones or skipping optional sub-steps)
         lookahead_limit = min(len(self.steps), self.current_index + 16)
         for idx in range(self.current_index, lookahead_limit):
-            if self.steps[idx].zone_name.strip().lower() == normalized:
+            if self.steps[idx].matches_zone(normalized):
                 self.current_index = idx
                 self.max_reached_index = max(self.max_reached_index, self.current_index)
                 self.active_fallback = None
@@ -269,7 +277,7 @@ class RouteEngine:
         matching_indices = [
             idx
             for idx, s in enumerate(self.steps)
-            if s.zone_name.strip().lower() == normalized
+            if s.matches_zone(normalized)
         ]
         if matching_indices:
             best_idx = min(matching_indices, key=lambda i: abs(i - self.current_index))

@@ -4,9 +4,88 @@
   "title": "Act 7 Speedrun Route",
   "steps": [
     {
-      "step_id": "a7_s01_broken_bridge",
+      "step_id": "a7_s01_bridge_encampment",
       "act": 7,
       "step_number": 1,
+      "zone_name": "The Bridge Encampment",
+      "area_level": 50,
+      "compass": "TOWN (EXIT SW ↙)",
+      "summary": "Act 7 Town Hub → Tag Waypoint → Exit South-West into The Broken Bridge",
+      "layout_tell": "Arrive by boat from Act 6; Waypoint is in the center; exit to The Broken Bridge is South-West (SW).",
+      "next_exit": "Exit SW → Enter The Broken Bridge",
+      "portal_tip": "Helena gives Greust's Necklace quest later; Yeena & Weylam reward flasks/skill points.",
+      "badges": [
+        {
+          "label": "TOWN HUB",
+          "color": "sky"
+        },
+        {
+          "label": "EXIT SW ↙ BROKEN BRIDGE",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Bridge Encampment Waypoint"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Exit South-West into The Broken Bridge"
+        }
+      ],
+      "boss_info": "Safe Town Hub (Weylam Roth, Yeena, Helena, Eramir, Silk).",
+      "gem_reward": "Yeena sells all Act 1–6 Gems.",
+      "variants": [
+        {
+          "title": "Fixed Town Hub",
+          "desc": "Exit SW into The Broken Bridge."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "↗ Boat Dock",
+            "x": 0.78,
+            "y": 0.24,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Town WP + NPCs",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↙ Broken Bridge",
+            "x": 0.2,
+            "y": 0.78,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a7_s01_broken_bridge",
+      "act": 7,
+      "step_number": 2,
       "zone_name": "The Broken Bridge",
       "area_level": 50,
       "compass": "FOLLOW ROAD SW ↙",
@@ -81,7 +160,7 @@
     {
       "step_id": "a7_s02_crossroads_and_crypt",
       "act": 7,
-      "step_number": 2,
+      "step_number": 3,
       "zone_name": "The Crypt",
       "area_level": 51,
       "compass": "CRUEL TRIAL #2 + MALIGARO'S MAP",
@@ -159,13 +238,19 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural 2-floor dungeon: Cruel Trial #2 is on Level 1; Maligaro's Map is in Level 2"
+      },
+      "zone_aliases": [
+        "The Crossroads",
+        "The Fellshrine Ruins",
+        "The Crypt Level 2"
+      ]
     },
     {
       "step_id": "a7_s03_chamber_of_sins_1",
       "act": 7,
-      "step_number": 3,
+      "step_number": 4,
       "zone_name": "The Chamber of Sins Level 1",
       "area_level": 51,
       "compass": "MAP DEVICE TELL!",
@@ -255,13 +340,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "4-Way Cross: Map Device points to Level 2; Maligaro's Sanctum has 3 connected island loops"
+      },
+      "zone_aliases": [
+        "Maligaro's Sanctum",
+        "Maligaro's Workshop"
+      ]
     },
     {
       "step_id": "a7_s04_chamber_of_sins_2",
       "act": 7,
-      "step_number": 4,
+      "step_number": 5,
       "zone_name": "The Chamber of Sins Level 2",
       "area_level": 52,
       "compass": "CRUEL TRIAL #3 → SECRET DOOR",
@@ -334,13 +424,17 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural dungeon: Complete Cruel Trial #3, then take the secret passage to The Den"
+      },
+      "zone_aliases": [
+        "The Den"
+      ]
     },
     {
       "step_id": "a7_s05_ashen_fields",
       "act": 7,
-      "step_number": 5,
+      "step_number": 6,
       "zone_name": "The Ashen Fields",
       "area_level": 53,
       "compass": "FOLLOW ROAD SW → KILL GREUST (+1 PT)",
@@ -424,7 +518,7 @@
     {
       "step_id": "a7_s06_northern_forest_dread_thicket",
       "act": 7,
-      "step_number": 6,
+      "step_number": 7,
       "zone_name": "The Dread Thicket",
       "area_level": 53,
       "compass": "7 FIREFLIES + GRUTHKUL (+1 PT)",
@@ -514,13 +608,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural jungle loop: 7 Fireflies & Gruthkul's Den (+1 Pt) spawn randomly across the thicket"
+      },
+      "zone_aliases": [
+        "The Northern Forest",
+        "The Den of Despair"
+      ]
     },
     {
       "step_id": "a7_s07_the_causeway",
       "act": 7,
-      "step_number": 7,
+      "step_number": 8,
       "zone_name": "The Causeway",
       "area_level": 54,
       "compass": "NE ↗ (+1 PT KISHARA'S STAR)",
@@ -604,7 +703,7 @@
     {
       "step_id": "a7_s08_vaal_city",
       "act": 7,
-      "step_number": 8,
+      "step_number": 9,
       "zone_name": "The Vaal City",
       "area_level": 54,
       "compass": "OUTER WALL INWARD ALLEY TELL!",
@@ -677,13 +776,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural city maze (4 seeds): Hug outer wall until a dead-end forces you down the central corridor to Yeena"
       }
     },
     {
       "step_id": "a7_s09_temple_of_decay",
       "act": 7,
-      "step_number": 9,
+      "step_number": 10,
       "zone_name": "The Temple of Decay Level 1",
       "area_level": 54,
       "compass": "DESCEND 2 LEVELS → ARAKAALI",
@@ -757,8 +857,13 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural multi-floor descent: Stairs down spawn in opposite/diagonal corners on each floor"
+      },
+      "zone_aliases": [
+        "The Temple of Decay Level 2",
+        "Arakaali's Web"
+      ]
     }
   ]
 }

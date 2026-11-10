@@ -220,12 +220,18 @@ def test_topology_labels_never_overlap_across_all_103_steps(qapp: QApplication) 
     from PyQt6.QtCore import QRectF
 
     engine = RouteEngine()
-    for compact, cw, ch in [(False, 380.0, 230.0), (True, 210.0, 140.0)]:
+    for compact, cw, ch in [(False, 380.0, 252.0), (True, 220.0, 158.0)]:
         canvas = TopologyMapWidget(compact=compact)
         for step in engine.steps:
             canvas.set_topology(step.topology, compass_label=step.compass)
             coords, rad = canvas._compute_node_positions(cw, ch)
             placements = canvas.compute_label_rects(cw, ch)
+            banner_h = canvas._banner_height()
+            banner_rect = (
+                QRectF(4.0, ch - banner_h + 1.0, cw - 8.0, banner_h - 3.0)
+                if banner_h > 0.0
+                else QRectF()
+            )
 
             # 1. Verify no two tooltip boxes overlap each other
             for i in range(len(placements)):
@@ -236,8 +242,12 @@ def test_topology_labels_never_overlap_across_all_103_steps(qapp: QApplication) 
                         f"{placements[i][0]['label']} vs {placements[j][0]['label']}"
                     )
 
-            # 2. Verify no tooltip box overlaps any node circle
+            # 2. Verify no tooltip box overlaps any node circle or the bottom procedural warning banner
             for n, _pt, lrect in placements:
+                if not banner_rect.isEmpty():
+                    assert _intersection_area(lrect, banner_rect) == 0.0, (
+                        f"Label-Banner overlap (compact={compact}) on {step.step_id}: '{n['label']}'"
+                    )
                 for nid, npt in coords.items():
                     node_rect = QRectF(npt.x() - rad, npt.y() - rad, 2 * rad, 2 * rad)
                     node_overlap = _intersection_area(lrect, node_rect)
@@ -245,6 +255,34 @@ def test_topology_labels_never_overlap_across_all_103_steps(qapp: QApplication) 
                         f"Label-Node overlap (compact={compact}) on {step.step_id}: "
                         f"label '{n['label']}' overlaps node '{nid}'"
                     )
+
+
+def test_zone_aliases_and_town_hubs_match_guided_steps() -> None:
+    engine = RouteEngine()
+    # Verify newly added town hubs & Weaver's Chambers + key sub-zone aliases resolve to guided steps (never LIVE ZONE)
+    expected_zones = [
+        ("The Warden's Quarters", "a1_s11_upper_prison"),
+        ("Merveil's Caverns", "a1_s16_cavern_of_anger"),
+        ("The Forest Encampment", "a2_s02_forest_encampment"),
+        ("The Weaver's Chambers", "a2_s09_weavers_chambers"),
+        ("The Fellshrine Ruins", "a2_s10_crypt_level_1"),
+        ("The Ancient Pyramid", "a2_s14_caverns_and_pyramid"),
+        ("The Sarn Encampment", "a3_s02_sarn_encampment"),
+        ("The Solaris Temple Level 2", "a3_s08_solaris_temple"),
+        ("The Lunaris Temple Level 2", "a3_s10_lunaris_temple"),
+        ("The Upper Sceptre of God", "a3_s12_sceptre_of_god"),
+        ("Highgate", "a4_s02_highgate"),
+        ("The Belly of the Beast Level 2", "a4_s10_belly_of_the_beast"),
+        ("Overseer's Tower", "a5_s02_overseers_tower"),
+        ("The Bridge Encampment", "a7_s01_bridge_encampment"),
+        ("Doedre's Cesspool", "a8_s02_toxic_conduits_doedre"),
+        ("The Descent", "a9_s02_descent_vastiri_desert"),
+        ("Oriath Docks", "a10_s01_oriath_docks"),
+    ]
+    for zone_name, expected_step_id in expected_zones:
+        step = engine.on_zone_entered(zone_name)
+        assert engine.active_fallback is None, f"Zone '{zone_name}' fell back to unmapped LIVE ZONE"
+        assert step.step_id == expected_step_id, f"Zone '{zone_name}' matched {step.step_id} instead of {expected_step_id}"
 
 
 def test_topology_compass_quadrants_across_all_103_steps() -> None:

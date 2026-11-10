@@ -4,9 +4,88 @@
   "title": "Act 10 Speedrun Route",
   "steps": [
     {
-      "step_id": "a10_s01_cathedral_rooftop",
+      "step_id": "a10_s01_oriath_docks",
       "act": 10,
       "step_number": 1,
+      "zone_name": "Oriath Docks",
+      "area_level": 64,
+      "compass": "TOWN (EXIT NW ↖)",
+      "summary": "Act 10 Town Hub → Climb stairs North-West into The Cathedral Rooftop to rescue Bannon",
+      "layout_tell": "Arrive on Weylam's ship at the bottom; Waypoint & Lani are in the center; stairs to The Cathedral Rooftop are NW.",
+      "next_exit": "Climb NW stairs → Enter The Cathedral Rooftop",
+      "portal_tip": "Talk to Lani after Kitava for your final +2 Passive Skill Points Book!",
+      "badges": [
+        {
+          "label": "TOWN HUB",
+          "color": "sky"
+        },
+        {
+          "label": "EXIT NW ↖ CATHEDRAL ROOFTOP",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Oriath Docks Waypoint"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Climb NW stairs into The Cathedral Rooftop"
+        }
+      ],
+      "boss_info": "Safe Town Hub (Lani, Weylam Roth, Bannon/Innocence).",
+      "gem_reward": "Completing Vilenta (+1 Pt) and Kitava (+2 Pts) awards 3 Passive Skill Points in Act 10.",
+      "variants": [
+        {
+          "title": "Fixed Dock Hub",
+          "desc": "NW stairs enter The Cathedral Rooftop."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "↘ Ship Arrival",
+            "x": 0.76,
+            "y": 0.78,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Town WP + Lani",
+            "x": 0.5,
+            "y": 0.52,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↖ Cathedral Rooftop",
+            "x": 0.2,
+            "y": 0.22,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a10_s01_cathedral_rooftop",
+      "act": 10,
+      "step_number": 2,
       "zone_name": "The Cathedral Rooftop",
       "area_level": 64,
       "compass": "LEFT TO BANNON → SE ↘",
@@ -80,12 +159,15 @@
             "style": "main"
           }
         ]
-      }
+      },
+      "zone_aliases": [
+        "The Cathedral Apex"
+      ]
     },
     {
       "step_id": "a10_s02_ravaged_square",
       "act": 10,
-      "step_number": 2,
+      "step_number": 3,
       "zone_name": "The Ravaged Square",
       "area_level": 64,
       "compass": "SW (VILENTA +1 PT) & NW (WP + TRIAL #3)",
@@ -171,12 +253,15 @@
             "style": "main"
           }
         ]
-      }
+      },
+      "zone_aliases": [
+        "The Reliquary"
+      ]
     },
     {
       "step_id": "a10_s03_control_blocks_act10",
       "act": 10,
-      "step_number": 3,
+      "step_number": 4,
       "zone_name": "The Control Blocks",
       "area_level": 65,
       "compass": "HUG LEFT → KILL VILENTA (+1 PT)",
@@ -254,13 +339,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural prison: Hug the Left/SW perimeter wall (using Frostblink/Flame Dash over gates) to reach Vilenta"
       }
     },
     {
       "step_id": "a10_s04_the_ossuary_act10",
       "act": 10,
-      "step_number": 4,
+      "step_number": 5,
       "zone_name": "The Ossuary",
       "area_level": 65,
       "compass": "MERCILESS TRIAL #3 (FINAL!)",
@@ -333,13 +419,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Figure-8 loop: Merciless Lab Trial #3 (Final Campaign Trial!) spawns along the outer NW/NE loop"
       }
     },
     {
       "step_id": "a10_s05_torched_desecrated_chambers",
       "act": 10,
-      "step_number": 5,
+      "step_number": 6,
       "zone_name": "The Desecrated Chambers",
       "area_level": 66,
       "compass": "CCW SPIRAL ↺ → KILL AVARIUS",
@@ -429,13 +516,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Torched Courts loops Clockwise; Desecrated Chambers spirals Counter-Clockwise to Avarius"
+      },
+      "zone_aliases": [
+        "The Torched Courts",
+        "The Sanctum of Innocence"
+      ]
     },
     {
       "step_id": "a10_s06_the_canals",
       "act": 10,
-      "step_number": 6,
+      "step_number": 7,
       "zone_name": "The Canals",
       "area_level": 67,
       "compass": "LINEAR NW ↖",
@@ -514,7 +606,7 @@
     {
       "step_id": "a10_s07_feeding_trough",
       "act": 10,
-      "step_number": 7,
+      "step_number": 8,
       "zone_name": "The Feeding Trough",
       "area_level": 67,
       "compass": "LINEAR NW ↖ → KITAVA (+2 PTS!)",
@@ -593,7 +685,10 @@
             "style": "main"
           }
         ]
-      }
+      },
+      "zone_aliases": [
+        "The Altar of Hunger"
+      ]
     }
   ]
 }

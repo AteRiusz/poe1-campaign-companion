@@ -76,7 +76,10 @@
             "style": "main"
           }
         ]
-      }
+      },
+      "zone_aliases": [
+        "Lioneye's Watch"
+      ]
     },
     {
       "step_id": "a6_s02_the_coast_act6",
@@ -233,7 +236,8 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural flats: Dishonoured Queen (Eye of Conquest) spawns NE/E; Karui Fortress is NW/N"
       }
     },
     {
@@ -312,7 +316,8 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Tukohama's arena is in the central circular fortress; exit to The Ridge is North/NE"
       }
     },
     {
@@ -471,7 +476,8 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural grid: Cruel Lab Trial #1 & Shavronne's Tower stairs spawn in varying outer corners"
       }
     },
     {
@@ -551,8 +557,12 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural 3-floor spiral tower: Stairs up spawn along the outer perimeter"
+      },
+      "zone_aliases": [
+        "Prison Rooftop"
+      ]
     },
     {
       "step_id": "a6_s08_prisoners_gate_act6",
@@ -635,7 +645,8 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "2 seed variants: Valley of the Fire Drinker (Abberath +1 Pt) is at the end of the paved road; Western Forest is down the valley"
       }
     },
     {
@@ -732,7 +743,12 @@
             "style": "branch"
           }
         ]
-      }
+      },
+      "zone_aliases": [
+        "The Riverways",
+        "The Southern Forest",
+        "The Cavern of Anger"
+      ]
     },
     {
       "step_id": "a6_s10_wetlands_act6",
@@ -815,8 +831,12 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural swamp: Ryslatha's Spawning Ground (+1 Pt) spawns along the NW/NE perimeter"
+      },
+      "zone_aliases": [
+        "The Spawning Ground"
+      ]
     },
     {
       "step_id": "a6_s11_beacon_and_brine_king",
@@ -911,8 +931,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Brine King's Reef is a wide coastal loop: Hug the left (NW) or right (SE) shoreline to reach the Boat"
+      },
+      "zone_aliases": [
+        "The Brine King's Reef",
+        "The Southern Forest",
+        "The Cavern of Anger"
+      ]
     }
   ]
 }

@@ -100,9 +100,88 @@
       }
     },
     {
-      "step_id": "a3_s02_the_slums",
+      "step_id": "a3_s02_sarn_encampment",
       "act": 3,
       "step_number": 2,
+      "zone_name": "The Sarn Encampment",
+      "area_level": 23,
+      "compass": "TOWN (EXIT NE ↗)",
+      "summary": "Act 3 Town Hub → Check Clarissa/Hargan → Exit North-East up the stairs into The Slums",
+      "layout_tell": "Clarissa is by the bottom steps; Waypoint is in the center; stairs to The Slums are at the top-right (NE).",
+      "next_exit": "Climb NE stairs → Enter The Slums",
+      "portal_tip": "Clarissa unlocks Level 24 Curses & Aura Gems after you rescue Tolman in The Crematorium!",
+      "badges": [
+        {
+          "label": "TOWN HUB",
+          "color": "sky"
+        },
+        {
+          "label": "EXIT NE ↗ THE SLUMS",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Sarn Encampment Waypoint in center of town"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Climb the North-East stairs into The Slums"
+        }
+      ],
+      "boss_info": "Safe Town Hub (Clarissa, Maramoa, Hargan, Grigor).",
+      "gem_reward": "Clarissa sells Lvl 24 Curse/Aura gems (after Crematorium) and Lvl 28 Gems (after Gravicius).",
+      "variants": [
+        {
+          "title": "Fixed Town Hub",
+          "desc": "Enter at SW from City of Sarn; exit NE to The Slums."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "↙ City of Sarn",
+            "x": 0.2,
+            "y": 0.78,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Town WP + Clarissa",
+            "x": 0.5,
+            "y": 0.52,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↗ The Slums (NE)",
+            "x": 0.82,
+            "y": 0.22,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s02_the_slums",
+      "act": 3,
+      "step_number": 3,
       "zone_name": "The Slums",
       "area_level": 24,
       "compass": "NORTH ↑",
@@ -187,13 +266,14 @@
             "to": "sewer",
             "style": "branch"
           }
-        ]
+        ],
+        "procedural_note": "Procedural city grid: Crematorium & Sewer Grating spawn in varying northern corners"
       }
     },
     {
       "step_id": "a3_s03_crematorium",
       "act": 3,
-      "step_number": 3,
+      "step_number": 4,
       "zone_name": "The Crematorium",
       "area_level": 25,
       "compass": "TRIAL #4 + PIETY",
@@ -271,13 +351,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural dungeon: Trial #4 & Piety's corridor vary by seed — hug outer walls"
       }
     },
     {
       "step_id": "a3_s04_the_sewers",
       "act": 3,
-      "step_number": 4,
+      "step_number": 5,
       "zone_name": "The Sewers",
       "area_level": 26,
       "compass": "3 BUSTS (+1 PT)",
@@ -367,13 +448,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural waterways: 1 Bust spawns before the WP and 2 Busts spawn after the WP"
       }
     },
     {
       "step_id": "a3_s05_marketplace_catacombs",
       "act": 3,
-      "step_number": 5,
+      "step_number": 6,
       "zone_name": "The Marketplace",
       "area_level": 26,
       "compass": "NE ↗ (+ TRIAL #5)",
@@ -463,13 +545,17 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural: Catacombs (Trial #5) spawns mid-zone; Battlefront exit is NE"
+      },
+      "zone_aliases": [
+        "The Catacombs"
+      ]
     },
     {
       "step_id": "a3_s06_battlefront",
       "act": 3,
-      "step_number": 6,
+      "step_number": 7,
       "zone_name": "The Battlefront",
       "area_level": 27,
       "compass": "WP CENTER → SW & N",
@@ -577,7 +663,7 @@
     {
       "step_id": "a3_s07_the_docks",
       "act": 3,
-      "step_number": 7,
+      "step_number": 8,
       "zone_name": "The Docks",
       "area_level": 29,
       "compass": "WEST PIERS ←",
@@ -650,13 +736,14 @@
             "to": "exit",
             "style": "river"
           }
-        ]
+        ],
+        "procedural_note": "Procedural piers: Thaumetic Sulphite spawns at the end of one of the SW/W docks"
       }
     },
     {
       "step_id": "a3_s08_solaris_temple",
       "act": 3,
-      "step_number": 8,
+      "step_number": 9,
       "zone_name": "The Solaris Temple Level 1",
       "area_level": 27,
       "compass": "CARPET PATH",
@@ -734,13 +821,17 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural temple: Follow the red carpet for the main path through Levels 1 & 2"
+      },
+      "zone_aliases": [
+        "The Solaris Temple Level 2"
+      ]
     },
     {
       "step_id": "a3_s09_ebony_barracks",
       "act": 3,
-      "step_number": 9,
+      "step_number": 10,
       "zone_name": "The Ebony Barracks",
       "area_level": 29,
       "compass": "NORTH ↑",
@@ -836,7 +927,7 @@
     {
       "step_id": "a3_s10_lunaris_temple",
       "act": 3,
-      "step_number": 10,
+      "step_number": 11,
       "zone_name": "The Lunaris Temple Level 1",
       "area_level": 29,
       "compass": "CARTS TELL!",
@@ -914,13 +1005,17 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural temple: Follow carpet in Lvl 1; in Lvl 2 take the side with 1 wagon (not 2)"
+      },
+      "zone_aliases": [
+        "The Lunaris Temple Level 2"
+      ]
     },
     {
       "step_id": "a3_s11_imperial_gardens",
       "act": 3,
-      "step_number": 11,
+      "step_number": 12,
       "zone_name": "The Imperial Gardens",
       "area_level": 30,
       "compass": "FOLLOW ROAD → NW / NE",
@@ -1010,13 +1105,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Tiled garden: Follow cobble road to WP; Trial #6 is North, Library NW, Sceptre E/NE"
+      },
+      "zone_aliases": [
+        "The Library",
+        "The Archives"
+      ]
     },
     {
       "step_id": "a3_s12_sceptre_of_god",
       "act": 3,
-      "step_number": 12,
+      "step_number": 13,
       "zone_name": "The Sceptre of God",
       "area_level": 32,
       "compass": "DIAGONAL CORNERS ↑",
@@ -1094,8 +1194,12 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural 6-floor tower: Stairs up spawn in one of the 3 non-entry corners on each floor"
+      },
+      "zone_aliases": [
+        "The Upper Sceptre of God"
+      ]
     }
   ]
 }

@@ -255,8 +255,12 @@
             "to": "den",
             "style": "branch"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Road always leads NE to Crossroads; The Den entrance spawns randomly off-road"
+      },
+      "zone_aliases": [
+        "The Den"
+      ]
     },
     {
       "step_id": "a2_s04_crossroads",
@@ -372,9 +376,9 @@
       "step_number": 5,
       "zone_name": "The Chamber of Sins Level 1",
       "area_level": 15,
-      "compass": "CHECK MAP DEVICE",
-      "summary": "Reach center Map Device room → Exit is ALWAYS in the direction the Map Device points!",
-      "layout_tell": "⚡ BEST TELL IN POE: In the center Waypoint room, look at which hallway has the broken carpet / Map Device facing it — Level 2 is 100% down that hallway!",
+      "compass": "4-WAY MAP DEVICE",
+      "summary": "Reach center Map Device room → Level 2 is ALWAYS down whichever of the 3 hallways (NW/NE/SE) the Map Device points toward!",
+      "layout_tell": "⚡ 4-WAY CROSS TELL: In the center Waypoint room, look at which hallway (NW, NE, or SE) the broken carpet & Map Device point toward — Level 2 is 100% down that hallway!",
       "next_exit": "Follow Map Device direction → Enter Chamber of Sins Level 2",
       "portal_tip": "Tag Waypoint in center room just in case",
       "badges": [
@@ -413,12 +417,13 @@
         }
       ],
       "topology": {
+        "procedural_note": "3 seed exits (NW, NE, or SE): Follow whichever hallway the center Map Device points toward",
         "nodes": [
           {
             "id": "start",
-            "label": "Entrance",
+            "label": "↙ Entrance (SW)",
             "x": 0.2,
-            "y": 0.78,
+            "y": 0.8,
             "type": "start"
           },
           {
@@ -429,10 +434,24 @@
             "type": "wp"
           },
           {
-            "id": "exit",
-            "label": "→ Sins Level 2",
+            "id": "nw",
+            "label": "↖ NW Hall (Seed A)",
+            "x": 0.2,
+            "y": 0.2,
+            "type": "exit"
+          },
+          {
+            "id": "ne",
+            "label": "↗ NE Hall (Seed B)",
             "x": 0.8,
-            "y": 0.22,
+            "y": 0.2,
+            "type": "exit"
+          },
+          {
+            "id": "se",
+            "label": "↘ SE Hall (Seed C)",
+            "x": 0.8,
+            "y": 0.8,
             "type": "exit"
           }
         ],
@@ -444,8 +463,18 @@
           },
           {
             "from": "wp",
-            "to": "exit",
+            "to": "nw",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
+            "to": "ne",
             "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "se",
+            "style": "branch"
           }
         ]
       }
@@ -531,7 +560,8 @@
             "to": "boss",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural dungeon: Trial #2 & Fidelitas's long narrow corridor spawn in varying quadrants"
       }
     },
     {
@@ -540,19 +570,19 @@
       "step_number": 7,
       "zone_name": "The Riverways",
       "area_level": 15,
-      "compass": "FOLLOW ROAD ↖",
-      "summary": "Exit Town West → Follow cobblestone road to Waypoint → Continue SW along road to Western Forest",
-      "layout_tell": "Look for two broken stone pillars along the road just past the Waypoint: they lead north to Wetlands (Oak), while the main road continues to Western Forest.",
+      "compass": "SW ROAD ↙ / NW PILLARS ↖",
+      "summary": "Enter from Town (East/NE) → Follow cobblestone road SW to Waypoint & Western Forest (NW pillars lead to Wetlands)",
+      "layout_tell": "You enter from The Forest Encampment at the East/North-East and follow the cobblestone road South-West (SW) to The Western Forest. Near the Waypoint, two mossy stone pillars mark the dirt path North-West (NW) to The Wetlands!",
       "next_exit": "Tag WP → Follow road into The Western Forest",
       "portal_tip": "Tag The Riverways Waypoint so you can come back for Oak in The Wetlands!",
       "badges": [
         {
-          "label": "TAG WAYPOINT",
-          "color": "sky"
+          "label": "FOLLOW ROAD SW ↙",
+          "color": "emerald"
         },
         {
-          "label": "FOLLOW ROAD ↖",
-          "color": "emerald"
+          "label": "NW PILLARS → WETLANDS",
+          "color": "sky"
         }
       ],
       "actions": [
@@ -584,30 +614,30 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start (East)",
-            "x": 0.84,
-            "y": 0.76,
+            "label": "Start (NE from Town)",
+            "x": 0.82,
+            "y": 0.24,
             "type": "start"
           },
           {
             "id": "wp",
-            "label": "Waypoint",
+            "label": "Waypoint + Road",
             "x": 0.52,
-            "y": 0.52,
+            "y": 0.5,
             "type": "wp"
           },
           {
             "id": "wetlands",
-            "label": "↑ Wetlands (Oak)",
-            "x": 0.58,
+            "label": "↖ Wetlands (2 Pillars)",
+            "x": 0.24,
             "y": 0.2,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "← Western Forest",
-            "x": 0.16,
-            "y": 0.34,
+            "label": "↙ Western Forest (SW)",
+            "x": 0.18,
+            "y": 0.78,
             "type": "exit"
           }
         ],
@@ -636,9 +666,9 @@
       "step_number": 8,
       "zone_name": "The Western Forest",
       "area_level": 17,
-      "compass": "ROAD + TORCH TELL",
-      "summary": "Follow Road to WP → Follow Torch on Road to Alira → Kill Arteri at South End (+1 Pt) → Open Thaumetic Seal",
-      "layout_tell": "⚡ TORCH TELL: On the main road near the WP, look for a Torch and broken cobbles leading off the road — that path ALWAYS leads to Alira's camp! Spider Chambers (Weaver) is on the OPPOSITE side of the road from Alira.",
+      "compass": "SW ROAD ↙ + TORCH TELL",
+      "summary": "Follow Road SW to WP → Torch on Road points to Alira → Opposite side is Weaver's Chambers → Arteri at SW end (+1 Pt)",
+      "layout_tell": "⚡ TORCH TELL: Follow the central road SW. Near the WP, a Torch & broken cobbles on the road edge ALWAYS point toward Alira's camp (can spawn on NW or SE side)! The Weaver's Chambers is always on the OPPOSITE side of the road.",
       "next_exit": "Do Weaver's Chambers + Alira + Captain Arteri (+1 Skill Pt!)",
       "portal_tip": "After Captain Arteri & Thaumetic Seal, talk to Bestel in Act 1 Town for +1 Passive Skill Point!",
       "badges": [
@@ -739,13 +769,99 @@
             "to": "exit",
             "style": "main"
           }
+        ],
+        "procedural_note": "2 seed variants: Alira (Torch side) & Weaver's Chambers (Opposite side) swap between NW and SE of the road"
+      }
+    },
+    {
+      "step_id": "a2_s09_weavers_chambers",
+      "act": 2,
+      "step_number": 9,
+      "zone_name": "The Weaver's Chambers",
+      "area_level": 16,
+      "compass": "PROCEDURAL SPIDER CAVE",
+      "summary": "Navigate web-covered cave tunnels → Enter The Weaver's Nest → Kill The Weaver & take Maligaro's Spike",
+      "layout_tell": "Procedural spider dungeon with no fixed compass direction: follow the thickest spider-webbing and avoid short dead-end side alcoves until you reach The Weaver's Nest door.",
+      "next_exit": "Kill The Weaver → Loot Maligaro's Spike → Portal/Logout back to Western Forest or Town (Silk)",
+      "portal_tip": "⚡ LOGOUT after looting Maligaro's Spike (or take portal if continuing Western Forest)",
+      "badges": [
+        {
+          "label": "MALIGARO'S SPIKE",
+          "color": "amber"
+        },
+        {
+          "label": "LVL 18 SUPPORTS",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Navigate spider tunnels toward denser web curtains"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter The Weaver's Nest → Kill The Weaver & loot Maligaro's Spike"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Return to Western Forest (or Town to claim Lvl 18 Support Gem from Silk)"
+        }
+      ],
+      "boss_info": "The Weaver: Chaos & Physical Ethereal Knives + Viper Strike. Retreats to ceiling at 50% HP to spawn spiders.",
+      "gem_reward": "Sharp and Cruel (Silk): Unlocks Level 18 Support Gems (Controlled Destruction, Elemental Focus, Faster Attacks, Concentrated Effect, Vicious Projectiles, Cruelty).",
+      "variants": [
+        {
+          "title": "Procedural Web Cavern",
+          "desc": "Layout varies heavily by seed; follow thicker webbing toward The Weaver's Nest."
+        }
+      ],
+      "topology": {
+        "procedural_note": "Procedural cave: Insufficient fixed layout data — follow denser spider webs to Boss",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Entrance",
+            "x": 0.18,
+            "y": 0.78,
+            "type": "start"
+          },
+          {
+            "id": "tunnels",
+            "label": "Web Tunnels",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "boss",
+            "label": "The Weaver + Spike",
+            "x": 0.82,
+            "y": 0.22,
+            "type": "boss"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "tunnels",
+            "style": "main"
+          },
+          {
+            "from": "tunnels",
+            "to": "boss",
+            "style": "main"
+          }
         ]
       }
     },
     {
       "step_id": "a2_s09_broken_bridge",
       "act": 2,
-      "step_number": 9,
+      "step_number": 10,
       "zone_name": "The Broken Bridge",
       "area_level": 16,
       "compass": "FOLLOW ROAD ↗",
@@ -829,7 +945,7 @@
     {
       "step_id": "a2_s10_crypt_level_1",
       "act": 2,
-      "step_number": 10,
+      "step_number": 11,
       "zone_name": "The Crypt Level 1",
       "area_level": 17,
       "compass": "LOOP / TRIAL #3",
@@ -907,13 +1023,18 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural 4-corner loop: Hug outer perimeter walls to locate Lab Trial #3"
+      },
+      "zone_aliases": [
+        "The Fellshrine Ruins",
+        "The Crypt Level 2"
+      ]
     },
     {
       "step_id": "a2_s11_wetlands",
       "act": 2,
-      "step_number": 11,
+      "step_number": 12,
       "zone_name": "The Wetlands",
       "area_level": 16,
       "compass": "CENTER + NW ↖",
@@ -991,18 +1112,19 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Oak is always in the center; WP & Vaal Ruins spawn along the NW or NE cliff wall"
       }
     },
     {
       "step_id": "a2_s12_vaal_ruins",
       "act": 2,
-      "step_number": 12,
+      "step_number": 13,
       "zone_name": "The Vaal Ruins",
       "area_level": 18,
-      "compass": "S-CURVE / WALL",
+      "compass": "PROCEDURAL MAZE",
       "summary": "Navigate corridors to the Ancient Seal → Click Seal to release darkness → Exit to Northern Forest",
-      "layout_tell": "When you find a long straight corridor heading away from the entrance, follow its general direction after it turns.",
+      "layout_tell": "Procedural indoor maze with high seed variance: work toward the opposite corner from your entrance to find the Ancient Seal (the Northern Forest exit is always right next to the Seal).",
       "next_exit": "Break the Ancient Seal → Enter The Northern Forest",
       "portal_tip": "Do not backtrack after breaking the Ancient Seal — the exit is always just past it!",
       "badges": [
@@ -1087,13 +1209,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural indoor maze: Insufficient fixed layout data — actual layout varies heavily by seed"
       }
     },
     {
       "step_id": "a2_s13_northern_forest",
       "act": 2,
-      "step_number": 13,
+      "step_number": 14,
       "zone_name": "The Northern Forest",
       "area_level": 18,
       "compass": "NE ↗ (RIVER)",
@@ -1163,12 +1286,15 @@
             "style": "main"
           }
         ]
-      }
+      },
+      "zone_aliases": [
+        "The Dread Thicket"
+      ]
     },
     {
       "step_id": "a2_s14_caverns_and_pyramid",
       "act": 2,
-      "step_number": 14,
+      "step_number": 15,
       "zone_name": "The Caverns",
       "area_level": 19,
       "compass": "STAIRS UP ↑",
@@ -1246,8 +1372,12 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural dungeon: Caverns & each Pyramid floor place stairs in random outer corners"
+      },
+      "zone_aliases": [
+        "The Ancient Pyramid"
+      ]
     }
   ]
 }

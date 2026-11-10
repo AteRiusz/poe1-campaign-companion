@@ -83,9 +83,88 @@
       }
     },
     {
-      "step_id": "a9_s02_descent_vastiri_desert",
+      "step_id": "a9_s02_highgate_act9",
       "act": 9,
       "step_number": 2,
+      "zone_name": "Highgate",
+      "area_level": 61,
+      "compass": "TOWN (EXIT NE ↗)",
+      "summary": "Act 9 Town Hub → Tag Waypoint → Climb North-East stairs to The Descent",
+      "layout_tell": "Enter from Blood Aqueduct on the left; climb the long North-East wooden stairs past Petarus & Vanja to enter The Descent.",
+      "next_exit": "Climb NE stairs → Enter The Descent → Supply Hoist to Vastiri Desert",
+      "portal_tip": "Turn in Storm Blade to Petarus & Vanja for the Bottled Storm (unlocks The Oasis +1 Skill Pt)!",
+      "badges": [
+        {
+          "label": "TOWN HUB",
+          "color": "sky"
+        },
+        {
+          "label": "EXIT NE ↗ THE DESCENT",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Act 9 Highgate Waypoint"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Climb top-right (NE) stairs into The Descent"
+        }
+      ],
+      "boss_info": "Safe Town Hub (Petarus & Vanja, Tasuni, Irasha, Sin).",
+      "gem_reward": "Irasha/Tasuni rewards +1 Passive Skill Point for Sekhema Feather (The Ruler of Highgate).",
+      "variants": [
+        {
+          "title": "Fixed Town Hub",
+          "desc": "NE stairs lead to The Descent."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "← Blood Aqueduct",
+            "x": 0.18,
+            "y": 0.62,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Town WP + Sin",
+            "x": 0.5,
+            "y": 0.52,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↗ The Descent (NE)",
+            "x": 0.82,
+            "y": 0.22,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a9_s02_descent_vastiri_desert",
+      "act": 9,
+      "step_number": 3,
       "zone_name": "The Vastiri Desert",
       "area_level": 61,
       "compass": "STORM BLADE → OASIS (+1 PT SHAKARI)",
@@ -175,13 +254,20 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural desert: Storm Blade, Waypoint, and Oasis (+1 Pt Shakari) locations vary across seeds"
+      },
+      "zone_aliases": [
+        "The Descent",
+        "The Supply Hoist",
+        "The Oasis",
+        "The Sand Pit"
+      ]
     },
     {
       "step_id": "a9_s03_foothills_boiling_lake",
       "act": 9,
-      "step_number": 3,
+      "step_number": 4,
       "zone_name": "The Foothills",
       "area_level": 62,
       "compass": "NE (BOILING LAKE) → NW (TUNNEL)",
@@ -259,13 +345,17 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Foothills WP & Calendar of Fortune are North/NE; Boiling Lake is East; Tunnel is NW"
+      },
+      "zone_aliases": [
+        "The Boiling Lake"
+      ]
     },
     {
       "step_id": "a9_s04_the_tunnel",
       "act": 9,
-      "step_number": 4,
+      "step_number": 5,
       "zone_name": "The Tunnel",
       "area_level": 62,
       "compass": "MERCILESS TRIAL #2 → NORTH ↑",
@@ -343,13 +433,14 @@
             "to": "exit",
             "style": "main"
           }
-        ]
+        ],
+        "procedural_note": "Procedural tunnel: Merciless Lab Trial #2 spawns in a side branch BEFORE the Waypoint!"
       }
     },
     {
       "step_id": "a9_s05_the_quarry",
       "act": 9,
-      "step_number": 5,
+      "step_number": 6,
       "zone_name": "The Quarry",
       "area_level": 63,
       "compass": "CENTER WP → GARUKHAN (+1 PT) & REFINERY",
@@ -444,13 +535,18 @@
             "to": "ref",
             "style": "branch"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Sin & Waypoint are dead-center; Shrine of the Winds (+1 Pt) & Refinery spawn on random N/W/E walls"
+      },
+      "zone_aliases": [
+        "The Refinery",
+        "The Shrine of the Winds"
+      ]
     },
     {
       "step_id": "a9_s06_belly_and_rotting_core",
       "act": 9,
-      "step_number": 6,
+      "step_number": 7,
       "zone_name": "The Rotting Core",
       "area_level": 64,
       "compass": "3 GUARDIAN PORTALS → DEPRAVED TRINITY",
@@ -524,8 +620,13 @@
             "to": "exit",
             "style": "main"
           }
-        ]
-      }
+        ],
+        "procedural_note": "Procedural organic maze through Belly of the Beast & Rotting Core to the 3 Guardian Portals"
+      },
+      "zone_aliases": [
+        "The Belly of the Beast",
+        "The Black Heart"
+      ]
     }
   ]
 }

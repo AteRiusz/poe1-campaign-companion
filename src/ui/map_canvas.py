@@ -64,7 +64,14 @@ class TopologyMapWidget(QWidget):
         self.compact = compact
         self.topology: Dict[str, Any] = {"nodes": [], "edges": []}
         self.compass_label: str = ""
-        self.setMinimumHeight(140 if compact else 230)
+        self.setMinimumHeight(158 if compact else 252)
+
+    def _banner_height(self) -> float:
+        """Reserve bottom height when `procedural_note` is present on the zone topology."""
+        proc_note = str(self.topology.get("procedural_note", "")).strip()
+        if not proc_note:
+            return 0.0
+        return 18.0 if self.compact else 22.0
 
     def set_topology(
         self,
@@ -77,11 +84,12 @@ class TopologyMapWidget(QWidget):
         self.update()
 
     def _compute_node_positions(self, w: float, h: float) -> Tuple[Dict[str, QPointF], float]:
+        eff_h = max(60.0, h - self._banner_height())
         radius = 4.5 if self.compact else 6.5
         pad_x = 26.0 if self.compact else 46.0
         pad_y = 26.0 if self.compact else 36.0
         usable_w = max(40.0, w - 2 * pad_x)
-        usable_h = max(40.0, h - 2 * pad_y)
+        usable_h = max(40.0, eff_h - 2 * pad_y)
 
         nodes: List[Dict[str, Any]] = self.topology.get("nodes", [])
         node_coords: Dict[str, QPointF] = {}
@@ -94,12 +102,14 @@ class TopologyMapWidget(QWidget):
     def compute_label_rects(self, w: float, h: float) -> List[Tuple[Dict[str, Any], QPointF, QRectF]]:
         """
         Compute non-overlapping tooltip bounding boxes (`QRectF`) for all nodes on a canvas of size (w, h).
-        Guarantees zero overlap between tooltip boxes and zero overlap with node circles.
+        Guarantees zero overlap between tooltip boxes, zero overlap with node circles, and zero overlap with
+        the bottom procedural warning banner.
         """
         nodes: List[Dict[str, Any]] = self.topology.get("nodes", [])
         if not nodes:
             return []
 
+        eff_h = max(60.0, h - self._banner_height())
         node_coords, radius = self._compute_node_positions(w, h)
         label_font = QFont("Segoe UI", 8 if self.compact else 9, QFont.Weight.DemiBold)
         fm = QFontMetricsF(label_font)
@@ -146,7 +156,7 @@ class TopologyMapWidget(QWidget):
             ]
 
             # 2. Add exact tangent Y/X slots next to node obstacles & placed labels + fine 2D grid
-            y_slots: List[float] = [margin, h - box_h - margin, pt.y() - gap - box_h, pt.y() + gap]
+            y_slots: List[float] = [margin, eff_h - box_h - margin, pt.y() - gap - box_h, pt.y() + gap]
             for obs in node_obstacles:
                 y_slots.append(obs.bottom() + 0.5)
                 y_slots.append(obs.top() - box_h - 0.5)
@@ -155,9 +165,9 @@ class TopologyMapWidget(QWidget):
                 y_slots.append(prev_r.top() - box_h - 2.5)
 
             step_x = max(4.0, (w - box_w - 2 * margin) / 20.0)
-            step_y = max(3.5, (h - box_h - 2 * margin) / 24.0)
+            step_y = max(3.5, (eff_h - box_h - 2 * margin) / 24.0)
             gy = margin
-            while gy <= h - box_h - margin + 0.5:
+            while gy <= eff_h - box_h - margin + 0.5:
                 y_slots.append(gy)
                 gy += step_y
 
@@ -180,7 +190,7 @@ class TopologyMapWidget(QWidget):
 
             for cx, cy in candidates:
                 clamped_x = max(margin, min(w - box_w - margin, cx))
-                clamped_y = max(margin, min(h - box_h - margin, cy))
+                clamped_y = max(margin, min(eff_h - box_h - margin, cy))
                 cand = QRectF(clamped_x, clamped_y, box_w, box_h)
 
                 padded_cand = cand.adjusted(-2.0, -2.0, 2.0, 2.0)
@@ -231,6 +241,8 @@ class TopologyMapWidget(QWidget):
         rect = self.rect()
         w = float(rect.width())
         h = float(rect.height())
+        banner_h = self._banner_height()
+        eff_h = max(60.0, h - banner_h)
 
         # Dark slate-stone background with subtle border & cardinal N/S/W/E guides
         painter.fillRect(rect, QColor("#090b10"))
@@ -240,16 +252,16 @@ class TopologyMapWidget(QWidget):
 
         grid_pen = QPen(QColor(255, 255, 255, 14), 1.0, Qt.PenStyle.DotLine)
         painter.setPen(grid_pen)
-        painter.drawLine(QPointF(w / 2.0, 16.0), QPointF(w / 2.0, h - 16.0))
-        painter.drawLine(QPointF(18.0, h / 2.0), QPointF(w - 18.0, h / 2.0))
+        painter.drawLine(QPointF(w / 2.0, 16.0), QPointF(w / 2.0, eff_h - 16.0))
+        painter.drawLine(QPointF(18.0, eff_h / 2.0), QPointF(w - 18.0, eff_h / 2.0))
 
         compass_font = QFont("Consolas", 7 if self.compact else 8, QFont.Weight.Bold)
         painter.setFont(compass_font)
         painter.setPen(QColor("#57534e"))
         painter.drawText(QRectF(w / 2.0 - 10.0, 2.0, 20.0, 12.0), Qt.AlignmentFlag.AlignCenter, "N")
-        painter.drawText(QRectF(w / 2.0 - 10.0, h - 14.0, 20.0, 12.0), Qt.AlignmentFlag.AlignCenter, "S")
-        painter.drawText(QRectF(3.0, h / 2.0 - 7.0, 12.0, 14.0), Qt.AlignmentFlag.AlignCenter, "W")
-        painter.drawText(QRectF(w - 15.0, h / 2.0 - 7.0, 12.0, 14.0), Qt.AlignmentFlag.AlignCenter, "E")
+        painter.drawText(QRectF(w / 2.0 - 10.0, eff_h - 14.0, 20.0, 12.0), Qt.AlignmentFlag.AlignCenter, "S")
+        painter.drawText(QRectF(3.0, eff_h / 2.0 - 7.0, 12.0, 14.0), Qt.AlignmentFlag.AlignCenter, "W")
+        painter.drawText(QRectF(w - 15.0, eff_h / 2.0 - 7.0, 12.0, 14.0), Qt.AlignmentFlag.AlignCenter, "E")
 
         nodes: List[Dict[str, Any]] = self.topology.get("nodes", [])
         edges: List[Dict[str, Any]] = self.topology.get("edges", [])
@@ -338,3 +350,27 @@ class TopologyMapWidget(QWidget):
 
             painter.setPen(QColor("#f5f5f4"))
             painter.drawText(lrect, Qt.AlignmentFlag.AlignCenter, label)
+
+        # 5. Draw procedural / multi-seed layout warning banner at bottom of canvas when present
+        proc_note = str(self.topology.get("procedural_note", "")).strip()
+        if proc_note and banner_h > 0.0:
+            banner_rect = QRectF(4.0, h - banner_h + 1.0, max(20.0, w - 8.0), banner_h - 3.0)
+            painter.setPen(QPen(QColor(245, 158, 11, 185), 1.0))
+            painter.setBrush(QColor(28, 22, 12, 235))
+            painter.drawRoundedRect(banner_rect, 4.0, 4.0)
+
+            banner_font = QFont("Segoe UI", 7 if self.compact else 8, QFont.Weight.DemiBold)
+            painter.setFont(banner_font)
+            painter.setPen(QColor("#fcd34d"))
+            raw_banner_text = (
+                "⚠ Procedural: Actual layout may differ by seed"
+                if self.compact
+                else f"⚠ {proc_note}"
+            )
+            bfm = QFontMetricsF(banner_font)
+            elided = bfm.elidedText(
+                raw_banner_text,
+                Qt.TextElideMode.ElideRight,
+                max(10.0, banner_rect.width() - 10.0),
+            )
+            painter.drawText(banner_rect.adjusted(5.0, 0.0, -5.0, 0.0), Qt.AlignmentFlag.AlignCenter, elided)
