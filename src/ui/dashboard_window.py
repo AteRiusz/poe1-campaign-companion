@@ -528,7 +528,7 @@ class DashboardWindow(QMainWindow):
         else:
             self.variants_box.setVisible(False)
 
-        self.map_canvas.set_topology(step.topology, compass_label=step.compass)
+        self.map_canvas.set_topology(step.topology, compass_label=step.compass, step_id=step.step_id)
 
         # Sync timeline selection without recursive signal loop
         self.route_list.blockSignals(True)

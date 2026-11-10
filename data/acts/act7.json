@@ -45,8 +45,8 @@
           {
             "id": "start",
             "label": "Start (NE)",
-            "x": 0.84,
-            "y": 0.8,
+            "x": 0.82,
+            "y": 0.2,
             "type": "start"
           },
           {
@@ -58,9 +58,9 @@
           },
           {
             "id": "exit",
-            "label": "↙ The Crossroads",
-            "x": 0.16,
-            "y": 0.2,
+            "label": "↙ The Crossroads (SW)",
+            "x": 0.18,
+            "y": 0.8,
             "type": "exit"
           }
         ],
@@ -128,34 +128,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "label": "Crossroads WP (NW)",
+            "x": 0.2,
+            "y": 0.24,
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "Lvl 1: Cruel Trial #2",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "trial",
+            "label": "Crypt 1: Cruel Trial #2",
+            "x": 0.54,
+            "y": 0.48,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Lvl 2: Maligaro's Map",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↘ Crypt 2: Maligaro Map",
+            "x": 0.82,
+            "y": 0.78,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "trial",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "trial",
             "to": "exit",
             "style": "main"
           }
@@ -212,34 +212,46 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (SW)",
+            "x": 0.2,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "WP + Maligaro's Sanctum",
+            "id": "wp",
+            "label": "Center WP + Map Device",
             "x": 0.5,
             "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "mal",
+            "label": "Maligaro's Sanctum",
+            "x": 0.22,
+            "y": 0.22,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "→ Chamber of Sins Lvl 2",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↗ Sins Lvl 2 (Map Tell)",
+            "x": 0.82,
+            "y": 0.22,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
+            "to": "mal",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -291,34 +303,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (SW)",
+            "x": 0.2,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Cruel Trial #3",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "trial",
+            "label": "Cruel Trial #3 (Final)",
+            "x": 0.26,
+            "y": 0.24,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "→ The Den / Ashen Fields",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↗ Secret Door → Den",
+            "x": 0.82,
+            "y": 0.24,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
-            "style": "main"
+            "to": "trial",
+            "style": "branch"
           },
           {
-            "from": "mid",
+            "from": "start",
             "to": "exit",
             "style": "main"
           }
@@ -375,34 +387,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
-            "x": 0.84,
-            "y": 0.8,
-            "type": "start"
+            "label": "Start + WP (NE)",
+            "x": 0.82,
+            "y": 0.22,
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "Greust (+1 Pt)",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "greust",
+            "label": "↙ Greust (+1 Skill Pt)",
+            "x": 0.48,
+            "y": 0.54,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "← Northern Forest",
+            "label": "← Northern Forest (W)",
             "x": 0.16,
-            "y": 0.2,
+            "y": 0.64,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "greust",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "greust",
             "to": "exit",
             "style": "main"
           }
@@ -459,21 +471,28 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Dread Thicket Entry",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Thicket Entry (SW)",
+            "x": 0.2,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "7 Fireflies",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "flies",
+            "label": "7/7 Fireflies Loop",
+            "x": 0.26,
+            "y": 0.26,
             "type": "quest"
           },
           {
+            "id": "gruth",
+            "label": "Gruthkul (+1 Skill Pt)",
+            "x": 0.56,
+            "y": 0.54,
+            "type": "boss"
+          },
+          {
             "id": "exit",
-            "label": "Gruthkul (+1 Pt) → Causeway",
+            "label": "↗ To The Causeway",
             "x": 0.84,
             "y": 0.2,
             "type": "exit"
@@ -482,11 +501,16 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "flies",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "flies",
+            "to": "gruth",
+            "style": "branch"
+          },
+          {
+            "from": "flies",
             "to": "exit",
             "style": "main"
           }
@@ -549,15 +573,15 @@
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Waypoint",
+            "id": "wp",
+            "label": "Causeway WP",
             "x": 0.5,
             "y": 0.5,
             "type": "wp"
           },
           {
             "id": "exit",
-            "label": "↗ Kishara's Star + Vaal City",
+            "label": "↗ Kishara's Star + Exit",
             "x": 0.84,
             "y": 0.2,
             "type": "exit"
@@ -566,11 +590,11 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -622,34 +646,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
+            "label": "Start (Outer Wall)",
+            "x": 0.2,
             "y": 0.8,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Outer Wall Alley Tell",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "alley",
+            "label": "Inward Alley Tell",
+            "x": 0.24,
+            "y": 0.28,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Center WP + Yeena → Temple",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "label": "Center WP + Yeena",
+            "x": 0.54,
+            "y": 0.52,
+            "type": "wp"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "alley",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "alley",
             "to": "exit",
             "style": "main"
           }
@@ -703,23 +727,23 @@
           {
             "id": "start",
             "label": "Temple Lvl 1",
-            "x": 0.16,
-            "y": 0.8,
+            "x": 0.22,
+            "y": 0.24,
             "type": "start"
           },
           {
             "id": "mid",
-            "label": "Temple Lvl 2",
-            "x": 0.5,
-            "y": 0.5,
-            "type": "main"
+            "label": "Temple Lvl 2 (Webs)",
+            "x": 0.76,
+            "y": 0.52,
+            "type": "quest"
           },
           {
             "id": "exit",
             "label": "Arakaali → Act 8",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "x": 0.28,
+            "y": 0.8,
+            "type": "boss"
           }
         ],
         "edges": [

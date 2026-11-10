@@ -58,11 +58,11 @@
             "label": "Blood Channels",
             "x": 0.5,
             "y": 0.5,
-            "type": "main"
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "↖ Highgate",
+            "label": "↖ Highgate (NW)",
             "x": 0.16,
             "y": 0.2,
             "type": "exit"
@@ -72,12 +72,12 @@
           {
             "from": "start",
             "to": "mid",
-            "style": "main"
+            "style": "river"
           },
           {
             "from": "mid",
             "to": "exit",
-            "style": "main"
+            "style": "river"
           }
         ]
       }
@@ -132,34 +132,46 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
-            "x": 0.16,
+            "label": "Start (SW)",
+            "x": 0.2,
             "y": 0.8,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Storm Blade → The Oasis (+1 Pt)",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "wp",
+            "label": "Desert WP + Storm Blade",
+            "x": 0.48,
+            "y": 0.54,
+            "type": "wp"
+          },
+          {
+            "id": "oasis",
+            "label": "→ East: Oasis (Shakari +1 Pt)",
+            "x": 0.84,
+            "y": 0.52,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "↑ The Foothills",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↑ The Foothills (North)",
+            "x": 0.48,
+            "y": 0.18,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
+            "to": "oasis",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -216,22 +228,22 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start (S)",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.5,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "NE: WP + Boiling Lake (Acid)",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "lake",
+            "label": "NE: WP + Boiling Lake",
+            "x": 0.82,
+            "y": 0.3,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "↖ The Tunnel",
-            "x": 0.84,
+            "label": "↖ The Tunnel (NW)",
+            "x": 0.18,
             "y": 0.2,
             "type": "exit"
           }
@@ -239,11 +251,11 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
-            "style": "main"
+            "to": "lake",
+            "style": "branch"
           },
           {
-            "from": "mid",
+            "from": "start",
             "to": "exit",
             "style": "main"
           }
@@ -300,34 +312,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start (S)",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.5,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "trial",
             "label": "WP + Merciless Trial #2",
-            "x": 0.5,
+            "x": 0.48,
             "y": 0.5,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "↑ The Quarry",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↑ The Quarry (North)",
+            "x": 0.5,
+            "y": 0.18,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "trial",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "trial",
             "to": "exit",
             "style": "main"
           }
@@ -389,36 +401,48 @@
         "nodes": [
           {
             "id": "start",
-            "label": "NW: Garukhan (+1 Pt)",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.5,
+            "y": 0.84,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "wp",
             "label": "Center: WP + Sin",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.52,
             "type": "wp"
           },
           {
-            "id": "exit",
-            "label": "NE: Refinery (Powder)",
-            "x": 0.84,
+            "id": "garu",
+            "label": "NW: Garukhan (+1 Pt)",
+            "x": 0.18,
             "y": 0.2,
-            "type": "exit"
+            "type": "boss"
+          },
+          {
+            "id": "ref",
+            "label": "NE: Refinery (Powder)",
+            "x": 0.82,
+            "y": 0.2,
+            "type": "quest"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
-            "to": "exit",
-            "style": "main"
+            "from": "wp",
+            "to": "garu",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
+            "to": "ref",
+            "style": "branch"
           }
         ]
       }
@@ -469,24 +493,24 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Belly of the Beast",
-            "x": 0.16,
+            "label": "Belly of the Beast (SE)",
+            "x": 0.82,
             "y": 0.8,
             "type": "start"
           },
           {
             "id": "mid",
-            "label": "3 Sub-Boss Portals",
+            "label": "Rotting Core: 3 Portals",
             "x": 0.5,
             "y": 0.5,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Depraved Trinity → Act 10",
-            "x": 0.84,
+            "label": "↖ Depraved Trinity → Act 10",
+            "x": 0.18,
             "y": 0.2,
-            "type": "exit"
+            "type": "boss"
           }
         ],
         "edges": [

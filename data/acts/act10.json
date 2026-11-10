@@ -48,34 +48,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + Rescue Bannon",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (NW)",
+            "x": 0.18,
+            "y": 0.24,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Rooftop Bridge",
-            "x": 0.5,
-            "y": 0.5,
-            "type": "main"
+            "id": "bannon",
+            "label": "↖ Rescue Bannon (Apex)",
+            "x": 0.36,
+            "y": 0.16,
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "↘ The Ravaged Square",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↘ The Ravaged Square (SE)",
+            "x": 0.82,
+            "y": 0.8,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
-            "style": "main"
+            "to": "bannon",
+            "style": "branch"
           },
           {
-            "from": "mid",
+            "from": "start",
             "to": "exit",
             "style": "main"
           }
@@ -126,36 +126,48 @@
       "topology": {
         "nodes": [
           {
-            "id": "start",
-            "label": "SW: Control Blocks (+1 Pt)",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
-          },
-          {
-            "id": "mid",
+            "id": "nw",
             "label": "NW: WP + Ossuary (Trial #3)",
-            "x": 0.5,
-            "y": 0.5,
+            "x": 0.2,
+            "y": 0.22,
             "type": "wp"
           },
           {
-            "id": "exit",
+            "id": "sw",
+            "label": "SW: Control Blocks (+1 Pt)",
+            "x": 0.2,
+            "y": 0.8,
+            "type": "quest"
+          },
+          {
+            "id": "center",
+            "label": "Center: Sin → Canals",
+            "x": 0.52,
+            "y": 0.46,
+            "type": "portal"
+          },
+          {
+            "id": "se",
             "label": "SE: Torched Courts",
-            "x": 0.84,
-            "y": 0.2,
+            "x": 0.82,
+            "y": 0.8,
             "type": "exit"
           }
         ],
         "edges": [
           {
-            "from": "start",
-            "to": "mid",
+            "from": "nw",
+            "to": "sw",
+            "style": "branch"
+          },
+          {
+            "from": "nw",
+            "to": "center",
             "style": "main"
           },
           {
-            "from": "mid",
-            "to": "exit",
+            "from": "center",
+            "to": "se",
             "style": "main"
           }
         ]
@@ -211,34 +223,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "label": "Start + WP (NE)",
+            "x": 0.78,
+            "y": 0.24,
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "Left Cage Shortcuts",
-            "x": 0.5,
-            "y": 0.5,
-            "type": "main"
+            "id": "left",
+            "label": "← West Cage Shortcuts",
+            "x": 0.24,
+            "y": 0.48,
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Vilenta (+1 Skill Pt)",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "label": "↙ Vilenta (+1 Skill Pt)",
+            "x": 0.28,
+            "y": 0.8,
+            "type": "boss"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "left",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "left",
             "to": "exit",
             "style": "main"
           }
@@ -290,22 +302,22 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (SE)",
+            "x": 0.78,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Bone Corridors",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "loop",
+            "label": "Upper Bone Corridors",
+            "x": 0.26,
+            "y": 0.54,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "⚡ Merciless Trial #3",
-            "x": 0.84,
+            "label": "⚡ Merciless Trial #3 (NW)",
+            "x": 0.3,
             "y": 0.2,
             "type": "exit"
           }
@@ -313,11 +325,11 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "loop",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "loop",
             "to": "exit",
             "style": "main"
           }
@@ -375,33 +387,45 @@
           {
             "id": "start",
             "label": "Start + WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "x": 0.54,
+            "y": 0.24,
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "CCW Spiral (Go Left!)",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "west",
+            "label": "1. Go Left (CCW ↺)",
+            "x": 0.18,
+            "y": 0.42,
+            "type": "quest"
+          },
+          {
+            "id": "south",
+            "label": "2. South Loop",
+            "x": 0.52,
+            "y": 0.82,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Avarius (Staff of Purity)",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "label": "3. Avarius (Staff)",
+            "x": 0.82,
+            "y": 0.44,
+            "type": "boss"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "west",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "west",
+            "to": "south",
+            "style": "main"
+          },
+          {
+            "from": "south",
             "to": "exit",
             "style": "main"
           }
@@ -463,7 +487,7 @@
             "label": "Canal Bridges",
             "x": 0.5,
             "y": 0.5,
-            "type": "main"
+            "type": "quest"
           },
           {
             "id": "exit",
@@ -477,12 +501,12 @@
           {
             "from": "start",
             "to": "mid",
-            "style": "main"
+            "style": "river"
           },
           {
             "from": "mid",
             "to": "exit",
-            "style": "main"
+            "style": "river"
           }
         ]
       }
@@ -551,7 +575,7 @@
           },
           {
             "id": "exit",
-            "label": "Kitava (+2 Pts → Endgame!)",
+            "label": "↖ Kitava (+2 Pts!)",
             "x": 0.16,
             "y": 0.2,
             "type": "exit"

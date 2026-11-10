@@ -234,7 +234,7 @@ class OverlayWindow(QWidget):
             )
             self.extra_container.addWidget(var_lbl)
 
-        self.map_widget.set_topology(step.topology, compass_label=step.compass)
+        self.map_widget.set_topology(step.topology, compass_label=step.compass, step_id=step.step_id)
         self.adjustSize()
 
     @staticmethod

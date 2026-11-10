@@ -44,22 +44,22 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Town Gate",
-            "x": 0.16,
+            "label": "Town Gate (SW)",
+            "x": 0.18,
             "y": 0.8,
             "type": "start"
           },
           {
             "id": "mid",
-            "label": "Clear Beach",
+            "label": "Clear All Mobs",
             "x": 0.5,
             "y": 0.5,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Lilly All-Gems Unlocked",
-            "x": 0.84,
+            "label": "Lilly All-Gems Shop",
+            "x": 0.82,
             "y": 0.2,
             "type": "exit"
           }
@@ -129,28 +129,28 @@
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Waypoint",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "wp",
+            "label": "Coast WP",
+            "x": 0.66,
+            "y": 0.36,
             "type": "wp"
           },
           {
             "id": "exit",
             "label": "↗ The Mud Flats",
             "x": 0.84,
-            "y": 0.2,
+            "y": 0.18,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -202,22 +202,22 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.48,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "queen",
             "label": "NE: Dishonoured Queen",
-            "x": 0.5,
-            "y": 0.5,
+            "x": 0.8,
+            "y": 0.38,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "↖ Karui Fortress",
-            "x": 0.84,
+            "label": "↖ Karui Fortress (NW)",
+            "x": 0.2,
             "y": 0.2,
             "type": "exit"
           }
@@ -225,11 +225,11 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "queen",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "queen",
             "to": "exit",
             "style": "main"
           }
@@ -281,13 +281,13 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start (S)",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.5,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "tuko",
             "label": "Tukohama (+1 Pt)",
             "x": 0.5,
             "y": 0.5,
@@ -295,20 +295,20 @@
           },
           {
             "id": "exit",
-            "label": "↑ The Ridge",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↑ The Ridge (North)",
+            "x": 0.5,
+            "y": 0.18,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "tuko",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "tuko",
             "to": "exit",
             "style": "main"
           }
@@ -356,22 +356,22 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
-            "x": 0.16,
+            "label": "Start + WP (SW)",
+            "x": 0.18,
             "y": 0.8,
-            "type": "start"
+            "type": "wp"
           },
           {
             "id": "mid",
-            "label": "Ridge Path",
-            "x": 0.5,
+            "label": "Outer Ridge Loop",
+            "x": 0.48,
             "y": 0.5,
-            "type": "main"
+            "type": "quest"
           },
           {
             "id": "exit",
             "label": "↗ The Lower Prison",
-            "x": 0.84,
+            "x": 0.82,
             "y": 0.2,
             "type": "exit"
           }
@@ -441,33 +441,33 @@
           {
             "id": "start",
             "label": "Start + WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "x": 0.2,
+            "y": 0.78,
+            "type": "wp"
           },
           {
-            "id": "mid",
+            "id": "trial",
             "label": "Cruel Trial #1",
-            "x": 0.5,
-            "y": 0.5,
+            "x": 0.26,
+            "y": 0.26,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "→ Shavronne's Tower",
-            "x": 0.84,
-            "y": 0.2,
+            "x": 0.8,
+            "y": 0.24,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
-            "style": "main"
+            "to": "trial",
+            "style": "branch"
           },
           {
-            "from": "mid",
+            "from": "start",
             "to": "exit",
             "style": "main"
           }
@@ -520,24 +520,24 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Tower Base",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Tower Base (S)",
+            "x": 0.5,
+            "y": 0.82,
             "type": "start"
           },
           {
             "id": "mid",
-            "label": "3 Floors Up",
-            "x": 0.5,
+            "label": "Climb 3 Floors",
+            "x": 0.48,
             "y": 0.5,
-            "type": "main"
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Shavronne → Prisoner's Gate",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "label": "↑ Shavronne & Brutus",
+            "x": 0.5,
+            "y": 0.18,
+            "type": "boss"
           }
         ],
         "edges": [
@@ -605,33 +605,33 @@
           {
             "id": "start",
             "label": "Start + WP",
-            "x": 0.84,
-            "y": 0.8,
-            "type": "start"
+            "x": 0.48,
+            "y": 0.24,
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "Abberath (+1 Pt)",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "abb",
+            "label": "↘ Abberath Cliff (+1 Pt)",
+            "x": 0.82,
+            "y": 0.72,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "← Western Forest",
+            "label": "← Western Forest (W)",
             "x": 0.16,
-            "y": 0.2,
+            "y": 0.56,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
-            "style": "main"
+            "to": "abb",
+            "style": "branch"
           },
           {
-            "from": "mid",
+            "from": "start",
             "to": "exit",
             "style": "main"
           }
@@ -688,36 +688,48 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Western Forest Road",
+            "label": "Western Forest (SW)",
             "x": 0.16,
-            "y": 0.8,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "wp",
             "label": "Riverways WP",
-            "x": 0.5,
-            "y": 0.5,
+            "x": 0.52,
+            "y": 0.52,
             "type": "wp"
           },
           {
             "id": "exit",
-            "label": "↑ The Wetlands (Ryslatha)",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↑ The Wetlands (N)",
+            "x": 0.52,
+            "y": 0.18,
             "type": "exit"
+          },
+          {
+            "id": "south",
+            "label": "↘ Southern Forest",
+            "x": 0.84,
+            "y": 0.72,
+            "type": "quest"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
             "to": "exit",
             "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "south",
+            "style": "branch"
           }
         ]
       }
@@ -772,24 +784,24 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start (S)",
-            "x": 0.84,
+            "label": "Start (SE)",
+            "x": 0.8,
             "y": 0.8,
             "type": "start"
           },
           {
             "id": "mid",
-            "label": "Spawning Ground (NW)",
+            "label": "Wetlands Grove",
             "x": 0.5,
-            "y": 0.5,
-            "type": "boss"
+            "y": 0.52,
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Ryslatha (+1 Pt)",
-            "x": 0.16,
+            "label": "↖ Ryslatha (NW +1 Pt)",
+            "x": 0.18,
             "y": 0.2,
-            "type": "exit"
+            "type": "boss"
           }
         ],
         "edges": [
@@ -857,33 +869,45 @@
           {
             "id": "start",
             "label": "The Beacon WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "x": 0.52,
+            "y": 0.82,
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "Left Shoreline (Reef)",
-            "x": 0.5,
-            "y": 0.5,
-            "type": "main"
+            "id": "pillars",
+            "label": "2 Fuel Pillars",
+            "x": 0.8,
+            "y": 0.52,
+            "type": "quest"
+          },
+          {
+            "id": "reef",
+            "label": "↺ Left Reef Wall",
+            "x": 0.2,
+            "y": 0.48,
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Brine King → Act 7",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "label": "↖ Brine King → Act 7",
+            "x": 0.32,
+            "y": 0.18,
+            "type": "boss"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "pillars",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "pillars",
+            "to": "reef",
+            "style": "river"
+          },
+          {
+            "from": "reef",
             "to": "exit",
             "style": "main"
           }

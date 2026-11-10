@@ -49,23 +49,23 @@
           {
             "id": "start",
             "label": "Start (South)",
-            "x": 0.16,
-            "y": 0.8,
+            "x": 0.5,
+            "y": 0.82,
             "type": "start"
           },
           {
             "id": "mid",
             "label": "Wooden Ramps",
-            "x": 0.5,
+            "x": 0.48,
             "y": 0.5,
-            "type": "main"
+            "type": "quest"
           },
           {
             "id": "exit",
             "label": "↑ Krow → Town",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "x": 0.5,
+            "y": 0.18,
+            "type": "boss"
           }
         ],
         "edges": [
@@ -132,34 +132,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.52,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Left: Miasmeter",
-            "x": 0.5,
+            "id": "mias",
+            "label": "← Left: Miasmeter",
+            "x": 0.18,
             "y": 0.5,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "NE: Casticus → Oriath Sq",
-            "x": 0.84,
+            "label": "↗ NE: Casticus (+1 Pt)",
+            "x": 0.82,
             "y": 0.2,
-            "type": "exit"
+            "type": "boss"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "mias",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "mias",
             "to": "exit",
             "style": "main"
           }
@@ -207,22 +207,22 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
-            "x": 0.16,
+            "label": "Start + WP (SW)",
+            "x": 0.18,
             "y": 0.8,
-            "type": "start"
+            "type": "wp"
           },
           {
             "id": "mid",
-            "label": "City Streets",
-            "x": 0.5,
-            "y": 0.5,
-            "type": "main"
+            "label": "NW Street Loop",
+            "x": 0.34,
+            "y": 0.38,
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "↗ Templar Courts",
-            "x": 0.84,
+            "label": "↗ Templar Courts (NE)",
+            "x": 0.82,
             "y": 0.2,
             "type": "exit"
           }
@@ -283,33 +283,45 @@
           {
             "id": "start",
             "label": "Start (SW)",
-            "x": 0.16,
-            "y": 0.8,
+            "x": 0.18,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "North Hallway",
-            "x": 0.5,
-            "y": 0.5,
-            "type": "main"
+            "id": "nw",
+            "label": "North-West Hall",
+            "x": 0.22,
+            "y": 0.22,
+            "type": "quest"
+          },
+          {
+            "id": "ne",
+            "label": "North-East Hall",
+            "x": 0.78,
+            "y": 0.22,
+            "type": "quest"
           },
           {
             "id": "exit",
             "label": "↘ Chamber of Innocence",
-            "x": 0.84,
-            "y": 0.2,
+            "x": 0.82,
+            "y": 0.78,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "nw",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "nw",
+            "to": "ne",
+            "style": "main"
+          },
+          {
+            "from": "ne",
             "to": "exit",
             "style": "main"
           }
@@ -367,33 +379,45 @@
           {
             "id": "start",
             "label": "Start + WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "x": 0.54,
+            "y": 0.24,
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "CCW Spiral (Go Left!)",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "west",
+            "label": "1. Go Left (CCW ↺)",
+            "x": 0.18,
+            "y": 0.42,
+            "type": "quest"
+          },
+          {
+            "id": "south",
+            "label": "2. South-East Loop",
+            "x": 0.52,
+            "y": 0.82,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Innocence → Torched Courts",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "label": "3. Innocence → Torched",
+            "x": 0.82,
+            "y": 0.44,
+            "type": "boss"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "west",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "west",
+            "to": "south",
+            "style": "main"
+          },
+          {
+            "from": "south",
             "to": "exit",
             "style": "main"
           }
@@ -442,33 +466,45 @@
           {
             "id": "start",
             "label": "Start (SE)",
-            "x": 0.84,
-            "y": 0.8,
+            "x": 0.82,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "North Hall",
-            "x": 0.5,
-            "y": 0.5,
-            "type": "main"
+            "id": "ne",
+            "label": "North-East Hall",
+            "x": 0.78,
+            "y": 0.22,
+            "type": "quest"
+          },
+          {
+            "id": "nw",
+            "label": "North-West Hall",
+            "x": 0.22,
+            "y": 0.22,
+            "type": "quest"
           },
           {
             "id": "exit",
             "label": "↙ The Ruined Square",
-            "x": 0.16,
-            "y": 0.2,
+            "x": 0.18,
+            "y": 0.78,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "ne",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "ne",
+            "to": "nw",
+            "style": "main"
+          },
+          {
+            "from": "nw",
             "to": "exit",
             "style": "main"
           }
@@ -520,22 +556,29 @@
         "nodes": [
           {
             "id": "start",
-            "label": "NW: WP + Ossuary",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (SW Gate)",
+            "x": 0.22,
+            "y": 0.54,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "nw",
+            "label": "NW: WP + Ossuary",
+            "x": 0.2,
+            "y": 0.2,
+            "type": "wp"
+          },
+          {
+            "id": "south",
             "label": "S: Reliquary (+1 Pt)",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.82,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "NE: Cathedral Rooftop",
-            "x": 0.84,
+            "x": 0.82,
             "y": 0.2,
             "type": "exit"
           }
@@ -543,11 +586,16 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "nw",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "nw",
+            "to": "south",
+            "style": "branch"
+          },
+          {
+            "from": "nw",
             "to": "exit",
             "style": "main"
           }
@@ -604,34 +652,46 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Ossuary Start",
+            "x": 0.2,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "loop",
+            "label": "Clockwise Loop",
+            "x": 0.24,
+            "y": 0.24,
+            "type": "quest"
+          },
+          {
+            "id": "sign",
             "label": "Sign of Purity",
-            "x": 0.5,
-            "y": 0.5,
+            "x": 0.78,
+            "y": 0.24,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "→ Reliquary / Rooftop",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↘ Reliquary (+1 Pt)",
+            "x": 0.78,
+            "y": 0.78,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "loop",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "loop",
+            "to": "sign",
+            "style": "main"
+          },
+          {
+            "from": "sign",
             "to": "exit",
             "style": "main"
           }
@@ -698,14 +758,14 @@
             "label": "Cathedral Apex",
             "x": 0.5,
             "y": 0.5,
-            "type": "boss"
+            "type": "quest"
           },
           {
             "id": "exit",
             "label": "↖ Kitava → Act 6",
             "x": 0.16,
             "y": 0.2,
-            "type": "exit"
+            "type": "boss"
           }
         ],
         "edges": [

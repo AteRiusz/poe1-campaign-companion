@@ -44,22 +44,22 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.46,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Climb Rampart Stairs",
-            "x": 0.5,
-            "y": 0.5,
-            "type": "main"
+            "id": "stairs",
+            "label": "NE: Climb Wall Stairs",
+            "x": 0.8,
+            "y": 0.52,
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "↖ Sarn Encampment",
-            "x": 0.84,
+            "label": "↖ Sarn Encampment (NW)",
+            "x": 0.18,
             "y": 0.2,
             "type": "exit"
           }
@@ -67,11 +67,11 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "stairs",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "stairs",
             "to": "exit",
             "style": "main"
           }
@@ -128,34 +128,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start (Check Splash!)",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (Splash Tell)",
+            "x": 0.2,
+            "y": 0.76,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "boss",
             "label": "Doedre's Cesspool",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.48,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "WP → Right to The Quay",
+            "label": "→ Sewer WP + Right Quay",
             "x": 0.84,
-            "y": 0.2,
+            "y": 0.48,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "boss",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "boss",
             "to": "exit",
             "style": "main"
           }
@@ -212,36 +212,36 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (NW)",
+            "x": 0.2,
+            "y": 0.24,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "ankh",
             "label": "1. Ankh of Eternity",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.52,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "2. Tolman (+1 Pt) → Grain Gate",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "2. Tolman (+1 Pt) → Gate",
+            "x": 0.82,
+            "y": 0.78,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
-            "style": "main"
+            "to": "ankh",
+            "style": "river"
           },
           {
-            "from": "mid",
+            "from": "ankh",
             "to": "exit",
-            "style": "main"
+            "style": "river"
           }
         ]
       }
@@ -297,12 +297,12 @@
           {
             "id": "start",
             "label": "Start + WP",
-            "x": 0.16,
+            "x": 0.18,
             "y": 0.8,
-            "type": "start"
+            "type": "wp"
           },
           {
-            "id": "mid",
+            "id": "gem",
             "label": "Gemling Legion (+1 Pt)",
             "x": 0.5,
             "y": 0.5,
@@ -310,8 +310,8 @@
           },
           {
             "id": "exit",
-            "label": "Corpse Doors → Imperial Fields",
-            "x": 0.84,
+            "label": "↗ Corpse Doors → Fields",
+            "x": 0.82,
             "y": 0.2,
             "type": "exit"
           }
@@ -319,11 +319,11 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "gem",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "gem",
             "to": "exit",
             "style": "main"
           }
@@ -372,35 +372,47 @@
           {
             "id": "start",
             "label": "Start (SE)",
-            "x": 0.16,
+            "x": 0.82,
             "y": 0.8,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Waypoint",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "wp",
+            "label": "Road Waypoint (NW)",
+            "x": 0.42,
+            "y": 0.48,
             "type": "wp"
           },
           {
             "id": "exit",
             "label": "↗ Solaris Temple 1",
-            "x": 0.84,
+            "x": 0.74,
             "y": 0.2,
             "type": "exit"
+          },
+          {
+            "id": "conc",
+            "label": "← Solaris Concourse",
+            "x": 0.16,
+            "y": 0.3,
+            "type": "quest"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
             "to": "exit",
             "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "conc",
+            "style": "branch"
           }
         ]
       }
@@ -455,34 +467,46 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Solaris 1 WP",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Solaris 1 Entry",
+            "x": 0.76,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Solaris 2: Kill Dawn (Sun Orb)",
+            "id": "wp",
+            "label": "Solaris 1 WP",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.52,
+            "type": "wp"
+          },
+          {
+            "id": "dawn",
+            "label": "↗ Lvl 2: Dawn (Sun Orb)",
+            "x": 0.8,
+            "y": 0.22,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "← Solaris Concourse",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "← Solaris Concourse (W)",
+            "x": 0.16,
+            "y": 0.52,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
+            "to": "dawn",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -539,34 +563,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Bath House Entry (S)",
+            "x": 0.5,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "NW: Trial #1 + High Gardens (+1 Pt)",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "nw",
+            "label": "NW: Trial #1 + Yugul (+1 Pt)",
+            "x": 0.2,
+            "y": 0.24,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "↗ Lunaris Concourse",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↗ Lunaris Concourse (NE)",
+            "x": 0.82,
+            "y": 0.22,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
-            "style": "main"
+            "to": "nw",
+            "style": "branch"
           },
           {
-            "from": "mid",
+            "from": "start",
             "to": "exit",
             "style": "main"
           }
@@ -622,35 +646,35 @@
       "topology": {
         "nodes": [
           {
-            "id": "start",
-            "label": "Concourse WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
-          },
-          {
-            "id": "mid",
-            "label": "Lunaris 2: Kill Dusk (Moon Orb)",
+            "id": "wp",
+            "label": "Concourse WP (Center)",
             "x": 0.5,
             "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "dusk",
+            "label": "↑ Lunaris 2: Dusk (Moon Orb)",
+            "x": 0.5,
+            "y": 0.18,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "↓ The Harbour Bridge",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↓ The Harbour Bridge (S)",
+            "x": 0.5,
+            "y": 0.82,
             "type": "exit"
           }
         ],
         "edges": [
           {
-            "from": "start",
-            "to": "mid",
-            "style": "main"
+            "from": "wp",
+            "to": "dusk",
+            "style": "branch"
           },
           {
-            "from": "mid",
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -703,34 +727,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (North-East)",
+            "x": 0.76,
+            "y": 0.2,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Sky Shrine (Solaris & Lunaris)",
+            "id": "boss",
+            "label": "Center: Solaris & Lunaris",
             "x": 0.5,
             "y": 0.5,
             "type": "boss"
           },
           {
             "id": "exit",
-            "label": "→ Blood Aqueduct (Act 9)",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↙ Blood Aqueduct (Act 9)",
+            "x": 0.22,
+            "y": 0.8,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "boss",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "boss",
             "to": "exit",
             "style": "main"
           }

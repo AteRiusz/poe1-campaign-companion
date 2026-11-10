@@ -54,15 +54,22 @@
           {
             "id": "start",
             "label": "Start (SE)",
-            "x": 0.84,
-            "y": 0.8,
+            "x": 0.82,
+            "y": 0.78,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Clarissa (Quest)",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "curve",
+            "label": "River Curve",
+            "x": 0.74,
+            "y": 0.34,
+            "type": "quest"
+          },
+          {
+            "id": "clar",
+            "label": "Clarissa",
+            "x": 0.42,
+            "y": 0.26,
             "type": "quest"
           },
           {
@@ -76,11 +83,16 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
-            "style": "main"
+            "to": "curve",
+            "style": "river"
           },
           {
-            "from": "mid",
+            "from": "curve",
+            "to": "clar",
+            "style": "river"
+          },
+          {
+            "from": "clar",
             "to": "exit",
             "style": "main"
           }
@@ -132,36 +144,48 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Sarn Exit",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Sarn Exit (S)",
+            "x": 0.48,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Metal Rooftops",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "sewer",
+            "label": "Sewer Grate",
+            "x": 0.24,
+            "y": 0.54,
+            "type": "quest"
+          },
+          {
+            "id": "roof",
+            "label": "Metal Stairs",
+            "x": 0.58,
+            "y": 0.48,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "↑ The Crematorium",
-            "x": 0.84,
-            "y": 0.2,
+            "x": 0.52,
+            "y": 0.18,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "roof",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "roof",
             "to": "exit",
             "style": "main"
+          },
+          {
+            "from": "start",
+            "to": "sewer",
+            "style": "branch"
           }
         ]
       }
@@ -217,33 +241,33 @@
           {
             "id": "start",
             "label": "Start + WP",
-            "x": 0.16,
+            "x": 0.2,
             "y": 0.8,
-            "type": "start"
+            "type": "wp"
           },
           {
-            "id": "mid",
+            "id": "trial",
             "label": "Lab Trial #4",
-            "x": 0.5,
-            "y": 0.5,
+            "x": 0.24,
+            "y": 0.28,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "Piety + Tolman",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "x": 0.8,
+            "y": 0.24,
+            "type": "boss"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "trial",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "trial",
             "to": "exit",
             "style": "main"
           }
@@ -301,21 +325,28 @@
           {
             "id": "start",
             "label": "Bust #1 (Pre-WP)",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "x": 0.8,
+            "y": 0.78,
+            "type": "quest"
           },
           {
-            "id": "mid",
+            "id": "wp",
             "label": "Sewers WP",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.52,
             "type": "wp"
           },
           {
+            "id": "busts",
+            "label": "Busts #2 & #3",
+            "x": 0.24,
+            "y": 0.44,
+            "type": "quest"
+          },
+          {
             "id": "exit",
-            "label": "Busts #2/#3 → Marketplace",
-            "x": 0.84,
+            "label": "↗ The Marketplace",
+            "x": 0.78,
             "y": 0.2,
             "type": "exit"
           }
@@ -323,11 +354,16 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
-            "style": "main"
+            "to": "wp",
+            "style": "river"
           },
           {
-            "from": "mid",
+            "from": "wp",
+            "to": "busts",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -390,11 +426,18 @@
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "WP + Catacombs (Trial #5)",
+            "id": "wp",
+            "label": "Marketplace WP",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.52,
             "type": "wp"
+          },
+          {
+            "id": "cata",
+            "label": "Catacombs (Trial #5)",
+            "x": 0.28,
+            "y": 0.24,
+            "type": "quest"
           },
           {
             "id": "exit",
@@ -407,11 +450,16 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
+            "to": "cata",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -468,22 +516,36 @@
         "nodes": [
           {
             "id": "start",
-            "label": "WP + Spool (SW)",
-            "x": 0.16,
+            "label": "Start (SE)",
+            "x": 0.78,
             "y": 0.8,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "The Docks (NW)",
+            "id": "wp",
+            "label": "Center WP",
             "x": 0.5,
             "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "spool",
+            "label": "↙ Ribbon Spool (SW)",
+            "x": 0.18,
+            "y": 0.78,
+            "type": "quest"
+          },
+          {
+            "id": "docks",
+            "label": "↖ The Docks (NW)",
+            "x": 0.2,
+            "y": 0.2,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "↗ Solaris Temple",
-            "x": 0.84,
+            "x": 0.82,
             "y": 0.2,
             "type": "exit"
           }
@@ -491,11 +553,21 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
+            "to": "spool",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
+            "to": "docks",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -547,23 +619,23 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start (NE)",
+            "label": "Start (East)",
             "x": 0.84,
-            "y": 0.8,
+            "y": 0.34,
             "type": "start"
           },
           {
             "id": "mid",
-            "label": "Wooden Piers",
-            "x": 0.5,
-            "y": 0.5,
+            "label": "Central Dock",
+            "x": 0.52,
+            "y": 0.48,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Supply Container (Sulphite)",
+            "label": "← West Piers (Sulphite)",
             "x": 0.16,
-            "y": 0.2,
+            "y": 0.66,
             "type": "exit"
           }
         ],
@@ -576,7 +648,7 @@
           {
             "from": "mid",
             "to": "exit",
-            "style": "main"
+            "style": "river"
           }
         ]
       }
@@ -632,23 +704,23 @@
           {
             "id": "start",
             "label": "Solaris 1 Start",
-            "x": 0.16,
+            "x": 0.18,
             "y": 0.8,
             "type": "start"
           },
           {
             "id": "mid",
-            "label": "Follow Carpet",
+            "label": "Golden Carpet",
             "x": 0.5,
             "y": 0.5,
-            "type": "main"
+            "type": "quest"
           },
           {
             "id": "exit",
             "label": "Dialla + WP → Sewers",
-            "x": 0.84,
+            "x": 0.82,
             "y": 0.2,
-            "type": "exit"
+            "type": "wp"
           }
         ],
         "edges": [
@@ -715,36 +787,48 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "label": "Start + WP (S)",
+            "x": 0.5,
+            "y": 0.82,
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "General Gravicius",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "grav",
+            "label": "↑ General Gravicius",
+            "x": 0.48,
+            "y": 0.46,
             "type": "boss"
           },
           {
             "id": "exit",
             "label": "↖ Lunaris Temple",
-            "x": 0.84,
-            "y": 0.2,
+            "x": 0.2,
+            "y": 0.18,
             "type": "exit"
+          },
+          {
+            "id": "gardens",
+            "label": "→ Imperial Gardens",
+            "x": 0.84,
+            "y": 0.52,
+            "type": "quest"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "grav",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "grav",
             "to": "exit",
             "style": "main"
+          },
+          {
+            "from": "start",
+            "to": "gardens",
+            "style": "branch"
           }
         ]
       }
@@ -800,23 +884,23 @@
           {
             "id": "start",
             "label": "Lunaris 1 WP",
-            "x": 0.16,
+            "x": 0.18,
             "y": 0.8,
-            "type": "start"
+            "type": "wp"
           },
           {
             "id": "mid",
-            "label": "Lvl 2 (1 Cart Side!)",
+            "label": "Lvl 2: 1-Cart Side!",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.48,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "Piety (+2 Skill Pts)",
-            "x": 0.84,
+            "x": 0.82,
             "y": 0.2,
-            "type": "exit"
+            "type": "boss"
           }
         ],
         "edges": [
@@ -883,22 +967,29 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Gardens WP",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (SW)",
+            "x": 0.18,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "↖ Lab Trial #6",
+            "id": "wp",
+            "label": "Gardens WP",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.52,
+            "type": "wp"
+          },
+          {
+            "id": "trial",
+            "label": "↖ Lab Trial #6 (NW)",
+            "x": 0.2,
+            "y": 0.2,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "↗ Sceptre of God",
-            "x": 0.84,
+            "label": "↗ Sceptre of God (NE)",
+            "x": 0.82,
             "y": 0.2,
             "type": "exit"
           }
@@ -906,11 +997,16 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
+            "to": "trial",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -967,34 +1063,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Sceptre Entry",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Sceptre Entry (S)",
+            "x": 0.26,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "wp",
             "label": "Mid-Tower WP",
-            "x": 0.5,
-            "y": 0.5,
+            "x": 0.72,
+            "y": 0.52,
             "type": "wp"
           },
           {
             "id": "exit",
-            "label": "Dominus → Aqueduct",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "label": "↑ Dominus → Aqueduct",
+            "x": 0.42,
+            "y": 0.18,
+            "type": "boss"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }

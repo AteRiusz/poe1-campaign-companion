@@ -51,14 +51,14 @@
           },
           {
             "id": "mid",
-            "label": "Water Bridge",
+            "label": "Water Channels",
             "x": 0.5,
             "y": 0.5,
             "type": "wp"
           },
           {
             "id": "exit",
-            "label": "↖ Highgate",
+            "label": "↖ Highgate (NW)",
             "x": 0.16,
             "y": 0.2,
             "type": "exit"
@@ -68,12 +68,12 @@
           {
             "from": "start",
             "to": "mid",
-            "style": "main"
+            "style": "river"
           },
           {
             "from": "mid",
             "to": "exit",
-            "style": "main"
+            "style": "river"
           }
         ]
       }
@@ -128,34 +128,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (NE Gate)",
+            "x": 0.8,
+            "y": 0.22,
             "type": "start"
           },
           {
-            "id": "mid",
-            "label": "Outer Perimeter",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "loop",
+            "label": "Outer Wall Loop",
+            "x": 0.24,
+            "y": 0.34,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "Voll (Deshret's Banner)",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "x": 0.28,
+            "y": 0.78,
+            "type": "boss"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "loop",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "loop",
             "to": "exit",
             "style": "main"
           }
@@ -203,23 +203,23 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start (S)",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.5,
+            "y": 0.82,
             "type": "start"
           },
           {
             "id": "mid",
             "label": "Mine Tracks",
-            "x": 0.5,
+            "x": 0.48,
             "y": 0.5,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "↑ Mines Level 2",
-            "x": 0.84,
-            "y": 0.2,
+            "x": 0.5,
+            "y": 0.18,
             "type": "exit"
           }
         ],
@@ -282,34 +282,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.5,
+            "y": 0.82,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "spirit",
             "label": "Deshret's Spirit (+1 Pt)",
-            "x": 0.5,
+            "x": 0.32,
             "y": 0.5,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "→ Crystal Veins",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↑ Crystal Veins",
+            "x": 0.56,
+            "y": 0.18,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "spirit",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "spirit",
             "to": "exit",
             "style": "main"
           }
@@ -361,8 +361,8 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Mines Exit",
-            "x": 0.16,
+            "label": "Mines Exit (SE)",
+            "x": 0.82,
             "y": 0.8,
             "type": "start"
           },
@@ -375,10 +375,10 @@
           },
           {
             "id": "exit",
-            "label": "WP + Dialla Portals",
-            "x": 0.84,
+            "label": "↖ WP + Dialla Portals",
+            "x": 0.18,
             "y": 0.2,
-            "type": "exit"
+            "type": "wp"
           }
         ],
         "edges": [
@@ -440,13 +440,13 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
+            "label": "Start (SW)",
+            "x": 0.18,
             "y": 0.8,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "pit",
             "label": "Barkhul Pit",
             "x": 0.5,
             "y": 0.5,
@@ -455,7 +455,7 @@
           {
             "id": "exit",
             "label": "↗ The Grand Arena",
-            "x": 0.84,
+            "x": 0.82,
             "y": 0.2,
             "type": "exit"
           }
@@ -463,11 +463,11 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "pit",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "pit",
             "to": "exit",
             "style": "main"
           }
@@ -524,34 +524,34 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
+            "label": "Start + WP (SW)",
             "x": 0.16,
             "y": 0.8,
-            "type": "start"
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "3 Trio Bosses (NE)",
+            "id": "trio",
+            "label": "3 Arenas (Exit NE ↗)",
             "x": 0.5,
             "y": 0.5,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Daresso (Eye of Desire)",
+            "label": "↗ Daresso (Eye)",
             "x": 0.84,
             "y": 0.2,
-            "type": "exit"
+            "type": "boss"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "trio",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "trio",
             "to": "exit",
             "style": "main"
           }
@@ -599,23 +599,23 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
-            "y": 0.8,
+            "label": "Start (South)",
+            "x": 0.5,
+            "y": 0.82,
             "type": "start"
           },
           {
             "id": "mid",
             "label": "Uphill Ramps",
-            "x": 0.5,
+            "x": 0.52,
             "y": 0.5,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "↑ Kaom's Stronghold",
-            "x": 0.84,
-            "y": 0.2,
+            "x": 0.5,
+            "y": 0.18,
             "type": "exit"
           }
         ],
@@ -683,24 +683,24 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start + WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "label": "Start + WP (S)",
+            "x": 0.5,
+            "y": 0.82,
+            "type": "wp"
           },
           {
             "id": "mid",
             "label": "Volcanic Ridge",
-            "x": 0.5,
+            "x": 0.48,
             "y": 0.5,
-            "type": "main"
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "King Kaom (Eye of Fury)",
-            "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "label": "↑ King Kaom (Eye)",
+            "x": 0.5,
+            "y": 0.18,
+            "type": "boss"
           }
         ],
         "edges": [
@@ -767,8 +767,8 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Crystal Veins",
-            "x": 0.16,
+            "label": "Crystal Veins (SE)",
+            "x": 0.82,
             "y": 0.8,
             "type": "start"
           },
@@ -777,14 +777,14 @@
             "label": "Belly 1 & 2 (NW)",
             "x": 0.5,
             "y": 0.5,
-            "type": "main"
+            "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Piety → The Harvest",
-            "x": 0.84,
+            "label": "↖ Piety → Harvest",
+            "x": 0.18,
             "y": 0.2,
-            "type": "exit"
+            "type": "boss"
           }
         ],
         "edges": [
@@ -850,35 +850,47 @@
       "topology": {
         "nodes": [
           {
-            "id": "start",
-            "label": "Left: 1 Guardian",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
-          },
-          {
-            "id": "mid",
-            "label": "Center WP + Black Core",
+            "id": "wp",
+            "label": "Center WP + Piety",
             "x": 0.5,
-            "y": 0.5,
+            "y": 0.62,
             "type": "wp"
           },
           {
-            "id": "exit",
-            "label": "Right: 2 Guardians",
+            "id": "left",
+            "label": "← Left: 1 Guardian",
+            "x": 0.16,
+            "y": 0.52,
+            "type": "quest"
+          },
+          {
+            "id": "right",
+            "label": "→ Right: 2 Guardians",
             "x": 0.84,
-            "y": 0.2,
-            "type": "exit"
+            "y": 0.52,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "↑ Malachai (Core)",
+            "x": 0.5,
+            "y": 0.18,
+            "type": "boss"
           }
         ],
         "edges": [
           {
-            "from": "start",
-            "to": "mid",
-            "style": "main"
+            "from": "wp",
+            "to": "left",
+            "style": "branch"
           },
           {
-            "from": "mid",
+            "from": "wp",
+            "to": "right",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }

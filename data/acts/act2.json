@@ -710,7 +710,7 @@
           },
           {
             "id": "exit",
-            "label": "Kraityn (NE)",
+            "label": "↗ Kraityn (NE)",
             "x": 0.84,
             "y": 0.2,
             "type": "exit"
@@ -781,33 +781,33 @@
           {
             "id": "start",
             "label": "Start + WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "x": 0.2,
+            "y": 0.78,
+            "type": "wp"
           },
           {
-            "id": "mid",
-            "label": "Crypt Corridors",
-            "x": 0.5,
-            "y": 0.5,
+            "id": "loop",
+            "label": "Outer Wall Loop",
+            "x": 0.24,
+            "y": 0.26,
             "type": "quest"
           },
           {
             "id": "exit",
             "label": "⚡ Lab Trial #3",
-            "x": 0.84,
-            "y": 0.2,
+            "x": 0.8,
+            "y": 0.24,
             "type": "exit"
           }
         ],
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "loop",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "loop",
             "to": "exit",
             "style": "main"
           }
@@ -865,12 +865,12 @@
           {
             "id": "start",
             "label": "Start (SE)",
-            "x": 0.84,
+            "x": 0.82,
             "y": 0.8,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "oak",
             "label": "Oak (Center Camp)",
             "x": 0.5,
             "y": 0.5,
@@ -879,7 +879,7 @@
           {
             "id": "exit",
             "label": "↖ WP + Vaal Ruins",
-            "x": 0.16,
+            "x": 0.18,
             "y": 0.2,
             "type": "exit"
           }
@@ -887,11 +887,11 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "oak",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "oak",
             "to": "exit",
             "style": "main"
           }
@@ -948,22 +948,29 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Start",
-            "x": 0.16,
+            "label": "Start (SW)",
+            "x": 0.18,
             "y": 0.8,
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "turn",
+            "label": "S-Curve Hall",
+            "x": 0.72,
+            "y": 0.58,
+            "type": "quest"
+          },
+          {
+            "id": "seal",
             "label": "Ancient Seal",
-            "x": 0.5,
-            "y": 0.5,
+            "x": 0.3,
+            "y": 0.38,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "→ Northern Forest",
-            "x": 0.84,
+            "label": "↗ Northern Forest",
+            "x": 0.82,
             "y": 0.2,
             "type": "exit"
           }
@@ -971,11 +978,16 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "turn",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "turn",
+            "to": "seal",
+            "style": "main"
+          },
+          {
+            "from": "seal",
             "to": "exit",
             "style": "main"
           }
@@ -1029,7 +1041,7 @@
             "type": "start"
           },
           {
-            "id": "mid",
+            "id": "wp",
             "label": "Waypoint",
             "x": 0.5,
             "y": 0.5,
@@ -1046,11 +1058,11 @@
         "edges": [
           {
             "from": "start",
-            "to": "mid",
+            "to": "wp",
             "style": "main"
           },
           {
-            "from": "mid",
+            "from": "wp",
             "to": "exit",
             "style": "main"
           }
@@ -1107,23 +1119,23 @@
         "nodes": [
           {
             "id": "start",
-            "label": "Caverns WP",
-            "x": 0.16,
-            "y": 0.8,
-            "type": "start"
+            "label": "Caverns WP (S)",
+            "x": 0.5,
+            "y": 0.82,
+            "type": "wp"
           },
           {
             "id": "mid",
             "label": "3 Pyramid Floors",
-            "x": 0.5,
+            "x": 0.26,
             "y": 0.5,
             "type": "quest"
           },
           {
             "id": "exit",
-            "label": "Vaal Oversoul → Act 3",
-            "x": 0.84,
-            "y": 0.2,
+            "label": "↑ Vaal Oversoul",
+            "x": 0.54,
+            "y": 0.18,
             "type": "exit"
           }
         ],

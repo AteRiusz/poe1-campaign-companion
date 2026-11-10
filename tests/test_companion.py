@@ -245,3 +245,62 @@ def test_topology_labels_never_overlap_across_all_103_steps(qapp: QApplication) 
                         f"Label-Node overlap (compact={compact}) on {step.step_id}: "
                         f"label '{n['label']}' overlaps node '{nid}'"
                     )
+
+
+def test_topology_compass_quadrants_across_all_103_steps() -> None:
+    import re
+
+    engine = RouteEngine()
+    for step in engine.steps:
+        sid = step.step_id
+        for node in step.topology.get("nodes", []):
+            lbl = str(node.get("label", ""))
+            x = float(node.get("x", 0.5))
+            y = float(node.get("y", 0.5))
+
+            has_nw = bool(re.search(r"\bNW\b|North-West|↖", lbl))
+            has_ne = bool(re.search(r"\bNE\b|North-East|↗", lbl))
+            has_sw = bool(re.search(r"\bSW\b|South-West|↙", lbl))
+            has_se = bool(re.search(r"\bSE\b|South-East|↘", lbl))
+
+            if has_nw:
+                assert x <= 0.52 and y <= 0.52, f"{sid} '{lbl}' at ({x},{y}) must be in NW quadrant"
+            if has_ne:
+                assert x >= 0.48 and y <= 0.52, f"{sid} '{lbl}' at ({x},{y}) must be in NE quadrant"
+            if has_sw:
+                assert x <= 0.52 and y >= 0.48, f"{sid} '{lbl}' at ({x},{y}) must be in SW quadrant"
+            if has_se:
+                assert x >= 0.48 and y >= 0.48, f"{sid} '{lbl}' at ({x},{y}) must be in SE quadrant"
+
+            if not (has_nw or has_ne or has_sw or has_se):
+                if re.search(r"\b(North|N)\b|↑", lbl):
+                    assert y <= 0.50, f"{sid} '{lbl}' at ({x},{y}) must be in North half (y<=0.50)"
+                if re.search(r"\b(South|S)\b|↓", lbl):
+                    assert y >= 0.50, f"{sid} '{lbl}' at ({x},{y}) must be in South half (y>=0.50)"
+                if re.search(r"\b(West|W|Left)\b|←", lbl):
+                    assert x <= 0.50, f"{sid} '{lbl}' at ({x},{y}) must be in West half (x<=0.50)"
+                if re.search(r"\b(East|E|Right)\b", lbl):
+                    assert x >= 0.50, f"{sid} '{lbl}' at ({x},{y}) must be in East half (x>=0.50)"
+                if re.search(r"\bCenter\b", lbl):
+                    assert 0.35 <= x <= 0.65 and 0.35 <= y <= 0.65, f"{sid} '{lbl}' at ({x},{y}) must be near Center"
+
+
+def test_embedded_static_map_png_assets_exist_and_load(qapp: QApplication) -> None:
+    from PyQt6.QtGui import QPixmap
+
+    engine = RouteEngine()
+    full_widget = TopologyMapWidget(compact=False)
+    compact_widget = TopologyMapWidget(compact=True)
+
+    for step in engine.steps:
+        full_path = full_widget.get_static_asset_path(step.step_id)
+        compact_path = compact_widget.get_static_asset_path(step.step_id)
+
+        assert full_path is not None and full_path.exists(), f"Missing static PNG for {step.step_id}"
+        assert compact_path is not None and compact_path.exists(), f"Missing compact PNG for {step.step_id}"
+
+        pix_full = QPixmap(str(full_path))
+        pix_compact = QPixmap(str(compact_path))
+        assert not pix_full.isNull() and pix_full.width() >= 380
+        assert not pix_compact.isNull() and pix_compact.width() >= 210
+
