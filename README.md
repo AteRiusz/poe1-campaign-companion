@@ -21,10 +21,14 @@ Instead of alt-tabbing to read long paragraphs from a walkthrough, this app tail
     * 🔵 **Sky (`[WP]` / `[PORTAL]`):** Waypoints & speedrunner portal/logout tricks
     * 🔴 **Rose (`[BOSS]`):** Required boss fights
   * **Speedrunner "Layout Tell":** 1-line heuristic explaining how to read the zone's random seed generation (e.g., *"The 3 small stones next to The Ledge Waypoint always point toward The Climb exit"*).
-  * **Vector Topology Map:** Antialiased schematic showing the relative position of the Entrance, Waypoint, Quest POIs, and Exits.
-* **Live Opacity Slider & Optional Extra Info (Off by Default):**
-  * Adjust window & overlay opacity between **25% and 100%** in real time.
-  * Optional extra details are hidden by default to keep the UI clean, and can be toggled on anytime inside **⚙️ Settings & Opacity**:
+  * **Collision-Free Vector Topology Map:** Antialiased schematic showing the relative position of the Entrance, Waypoint, Quest POIs, and Exits with automatic non-overlapping tooltip pills.
+* **Complete Acts 1–10 Campaign Route & Dedicated Labyrinth Trials Tracker:**
+  * **Modular Per-Act Route (`data/acts/act1.json` .. `act10.json`):** `103` zone-by-zone steps covering all 10 Acts, all 24 Passive Skill Point quests, and major Pantheon bosses.
+  * **Run-Anytime Labyrinth Trials Tracker (`Normal 0/6`, `Cruel 0/3`, `Merciless 0/3`):** Tracks `🔒 Locked` → `🔓 Unlocked — Ready to Run` → `✅ Completed` states across all 12 campaign trials, displaying the exact **Waypoint Hint** and **Trap Type** for any unlocked/skipped trials.
+* **Overlay-Only Opacity Slider & Optional Extra Info (Off by Default):**
+  * Window mode (`DashboardWindow`) is always locked at **100% opacity** for maximum readability.
+  * When **Overlay Mode** is active (`F9`), an **Overlay Opacity Slider (`25%–100%`)** appears in **⚙️ Settings & Opacity** to adjust the In-Game HUD transparency in real time.
+  * Optional extra details are hidden by default to keep the UI clean, and can be toggled on anytime inside **⚙️ Settings**:
     * `🛡️ Boss Damage & Resist Warnings`
     * `💎 Quest Gem & Vendor Rewards`
     * `🗺️ Detailed Seed Variations`
@@ -79,7 +83,9 @@ poe1-campaign-companion/
 ├── main.py                   # Application entry point
 ├── run_companion.bat         # Windows double-click launcher
 ├── data/
-│   └── campaign_route.json   # Declarative campaign steps, layout tells & vector map nodes
+│   ├── acts/
+│   │   └── act1.json .. act10.json # Per-Act declarative steps, layout tells & vector map nodes
+│   └── labyrinth_trials.json       # All 12 Campaign Labyrinth Trials (Locked → Unlocked → Completed)
 ├── src/
 │   ├── log_watcher.py        # Non-blocking Client.txt regex parser & incremental tailer
 │   ├── route_engine.py       # Stateful campaign step tracker with forward-lookahead matching

@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0",
+  "description": "All 12 Path of Exile 1 Campaign Labyrinth Trials (6 Normal, 3 Cruel, 3 Merciless). Tracks Locked -> Unlocked -> Completed status.",
+  "trials": [
+    {
+      "trial_id": "norm_1_lower_prison",
+      "labyrinth": "Normal",
+      "act": 1,
+      "zone_name": "The Lower Prison",
+      "waypoint_hint": "Act 1 — The Lower Prison WP (in-zone)",
+      "trap_type": "Spike Traps",
+      "unlock_zone": "The Lower Prison",
+      "layout_hint": "Hug outer perimeter walls from the Waypoint room."
+    },
+    {
+      "trial_id": "norm_2_sins_2",
+      "labyrinth": "Normal",
+      "act": 2,
+      "zone_name": "The Chamber of Sins Level 2",
+      "waypoint_hint": "Act 2 — Chamber of Sins Level 1 WP → Take Map Device hallway to Level 2",
+      "trap_type": "Spinning Sawblades",
+      "unlock_zone": "The Chamber of Sins Level 1",
+      "layout_hint": "Usually spawns in the NE or SE wing opposite Fidelitas."
+    },
+    {
+      "trial_id": "norm_3_crypt_1",
+      "labyrinth": "Normal",
+      "act": 2,
+      "zone_name": "The Crypt Level 1",
+      "waypoint_hint": "Act 2 — The Crossroads WP (go SE through Fellshrine) or The Crypt Level 1 WP",
+      "trap_type": "Spinning Roomba Discs",
+      "unlock_zone": "The Crossroads",
+      "layout_hint": "Optional side-zone SE of Crossroads; hug outer walls to find the Trial book."
+    },
+    {
+      "trial_id": "norm_4_crematorium",
+      "labyrinth": "Normal",
+      "act": 3,
+      "zone_name": "The Crematorium",
+      "waypoint_hint": "Act 3 — The Crematorium WP (in-zone)",
+      "trap_type": "Fire Grates & Furnaces",
+      "unlock_zone": "The Crematorium",
+      "layout_hint": "Spawns along the main outer loop before reaching Piety."
+    },
+    {
+      "trial_id": "norm_5_catacombs",
+      "labyrinth": "Normal",
+      "act": 3,
+      "zone_name": "The Catacombs",
+      "waypoint_hint": "Act 3 — The Marketplace WP (entrance is right beside the WP)",
+      "trap_type": "Blade Sentries & Spikes",
+      "unlock_zone": "The Marketplace",
+      "layout_hint": "Optional side-zone right next to The Marketplace Waypoint."
+    },
+    {
+      "trial_id": "norm_6_imperial_gardens",
+      "labyrinth": "Normal",
+      "act": 3,
+      "zone_name": "The Imperial Gardens",
+      "waypoint_hint": "Act 3 — The Imperial Gardens WP → Head North-West",
+      "trap_type": "Poison Darts & Sawblades",
+      "unlock_zone": "The Imperial Gardens",
+      "layout_hint": "Always in the North-West hedge maze section from the Gardens Waypoint."
+    },
+    {
+      "trial_id": "cruel_1_lower_prison",
+      "labyrinth": "Cruel",
+      "act": 6,
+      "zone_name": "The Lower Prison",
+      "waypoint_hint": "Act 6 — The Lower Prison WP (in-zone)",
+      "trap_type": "Flame & Spike Traps",
+      "unlock_zone": "The Lower Prison",
+      "layout_hint": "Search the outer corridors from the Act 6 Lower Prison Waypoint."
+    },
+    {
+      "trial_id": "cruel_2_crypt",
+      "labyrinth": "Cruel",
+      "act": 7,
+      "zone_name": "The Crypt",
+      "waypoint_hint": "Act 7 — The Crypt WP (in-zone, Level 1)",
+      "trap_type": "Spinning Discs & Poison Darts",
+      "unlock_zone": "The Crypt",
+      "layout_hint": "On Level 1 of The Crypt before taking the stairs to Maligaro's Map."
+    },
+    {
+      "trial_id": "cruel_3_sins_2",
+      "labyrinth": "Cruel",
+      "act": 7,
+      "zone_name": "The Chamber of Sins Level 2",
+      "waypoint_hint": "Act 7 — Chamber of Sins Level 1 WP → Take Map Device hallway to Level 2",
+      "trap_type": "Sawblades & Spike Floors",
+      "unlock_zone": "The Chamber of Sins Level 1",
+      "layout_hint": "Complete on your way to the secret passage to The Den."
+    },
+    {
+      "trial_id": "merc_1_bath_house",
+      "labyrinth": "Merciless",
+      "act": 8,
+      "zone_name": "The Bath House",
+      "waypoint_hint": "Act 8 — Solaris Concourse WP → Enter The Bath House",
+      "trap_type": "Fire Furnaces & Sawblades",
+      "unlock_zone": "The Bath House",
+      "layout_hint": "Spawns along the outer Northern/Western rooms of The Bath House."
+    },
+    {
+      "trial_id": "merc_2_tunnel",
+      "labyrinth": "Merciless",
+      "act": 9,
+      "zone_name": "The Tunnel",
+      "waypoint_hint": "Act 9 — The Tunnel WP (Trial is usually 1 screen from the WP)",
+      "trap_type": "Roomba Discs & Spikes",
+      "unlock_zone": "The Tunnel",
+      "layout_hint": "Almost always spawns right next to The Tunnel Waypoint!"
+    },
+    {
+      "trial_id": "merc_3_ossuary",
+      "labyrinth": "Merciless",
+      "act": 10,
+      "zone_name": "The Ossuary",
+      "waypoint_hint": "Act 10 — The Ravaged Square WP (entrance is right beside the WP)",
+      "trap_type": "Poison Darts & Lava Grates",
+      "unlock_zone": "The Ravaged Square",
+      "layout_hint": "Enter The Ossuary right beside the Ravaged Square Waypoint; loop the upper level."
+    }
+  ]
+}

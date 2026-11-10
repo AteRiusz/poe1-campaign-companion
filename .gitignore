@@ -17,3 +17,4 @@ config/user_settings.json
 Thumbs.db
 .vscode/
 .idea/
+.vs/

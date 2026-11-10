@@ -1,0 +1,889 @@
+{
+  "schema_version": "1.0",
+  "act": 4,
+  "title": "Act 4 Speedrun Route",
+  "steps": [
+    {
+      "step_id": "a4_s01_aqueduct",
+      "act": 4,
+      "step_number": 1,
+      "zone_name": "The Aqueduct",
+      "area_level": 33,
+      "compass": "LINEAR NW ↖",
+      "summary": "Run straight North-West along the bridge channels into Highgate (Act 4 Town)",
+      "layout_tell": "100% linear bridge; cross side bridges whenever a gate blocks the current channel.",
+      "next_exit": "Enter Highgate → Exit West into The Dried Lake",
+      "portal_tip": "Great XP density if underlevelled (target Lvl 31–33)",
+      "badges": [
+        {
+          "label": "LINEAR NW ↖",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run straight NW along the aqueduct channels"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter Highgate → Exit bottom-left to The Dried Lake"
+        }
+      ],
+      "boss_info": "No required boss.",
+      "gem_reward": "Unlocks Act 4 Highgate vendors.",
+      "variants": [
+        {
+          "title": "Parallel Channels",
+          "desc": "Cross short bridges between left and right lanes."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Water Bridge",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↖ Highgate",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s02_dried_lake",
+      "act": 4,
+      "step_number": 2,
+      "zone_name": "The Dried Lake",
+      "area_level": 34,
+      "compass": "WALL LOOP",
+      "summary": "Loop around perimeter to find Voll's Camp → Kill Voll & loot Deshret's Banner → Logout to Highgate",
+      "layout_tell": "Voll's wooden barricade camp always spawns along one of the outer walls opposite the entrance.",
+      "next_exit": "Kill Voll → Loot Deshret's Banner → Logout → Open Deshret's Seal in Highgate",
+      "portal_tip": "⚡ LOGOUT after picking up Deshret's Banner → Open Seal in Town → Enter The Mines!",
+      "badges": [
+        {
+          "label": "KILL VOLL",
+          "color": "rose"
+        },
+        {
+          "label": "LOGOUT WITH BANNER",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Search outer perimeter for Voll, Emperor of Purity"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Kill Voll & pick up Deshret's Banner"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Relog to Highgate → Click Deshret's Seal → Enter The Mines"
+        }
+      ],
+      "boss_info": "Voll, Emperor of Purity: Telegraph wind-up Physical Slam + Charge.",
+      "gem_reward": "Breaking the Seal (Oyun): Unlocks Lvl 34 Golem Gems!",
+      "variants": [
+        {
+          "title": "Square Perimeter",
+          "desc": "Hug left or right wall until you see wooden banners."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Outer Perimeter",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Voll (Deshret's Banner)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s03_mines_1",
+      "act": 4,
+      "step_number": 3,
+      "zone_name": "The Mines Level 1",
+      "area_level": 34,
+      "compass": "NORTH ↑",
+      "summary": "Follow mine tracks heading generally North / North-West to the Level 2 stairs",
+      "layout_tell": "Follow main minecart tracks upward; skip dead-end side rooms.",
+      "next_exit": "Enter The Mines Level 2",
+      "portal_tip": "No Waypoint here — keep pushing to Crystal Veins",
+      "badges": [
+        {
+          "label": "HEAD NORTH ↑",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow main mine shafts North/North-West"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Mines Level 2"
+        }
+      ],
+      "boss_info": "Pocked Lanternbearers: High Fire damage in tight corridors.",
+      "gem_reward": "None.",
+      "variants": [
+        {
+          "title": "Northward Tracks",
+          "desc": "Exit is always along the northern wall."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (S)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Mine Tracks",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "↑ Mines Level 2",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s04_mines_2",
+      "act": 4,
+      "step_number": 4,
+      "zone_name": "The Mines Level 2",
+      "area_level": 35,
+      "compass": "SPIRIT (+1 PT) → NORTH",
+      "summary": "Find & click Deshret's Spirit (+1 Skill Point!) → Continue North/North-East to The Crystal Veins",
+      "layout_tell": "Deshret's Spirit is marked by a quest icon as soon as you get within 2 screens of her central alcove.",
+      "next_exit": "Click Deshret's Spirit (+1 Pt) → Enter The Crystal Veins",
+      "portal_tip": "Never leave Mines Level 2 without freeing Deshret's Spirit (+1 Passive Point)!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (SPIRIT)",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT → VEINS",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Locate & click Deshret's Spirit (+1 Passive Skill Point!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Continue North into The Crystal Veins"
+        }
+      ],
+      "boss_info": "Corrupted spirits spawn briefly when freeing Deshret.",
+      "gem_reward": "An Indomitable Spirit (Tasuni in Highgate): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Central Spirit Alcove",
+          "desc": "Spirit spawns mid-zone before the Crystal Veins stairs."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Deshret's Spirit (+1 Pt)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "→ Crystal Veins",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s05_crystal_veins",
+      "act": 4,
+      "step_number": 5,
+      "zone_name": "The Crystal Veins",
+      "area_level": 36,
+      "compass": "NW ↖ TO DIALLA + WP",
+      "summary": "Navigate caverns North-West to Lady Dialla → TAG WAYPOINT → Enter Daresso's Dream & Kaom's Dream",
+      "layout_tell": "Keep heading North-West/North-East away from the entrance until you reach Lady Dialla's circular hub room.",
+      "next_exit": "Tag Crystal Veins WP → Enter Daresso's Dream (Right) & Kaom's Dream (Left)",
+      "portal_tip": "⚡ Tag the Crystal Veins Waypoint so you can teleport right back after Daresso and Kaom!",
+      "badges": [
+        {
+          "label": "TAG WAYPOINT!",
+          "color": "sky"
+        },
+        {
+          "label": "LVL 38 SUPPORTS!",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Reach Lady Dialla at the end of the zone & TAG WAYPOINT"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter Daresso's Dream portal first (or Kaom's Dream)"
+        }
+      ],
+      "boss_info": "Crystal Spiders & elemental packs.",
+      "gem_reward": "Tagging WP + talking to Dialla prepares the 2 Dream portals.",
+      "variants": [
+        {
+          "title": "Dialla Hub at End",
+          "desc": "WP and both Dream portals are at the far end of the zone."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Mines Exit",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Crystal Caverns",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "WP + Dialla Portals",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s06_daressos_dream",
+      "act": 4,
+      "step_number": 6,
+      "zone_name": "Daresso's Dream",
+      "area_level": 37,
+      "compass": "NE ↗ (ARENAS)",
+      "summary": "Navigate prison cells to Barkhul pit fight → Enter The Grand Arena",
+      "layout_tell": "In Daresso's Dream, head North-East through the gated pit arenas until you defeat Barkhul.",
+      "next_exit": "Defeat Barkhul → Enter The Grand Arena",
+      "portal_tip": "Stand near the gate after killing Barkhul so you can exit immediately",
+      "badges": [
+        {
+          "label": "SURVIVE PIT ARENA",
+          "color": "rose"
+        },
+        {
+          "label": "EXIT NE ↗",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run NE through the buildings into the pit cage"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Defeat Barkhul & his pit waves → Enter The Grand Arena"
+        }
+      ],
+      "boss_info": "Barkhul: Uses Cleave & Enduring Cry.",
+      "gem_reward": "None.",
+      "variants": [
+        {
+          "title": "NE Pit Route",
+          "desc": "Always exits top-right after the Barkhul cage fight."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Barkhul Pit",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↗ The Grand Arena",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s07_grand_arena",
+      "act": 4,
+      "step_number": 7,
+      "zone_name": "The Grand Arena",
+      "area_level": 38,
+      "compass": "TOP-RIGHT EXIT ↗",
+      "summary": "Tag Waypoint → Hop across circular arenas (always take the TOP-RIGHT bridge!) → Kill Daresso",
+      "layout_tell": "⚡ ARENA TELL: In every circular arena, the correct exit bridge is ALWAYS at the Top-Right (North-East)!",
+      "next_exit": "Kill Daresso, King of Swords → Loot Eye of Desire → Logout → WP to Crystal Veins",
+      "portal_tip": "⚡ LOGOUT after looting The Eye of Desire → Take WP to Crystal Veins → Enter Kaom's Dream!",
+      "badges": [
+        {
+          "label": "ALWAYS EXIT TOP-RIGHT ↗",
+          "color": "amber"
+        },
+        {
+          "label": "KILL DARESSO",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Cross 3 circular arenas by always taking the Top-Right (NE) exit"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Daresso, King of Swords & pick up The Eye of Desire"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Logout to Town → Take WP to Crystal Veins → Enter Kaom's Dream"
+        }
+      ],
+      "boss_info": "Daresso, King of Swords: Physical/Cold sword flurries. Do NOT stand inside the spinning blade rings!",
+      "gem_reward": "Drops The Eye of Desire (1 of 2 keys for Belly of the Beast).",
+      "variants": [
+        {
+          "title": "NE Bridge Rule",
+          "desc": "Every single arena ring exits to the North-East."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "3 Trio Bosses (NE)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Daresso (Eye of Desire)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s08_kaoms_dream",
+      "act": 4,
+      "step_number": 8,
+      "zone_name": "Kaom's Dream",
+      "area_level": 37,
+      "compass": "WALK UPHILL ↑",
+      "summary": "Always walk UPHILL along the volcanic ridges & bridges → Enter Kaom's Stronghold",
+      "layout_tell": "⚡ ELEVATION TELL: Whenever the path splits, always take the stairs/ramp going UPHILL!",
+      "next_exit": "Climb uphill → Enter Kaom's Stronghold",
+      "portal_tip": "Movement skills (Leap Slam / Frostblink) can jump across several lava gaps!",
+      "badges": [
+        {
+          "label": "ALWAYS GO UPHILL ↑",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow the rising volcanic cliffs uphill"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Cross the final bridge into Kaom's Stronghold"
+        }
+      ],
+      "boss_info": "Torchoak Grove (Unique Totem): Casts righteous fire / totems; run past.",
+      "gem_reward": "None.",
+      "variants": [
+        {
+          "title": "Uphill Lava Cliffs",
+          "desc": "Follow higher ground to the Stronghold gate."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Uphill Ramps",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "↑ Kaom's Stronghold",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s09_kaoms_stronghold",
+      "act": 4,
+      "step_number": 9,
+      "zone_name": "Kaom's Stronghold",
+      "area_level": 38,
+      "compass": "NORTH ↑ TO CALDERA",
+      "summary": "Tag Waypoint → Climb straight North up the narrow cliff path → Kill King Kaom → Logout to Crystal Veins",
+      "layout_tell": "Linear upward path from the Waypoint straight into the Caldera of the King.",
+      "next_exit": "Kill King Kaom → Loot Eye of Fury → Logout → Take WP to Crystal Veins",
+      "portal_tip": "⚡ LOGOUT after looting The Eye of Fury → Take WP to Crystal Veins → Give both Eyes to Dialla!",
+      "badges": [
+        {
+          "label": "KILL KING KAOM",
+          "color": "rose"
+        },
+        {
+          "label": "LOGOUT WITH EYE",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag WP & climb the narrow volcanic ridge North"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill King Kaom in the Caldera & loot The Eye of Fury"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Relog to Town → Claim +1 Pt & Lvl 38 Gems → WP to Crystal Veins"
+        }
+      ],
+      "boss_info": "King Kaom: Heavy Fire Slams, Leap Slam & SR totems. Keep moving around the outer ring!",
+      "gem_reward": "Opening Belly of the Beast next unlocks Level 38 Support Gems (Spell Echo, Multistrike, GMP, CWDT, Unleash)!",
+      "variants": [
+        {
+          "title": "Linear North Climb",
+          "desc": "Caldera entrance is always at the top of the zone."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Volcanic Ridge",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "King Kaom (Eye of Fury)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s10_belly_of_the_beast",
+      "act": 4,
+      "step_number": 10,
+      "zone_name": "The Belly of the Beast Level 1",
+      "area_level": 38,
+      "compass": "NW ↖ → KILL PIETY",
+      "summary": "Run North-West through Belly Level 1 & Level 2 → Kill Piety in The Bowels of the Beast → Enter The Harvest",
+      "layout_tell": "Both Belly Level 1 and Level 2 trend generally North-West; follow the main flesh arteries.",
+      "next_exit": "Kill Piety, the Abomination → Enter The Harvest",
+      "portal_tip": "In Piety's fight, run in a circle around her to dodge the rotating red bleeding beam!",
+      "badges": [
+        {
+          "label": "DODGE ROTATING BEAM!",
+          "color": "rose"
+        },
+        {
+          "label": "EXIT → HARVEST",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Navigate NW through Belly Level 1 into Belly Level 2"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "In Level 2, kill Piety (circle around her rotating laser beam!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Talk to Piety & enter The Harvest"
+        }
+      ],
+      "boss_info": "Piety, the Abomination: Rotating beam applies massive Bleed/Corrupting Blood stacks instantly — never cross the beam!",
+      "gem_reward": "Unlocks The Harvest.",
+      "variants": [
+        {
+          "title": "NW Flesh Tunnels",
+          "desc": "Keep moving toward the top-left in both levels."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Crystal Veins",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Belly 1 & 2 (NW)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "Piety → The Harvest",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a4_s11_the_harvest",
+      "act": 4,
+      "step_number": 11,
+      "zone_name": "The Harvest",
+      "area_level": 40,
+      "compass": "1 LEFT / 2 RIGHT → MALACHAI",
+      "summary": "Tag Waypoint → Kill 1 Guardian on LEFT & 2 Guardians on RIGHT → Give 3 Organs to Piety → Kill Malachai",
+      "layout_tell": "⚡ HARVEST RULE: There is ALWAYS 1 Guardian on one side of the Waypoint and 2 Guardians on the other side!",
+      "next_exit": "Kill Malachai (2 Phases) → Relog to Highgate → Exit NE into The Ascent (Act 5)",
+      "portal_tip": "After killing the 1st Guardian on the left, take your portal or WP back to the center to do the 2 on the right!",
+      "badges": [
+        {
+          "label": "1 LEFT / 2 RIGHT GUARDIANS",
+          "color": "amber"
+        },
+        {
+          "label": "ACT 4 BOSS: MALACHAI",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag The Harvest Waypoint right next to Piety"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Kill Doedre, Maligaro & Shavronne (Left & Right wings) for 3 Organs"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter The Black Core → Kill Malachai → Relog & take The Ascent to Act 5"
+        }
+      ],
+      "boss_info": "Malachai, The Nightmare: Destroy the 3 Heart phases when Malachai becomes immune; dodge red teleport slam.",
+      "gem_reward": "Completes Act 4; The Ascent leads into Act 5 (The Slave Pens).",
+      "variants": [
+        {
+          "title": "Symmetric Organ Wings",
+          "desc": "West wing = 1 Boss; East wing = 2 Bosses."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Left: 1 Guardian",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Center WP + Black Core",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "Right: 2 Guardians",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    }
+  ]
+}

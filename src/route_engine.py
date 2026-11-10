@@ -1,16 +1,17 @@
 """
-Campaign Route Engine for PoE1 Speedrun Companion.
+Campaign Route Engine & Labyrinth Trial Tracker for PoE1 Speedrun Companion.
 
-Loads declarative route definitions from `data/campaign_route.json` and resolves
-the active step when a player enters a zone in `Client.txt` or navigates manually.
+Loads declarative per-Act route files from `data/acts/act1.json` .. `act10.json`
+and Labyrinth Trial definitions from `data/labyrinth_trials.json`.
 """
 
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Sequence
 
 from src.log_watcher import LogEvent
 
@@ -58,6 +59,33 @@ class RouteStep:
         )
 
 
+@dataclass
+class LabyrinthTrial:
+    """Represents one of the 12 Campaign Labyrinth Trials (6 Normal, 3 Cruel, 3 Merciless)."""
+
+    trial_id: str
+    labyrinth: str  # "Normal" | "Cruel" | "Merciless"
+    act: int
+    zone_name: str
+    waypoint_hint: str
+    trap_type: str
+    unlock_zone: str
+    layout_hint: str
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "LabyrinthTrial":
+        return cls(
+            trial_id=str(data.get("trial_id", "")),
+            labyrinth=str(data.get("labyrinth", "Normal")),
+            act=int(data.get("act", 1)),
+            zone_name=str(data.get("zone_name", "")),
+            waypoint_hint=str(data.get("waypoint_hint", "")),
+            trap_type=str(data.get("trap_type", "")),
+            unlock_zone=str(data.get("unlock_zone", "")),
+            layout_hint=str(data.get("layout_hint", "")),
+        )
+
+
 def build_fallback_step(zone_name: str, act: int = 1) -> RouteStep:
     """Create a clean fallback RouteStep when entering an unmapped or endgame zone."""
     return RouteStep(
@@ -70,7 +98,7 @@ def build_fallback_step(zone_name: str, act: int = 1) -> RouteStep:
         summary=f"Currently in {zone_name} (Custom / Unmapped Zone)",
         layout_tell="Use manual Prev/Next buttons or enter a campaign zone to resume guided routing.",
         next_exit="Continue along your current objective",
-        portal_tip="Add this zone to data/campaign_route.json to customize its layout",
+        portal_tip="Add this zone to data/acts/actN.json to customize its layout",
         badges=[{"label": "LIVE TRACKING", "color": "sky"}],
         actions=[
             {
@@ -91,25 +119,54 @@ def build_fallback_step(zone_name: str, act: int = 1) -> RouteStep:
 
 class RouteEngine:
     """
-    Stateful tracker for the player's current position in the PoE1 campaign route.
+    Stateful tracker for the player's current position in the PoE1 campaign route
+    (Acts 1–10) and Labyrinth Trial unlock/completion states.
     """
 
-    def __init__(self, route_json_path: Optional[Path] = None) -> None:
-        if route_json_path is None:
-            root_dir = Path(__file__).resolve().parent.parent
-            route_json_path = root_dir / "data" / "campaign_route.json"
-        self.route_json_path = Path(route_json_path)
-        self.steps: List[RouteStep] = self._load_steps()
+    def __init__(
+        self,
+        acts_dir: Optional[Path] = None,
+        trials_path: Optional[Path] = None,
+    ) -> None:
+        root_dir = Path(__file__).resolve().parent.parent
+        self.acts_dir = Path(acts_dir) if acts_dir is not None else (root_dir / "data" / "acts")
+        self.trials_path = (
+            Path(trials_path) if trials_path is not None else (root_dir / "data" / "labyrinth_trials.json")
+        )
+
+        self.steps: List[RouteStep] = self._load_all_act_steps()
+        self.trials: List[LabyrinthTrial] = self._load_trials()
+
         self.current_index: int = 0
+        self.max_reached_index: int = 0
         self.active_fallback: Optional[RouteStep] = None
         self.character_name: Optional[str] = None
         self.character_level: Optional[int] = None
         self.poe_window_focused: bool = True
         self.last_log_timestamp: str = ""
 
-    def _load_steps(self) -> List[RouteStep]:
-        raw = json.loads(self.route_json_path.read_text(encoding="utf-8"))
-        return [RouteStep.from_dict(item) for item in raw.get("steps", [])]
+    def _load_all_act_steps(self) -> List[RouteStep]:
+        """Load all `act1.json` .. `act10.json` files from `data/acts/` in numerical order."""
+        if not self.acts_dir.exists():
+            return []
+
+        def _act_sort_key(p: Path) -> int:
+            m = re.search(r"(\d+)", p.stem)
+            return int(m.group(1)) if m else 999
+
+        loaded: List[RouteStep] = []
+        for act_file in sorted(self.acts_dir.glob("act*.json"), key=_act_sort_key):
+            raw = json.loads(act_file.read_text(encoding="utf-8"))
+            for item in raw.get("steps", []):
+                loaded.append(RouteStep.from_dict(item))
+        return loaded
+
+    def _load_trials(self) -> List[LabyrinthTrial]:
+        """Load the 12 Campaign Labyrinth Trials from `data/labyrinth_trials.json`."""
+        if not self.trials_path.exists():
+            return []
+        raw = json.loads(self.trials_path.read_text(encoding="utf-8"))
+        return [LabyrinthTrial.from_dict(item) for item in raw.get("trials", [])]
 
     @property
     def current_step(self) -> RouteStep:
@@ -125,12 +182,52 @@ class RouteEngine:
         target_act = act if act is not None else self.current_step.act
         return [s for s in self.steps if s.act == target_act]
 
+    def get_trials_by_tier(self, tier: str) -> List[LabyrinthTrial]:
+        """Return trials for 'Normal' (6), 'Cruel' (3), or 'Merciless' (3)."""
+        norm_tier = tier.strip().lower()
+        return [t for t in self.trials if t.labyrinth.strip().lower() == norm_tier]
+
+    def get_trial_status(
+        self,
+        trial: LabyrinthTrial,
+        unlocked_ids: Sequence[str] = (),
+        completed_ids: Sequence[str] = (),
+    ) -> str:
+        """
+        Determine a trial's current state: 'completed' | 'unlocked' | 'locked'.
+        A trial is unlocked if explicitly in `unlocked_ids` OR if the player's
+        highest reached campaign step has reached/passed the trial's `unlock_zone` or Act.
+        """
+        if trial.trial_id in completed_ids:
+            return "completed"
+        if trial.trial_id in unlocked_ids:
+            return "unlocked"
+
+        if not self.steps:
+            return "locked"
+
+        reached_step = self.steps[min(len(self.steps) - 1, max(self.current_index, self.max_reached_index))]
+        if reached_step.act > trial.act:
+            return "unlocked"
+
+        if reached_step.act == trial.act:
+            # Check if unlock_zone appears at or before max_reached_index in the same Act
+            unlock_norm = trial.unlock_zone.strip().lower()
+            zone_norm = trial.zone_name.strip().lower()
+            for idx in range(0, max(self.current_index, self.max_reached_index) + 1):
+                s = self.steps[idx]
+                if s.act == trial.act and s.zone_name.strip().lower() in (unlock_norm, zone_norm):
+                    return "unlocked"
+
+        return "locked"
+
     def select_index(self, index: int) -> RouteStep:
         """Manually jump to a specific step index."""
         if not self.steps:
             return self.current_step
         self.active_fallback = None
         self.current_index = max(0, min(len(self.steps) - 1, int(index)))
+        self.max_reached_index = max(self.max_reached_index, self.current_index)
         return self.current_step
 
     def next_step(self) -> RouteStep:
@@ -138,6 +235,7 @@ class RouteEngine:
         self.active_fallback = None
         if self.current_index < len(self.steps) - 1:
             self.current_index += 1
+            self.max_reached_index = max(self.max_reached_index, self.current_index)
         return self.current_step
 
     def prev_step(self) -> RouteStep:
@@ -152,7 +250,7 @@ class RouteEngine:
         Match a newly entered zone name from Client.txt against the route:
         1. Look forward from `current_index` (up to 8 steps ahead) for an exact case-insensitive match.
         2. Otherwise search all steps for an exact case-insensitive match (preferring closest index).
-        3. If the zone is not in `campaign_route.json`, set a non-destructive `active_fallback` step.
+        3. If the zone is not in `data/acts/`, set a non-destructive `active_fallback` step.
         """
         normalized = zone_name.strip().lower()
         if not normalized:
@@ -163,6 +261,7 @@ class RouteEngine:
         for idx in range(self.current_index, lookahead_limit):
             if self.steps[idx].zone_name.strip().lower() == normalized:
                 self.current_index = idx
+                self.max_reached_index = max(self.max_reached_index, self.current_index)
                 self.active_fallback = None
                 return self.current_step
 
@@ -175,6 +274,7 @@ class RouteEngine:
         if matching_indices:
             best_idx = min(matching_indices, key=lambda i: abs(i - self.current_index))
             self.current_index = best_idx
+            self.max_reached_index = max(self.max_reached_index, self.current_index)
             self.active_fallback = None
             return self.current_step
 

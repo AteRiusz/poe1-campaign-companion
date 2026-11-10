@@ -19,6 +19,7 @@ from src.log_watcher import ClientLogTailer, parse_client_log_line
 from src.route_engine import RouteEngine
 from src.settings_manager import AppSettings, SettingsManager
 from src.ui.dashboard_window import DashboardWindow
+from src.ui.map_canvas import TopologyMapWidget, _intersection_area
 
 
 @pytest.fixture(scope="session")
@@ -99,6 +100,8 @@ def test_settings_defaults_extra_info_off(tmp_path: Path) -> None:
     assert s.show_gem_rewards is False
     assert s.show_variants is False
     assert 0.25 <= s.opacity <= 1.0
+    assert s.completed_trials == []
+    assert s.unlocked_trials == []
 
 
 def test_settings_opacity_and_extra_toggle_persistence(tmp_path: Path) -> None:
@@ -108,6 +111,7 @@ def test_settings_opacity_and_extra_toggle_persistence(tmp_path: Path) -> None:
     mgr.set_opacity(0.65)
     mgr.set_extra_toggle("show_boss_info", True)
     mgr.set_extra_toggle("show_gem_rewards", True)
+    mgr.set_trial_completed("norm_1_lower_prison", True)
 
     # Reload from disk
     reloaded = SettingsManager(config_path=cfg_file)
@@ -115,13 +119,16 @@ def test_settings_opacity_and_extra_toggle_persistence(tmp_path: Path) -> None:
     assert reloaded.settings.show_boss_info is True
     assert reloaded.settings.show_gem_rewards is True
     assert reloaded.settings.show_variants is False
+    assert "norm_1_lower_prison" in reloaded.settings.completed_trials
 
 
-# ==================== 3. ROUTE ENGINE TESTS ====================
+# ==================== 3. ROUTE ENGINE & LABYRINTH TRIALS TESTS ====================
 
-def test_route_engine_zone_matching_and_fallback() -> None:
+def test_route_engine_all_ten_acts_and_fallback() -> None:
     engine = RouteEngine()
-    assert len(engine.steps) >= 20
+    acts_present = {s.act for s in engine.steps}
+    assert acts_present == {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    assert len(engine.steps) >= 90
 
     step = engine.on_zone_entered("The Mud Flats")
     assert step.zone_name == "The Mud Flats"
@@ -137,6 +144,24 @@ def test_route_engine_zone_matching_and_fallback() -> None:
     resumed = engine.on_zone_entered("The Submerged Passage")
     assert resumed.zone_name == "The Submerged Passage"
     assert engine.active_fallback is None
+
+
+def test_labyrinth_trials_locked_unlocked_completed_states() -> None:
+    engine = RouteEngine()
+    assert len(engine.get_trials_by_tier("Normal")) == 6
+    assert len(engine.get_trials_by_tier("Cruel")) == 3
+    assert len(engine.get_trials_by_tier("Merciless")) == 3
+
+    crypt_trial = [t for t in engine.trials if t.trial_id == "norm_3_crypt_1"][0]
+    # At start of Act 1, Act 2 Crypt trial is locked
+    assert engine.get_trial_status(crypt_trial) == "locked"
+
+    # When player reaches Act 2 'The Crossroads' (the unlock_zone for Crypt Level 1), it becomes unlocked!
+    engine.on_zone_entered("The Crossroads")
+    assert engine.get_trial_status(crypt_trial) == "unlocked"
+
+    # When marked completed, status is 'completed'
+    assert engine.get_trial_status(crypt_trial, completed_ids=["norm_3_crypt_1"]) == "completed"
 
 
 # ==================== 4. UI & OPACITY / EXTRA INFO INTEGRATION TESTS ====================
@@ -158,11 +183,26 @@ def test_dashboard_and_overlay_ui_sync(qapp: QApplication, tmp_path: Path) -> No
     assert win.overlay.extra_container.count() == 0
     assert win.variants_box.isHidden() is True
 
-    # Test Opacity Slider updates both Dashboard and Overlay
+    # In Window Mode (overlay hidden), opacity is locked at 100% and opacity setting is hidden
+    assert win.overlay.isVisible() is False
+    assert round(win.windowOpacity(), 2) == 1.0
+    assert win.opacity_group.isHidden() is True
+
+    # Toggle into Overlay Mode: opacity setting becomes visible and only affects the overlay
+    win.toggle_overlay()
+    assert win.overlay.isVisible() is True
+    assert win.opacity_group.isHidden() is False
+
     win.opacity_slider.setValue(55)
     assert settings_mgr.settings.opacity == 0.55
-    assert round(win.windowOpacity(), 2) == 0.55
+    assert round(win.windowOpacity(), 2) == 1.0  # Window mode stays locked at 100%
     assert round(win.overlay.windowOpacity(), 2) == 0.55
+
+    # Switch back to Window Mode: opacity setting hides again
+    win.toggle_overlay()
+    assert win.overlay.isVisible() is False
+    assert win.opacity_group.isHidden() is True
+    assert round(win.windowOpacity(), 2) == 1.0
 
     # Enable extra info toggles and verify they render
     win.chk_boss_info.setChecked(True)
@@ -174,3 +214,34 @@ def test_dashboard_and_overlay_ui_sync(qapp: QApplication, tmp_path: Path) -> No
     assert win.variants_box.isHidden() is False
 
     win.close()
+
+
+def test_topology_labels_never_overlap_across_all_103_steps(qapp: QApplication) -> None:
+    from PyQt6.QtCore import QRectF
+
+    engine = RouteEngine()
+    for compact, cw, ch in [(False, 380.0, 230.0), (True, 210.0, 140.0)]:
+        canvas = TopologyMapWidget(compact=compact)
+        for step in engine.steps:
+            canvas.set_topology(step.topology, compass_label=step.compass)
+            coords, rad = canvas._compute_node_positions(cw, ch)
+            placements = canvas.compute_label_rects(cw, ch)
+
+            # 1. Verify no two tooltip boxes overlap each other
+            for i in range(len(placements)):
+                for j in range(i + 1, len(placements)):
+                    overlap = _intersection_area(placements[i][2], placements[j][2])
+                    assert overlap == 0.0, (
+                        f"Label-Label overlap (compact={compact}) on {step.step_id}: "
+                        f"{placements[i][0]['label']} vs {placements[j][0]['label']}"
+                    )
+
+            # 2. Verify no tooltip box overlaps any node circle
+            for n, _pt, lrect in placements:
+                for nid, npt in coords.items():
+                    node_rect = QRectF(npt.x() - rad, npt.y() - rad, 2 * rad, 2 * rad)
+                    node_overlap = _intersection_area(lrect, node_rect)
+                    assert node_overlap == 0.0, (
+                        f"Label-Node overlap (compact={compact}) on {step.step_id}: "
+                        f"label '{n['label']}' overlaps node '{nid}'"
+                    )

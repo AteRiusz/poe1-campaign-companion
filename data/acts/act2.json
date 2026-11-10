@@ -1,0 +1,1145 @@
+{
+  "schema_version": "1.0",
+  "act": 2,
+  "title": "Act 2 Speedrun Route",
+  "steps": [
+    {
+      "step_id": "a2_s01_southern_forest",
+      "act": 2,
+      "step_number": 1,
+      "zone_name": "The Southern Forest",
+      "area_level": 13,
+      "compass": "NE ↗",
+      "summary": "Hug cliff/river edge North-East straight to The Forest Encampment",
+      "layout_tell": "Linear forest corridor: keep heading North-East along the main gap in the trees.",
+      "next_exit": "Enter The Forest Encampment (Act 2 Town)",
+      "portal_tip": "No quests here — run straight into Act 2 Town",
+      "badges": [
+        {
+          "label": "RUN STRAIGHT NE ↗",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run NE through the trees — ignore monkeys"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Tag WP at end & enter The Forest Encampment"
+        }
+      ],
+      "boss_info": "No boss in Southern Forest.",
+      "gem_reward": "Unlocks Act 2 Town vendors (Yeena & Greust).",
+      "variants": [
+        {
+          "title": "Linear Corridor",
+          "desc": "Always starts SW and exits NE into Forest Encampment."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SW)",
+            "x": 0.16,
+            "y": 0.82,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Waypoint",
+            "x": 0.72,
+            "y": 0.3,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "→ Encampment",
+            "x": 0.86,
+            "y": 0.18,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s02_old_fields",
+      "act": 2,
+      "step_number": 2,
+      "zone_name": "The Old Fields",
+      "area_level": 14,
+      "compass": "FOLLOW ROAD ↗",
+      "summary": "Follow the cobblestone road NE → Optional: Drop Portal at The Den → Enter The Crossroads",
+      "layout_tell": "The cobblestone road ALWAYS leads directly from Forest Encampment to The Crossroads exit!",
+      "next_exit": "Follow road → Enter The Crossroads",
+      "portal_tip": "Skip The Den unless you want a 2nd Quicksilver Flask",
+      "badges": [
+        {
+          "label": "FOLLOW ROAD ↗",
+          "color": "emerald"
+        },
+        {
+          "label": "2ND FLASK (OPTIONAL)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Stay on the cobblestone road heading North-East"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "(Optional) Drop portal at The Den entrance if you want 2nd Quicksilver"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Follow road into The Crossroads"
+        }
+      ],
+      "boss_info": "The Great White Beast (inside The Den): Optional quest for 2nd Quicksilver Flask.",
+      "gem_reward": "The Great White Beast (Yeena): Quicksilver Flask or Silver Flask.",
+      "variants": [
+        {
+          "title": "Road-Guided Field",
+          "desc": "Never leave the stone road unless looking for The Den."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.82,
+            "type": "start"
+          },
+          {
+            "id": "den",
+            "label": "The Den (Opt)",
+            "x": 0.45,
+            "y": 0.35,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "→ Crossroads",
+            "x": 0.84,
+            "y": 0.22,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "exit",
+            "style": "main"
+          },
+          {
+            "from": "start",
+            "to": "den",
+            "style": "branch"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s03_crossroads",
+      "act": 2,
+      "step_number": 3,
+      "zone_name": "The Crossroads",
+      "area_level": 15,
+      "compass": "4-WAY HUB",
+      "summary": "Follow road to Waypoint at center fork → Go North-West to Chamber of Sins Level 1",
+      "layout_tell": "At the central Waypoint fork: NW = Chamber of Sins, NE = Broken Bridge (Kraityn), SE = Fellshrine Ruins (Lab Trial).",
+      "next_exit": "Tag WP → Take NW Fork → Chamber of Sins Level 1",
+      "portal_tip": "Tag The Crossroads Waypoint — you will use it 3 times in Act 2!",
+      "badges": [
+        {
+          "label": "TAG HUB WAYPOINT",
+          "color": "sky"
+        },
+        {
+          "label": "GO NW ↖ TO SINS",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Follow road to the central Waypoint & tag it!"
+        },
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Take the North-West fork (uphill dirt path)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Chamber of Sins Level 1"
+        }
+      ],
+      "boss_info": "Calaf, Headstaver (near gate): Easy to run past.",
+      "gem_reward": "Hub zone connecting Chamber of Sins (Lvl 16 Herald/Blood Rage gems), Kraityn, and Crypt Trial.",
+      "variants": [
+        {
+          "title": "3-Fork Hub",
+          "desc": "WP sits at the intersection: NW = Sins, NE = Bridge, SE = Fellshrine."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SW)",
+            "x": 0.16,
+            "y": 0.82,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Hub Waypoint",
+            "x": 0.5,
+            "y": 0.52,
+            "type": "wp"
+          },
+          {
+            "id": "sins",
+            "label": "↖ Chamber of Sins",
+            "x": 0.24,
+            "y": 0.2,
+            "type": "exit"
+          },
+          {
+            "id": "bridge",
+            "label": "↗ Broken Bridge",
+            "x": 0.82,
+            "y": 0.22,
+            "type": "quest"
+          },
+          {
+            "id": "fell",
+            "label": "↘ Fellshrine",
+            "x": 0.82,
+            "y": 0.78,
+            "type": "quest"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "sins",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "bridge",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
+            "to": "fell",
+            "style": "branch"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s04_chamber_of_sins_1",
+      "act": 2,
+      "step_number": 4,
+      "zone_name": "The Chamber of Sins Level 1",
+      "area_level": 15,
+      "compass": "CHECK MAP DEVICE",
+      "summary": "Reach center Map Device room → Exit is ALWAYS in the direction the Map Device points!",
+      "layout_tell": "⚡ BEST TELL IN POE: In the center Waypoint room, look at which hallway has the broken carpet / Map Device facing it — Level 2 is 100% down that hallway!",
+      "next_exit": "Follow Map Device direction → Enter Chamber of Sins Level 2",
+      "portal_tip": "Tag Waypoint in center room just in case",
+      "badges": [
+        {
+          "label": "MAP DEVICE TELL",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT → SINS LVL 2",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Run to the central circular room with the Waypoint & Map Device"
+        },
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Take the hallway matching the Map Device's orientation"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Descend stairs into The Chamber of Sins Level 2"
+        }
+      ],
+      "boss_info": "Black Death (Unique Necromancer): Summons skeletons; ignore and take stairs.",
+      "gem_reward": "Completing Level 2 next unlocks Level 16 Herald & Aura Gems!",
+      "variants": [
+        {
+          "title": "Diamond Cross Layout",
+          "desc": "4 hallways radiating from center WP; Map Device points to the exit hallway."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Entrance",
+            "x": 0.2,
+            "y": 0.78,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Center WP + Map Device",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "→ Sins Level 2",
+            "x": 0.8,
+            "y": 0.22,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s05_chamber_of_sins_2",
+      "act": 2,
+      "step_number": 5,
+      "zone_name": "The Chamber of Sins Level 2",
+      "area_level": 16,
+      "compass": "TRIAL + FIDELITAS",
+      "summary": "Complete Lab Trial #2 → Follow long narrow corridor → Kill Fidelitas & take Baleful Gem",
+      "layout_tell": "Fidelitas is always at the end of a long narrow diagonal hallway in the North-West or North-East.",
+      "next_exit": "Kill Fidelitas → Loot Baleful Gem → Relog to Town (Helena)",
+      "portal_tip": "⚡ LOGOUT after grabbing the Baleful Gem & talking to Helena!",
+      "badges": [
+        {
+          "label": "LAB TRIAL #2",
+          "color": "amber"
+        },
+        {
+          "label": "KILL FIDELITAS",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "Complete Trial of Ascendancy (Spinning Sawblades)"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Find narrow corridor → Kill Fidelitas & click Strange Device"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Pick up Baleful Gem → Logout to Town → Talk to Greust & Helena"
+        }
+      ],
+      "boss_info": "Fidelitas, the Mourning: Pure Lightning melee & Lightning Strike projectiles. Topaz Ring helps!",
+      "gem_reward": "Intruders in Black (Greust/Yeena): Unlocks Lvl 16 Herald Gems (Herald of Ash, Ice, Thunder, Purity, Agony, Blood Rage, Desecrate, Wave of Conviction).",
+      "variants": [
+        {
+          "title": "NW Boss / NE Trial",
+          "desc": "Look for the long thin bridge corridor leading to Fidelitas's arena."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.5,
+            "y": 0.82,
+            "type": "start"
+          },
+          {
+            "id": "trial",
+            "label": "Lab Trial #2",
+            "x": 0.78,
+            "y": 0.42,
+            "type": "quest"
+          },
+          {
+            "id": "boss",
+            "label": "Fidelitas + Gem",
+            "x": 0.22,
+            "y": 0.22,
+            "type": "boss"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "trial",
+            "style": "branch"
+          },
+          {
+            "from": "start",
+            "to": "boss",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s06_riverways",
+      "act": 2,
+      "step_number": 6,
+      "zone_name": "The Riverways",
+      "area_level": 15,
+      "compass": "FOLLOW ROAD ↖",
+      "summary": "Exit Town West → Follow cobblestone road to Waypoint → Continue SW along road to Western Forest",
+      "layout_tell": "Look for two broken stone pillars along the road just past the Waypoint: they lead north to Wetlands (Oak), while the main road continues to Western Forest.",
+      "next_exit": "Tag WP → Follow road into The Western Forest",
+      "portal_tip": "Tag The Riverways Waypoint so you can come back for Oak in The Wetlands!",
+      "badges": [
+        {
+          "label": "TAG WAYPOINT",
+          "color": "sky"
+        },
+        {
+          "label": "FOLLOW ROAD ↖",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Follow main cobblestone road to the Waypoint & tag it"
+        },
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Stay on the cobblestone road past the broken bridge (use movement skill)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Western Forest at the end of the road"
+        }
+      ],
+      "boss_info": "No required boss in The Riverways.",
+      "gem_reward": "Leads to Western Forest (3 quests in 1 zone!).",
+      "variants": [
+        {
+          "title": "Road Spine",
+          "desc": "Main road cuts straight across; Wetlands entrance is North of the WP."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (East)",
+            "x": 0.84,
+            "y": 0.76,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Waypoint",
+            "x": 0.52,
+            "y": 0.52,
+            "type": "wp"
+          },
+          {
+            "id": "wetlands",
+            "label": "↑ Wetlands (Oak)",
+            "x": 0.58,
+            "y": 0.2,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "← Western Forest",
+            "x": 0.16,
+            "y": 0.34,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "wetlands",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s07_western_forest",
+      "act": 2,
+      "step_number": 7,
+      "zone_name": "The Western Forest",
+      "area_level": 17,
+      "compass": "ROAD + TORCH TELL",
+      "summary": "Follow Road to WP → Follow Torch on Road to Alira → Kill Arteri at South End (+1 Pt) → Open Thaumetic Seal",
+      "layout_tell": "⚡ TORCH TELL: On the main road near the WP, look for a Torch and broken cobbles leading off the road — that path ALWAYS leads to Alira's camp! Spider Chambers (Weaver) is on the OPPOSITE side of the road from Alira.",
+      "next_exit": "Do Weaver's Chambers + Alira + Captain Arteri (+1 Skill Pt!)",
+      "portal_tip": "After Captain Arteri & Thaumetic Seal, talk to Bestel in Act 1 Town for +1 Passive Skill Point!",
+      "badges": [
+        {
+          "label": "TORCH → ALIRA",
+          "color": "amber"
+        },
+        {
+          "label": "+1 SKILL PT (ARTERI)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Follow road to Waypoint & spot the Torch side-path (Alira's side)"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Opposite side of road from Alira → Enter Weaver's Chambers & kill Weaver"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Follow road to far SW end → Kill Captain Arteri & click Thaumetic Seal (+1 Pt)"
+        }
+      ],
+      "boss_info": "Alira: Casts Detonate Dead on corpses (do not stand on corpses!). Captain Arteri: Heavy Physical + Bleed.",
+      "gem_reward": "Sharp and Cruel (Silk): Lvl 18 Support Gems! The Way Forward (Bestel in Act 1): Book of Skill (+1 Passive Point)!",
+      "variants": [
+        {
+          "title": "Alira West / Weaver East",
+          "desc": "Torch is on the left of the road; Weaver's web trees are on the right."
+        },
+        {
+          "title": "Alira East / Weaver West",
+          "desc": "Torch is on the right of the road; Weaver's web trees are on the left."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (NE)",
+            "x": 0.82,
+            "y": 0.2,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "WP + Torch Tell",
+            "x": 0.52,
+            "y": 0.48,
+            "type": "wp"
+          },
+          {
+            "id": "alira",
+            "label": "Alira Camp",
+            "x": 0.24,
+            "y": 0.36,
+            "type": "boss"
+          },
+          {
+            "id": "weaver",
+            "label": "Weaver's Chambers",
+            "x": 0.78,
+            "y": 0.64,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Arteri + Seal (+1 Pt)",
+            "x": 0.2,
+            "y": 0.82,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "alira",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
+            "to": "weaver",
+            "style": "branch"
+          },
+          {
+            "from": "wp",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s08_broken_bridge",
+      "act": 2,
+      "step_number": 8,
+      "zone_name": "The Broken Bridge",
+      "area_level": 16,
+      "compass": "FOLLOW ROAD ↗",
+      "summary": "Take Crossroads WP → Go NE to Broken Bridge → Follow road to Kill Kraityn",
+      "layout_tell": "Follow the cobblestone road North-East straight to Kraityn's broken bridge camp.",
+      "next_exit": "Kill Kraityn (or Help) → Loot Kraityn's Amulet → Logout to Town",
+      "portal_tip": "⚡ LOGOUT after looting Kraityn's Amulet!",
+      "badges": [
+        {
+          "label": "BANDIT #2: KRAITYN",
+          "color": "rose"
+        },
+        {
+          "label": "FOLLOW ROAD ↗",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow the broken cobblestone road North-East"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Kraityn at the bridge gap & loot Kraityn's Amulet"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Logout to Town → Take WP to Crossroads (SE for Crypt Trial) or Riverways"
+        }
+      ],
+      "boss_info": "Kraityn: Uses Flicker Strike & Whirling Blades (Bleed + Physical).",
+      "gem_reward": "Part of Deal with the Bandits (+1 Passive Skill Point when killing all 3).",
+      "variants": [
+        {
+          "title": "Road to Bridge",
+          "desc": "Road leads directly from entrance to Kraityn's camp."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SW)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Cobble Road",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "Kraityn (NE)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s09_crypt_level_1",
+      "act": 2,
+      "step_number": 9,
+      "zone_name": "The Crypt Level 1",
+      "area_level": 17,
+      "compass": "LOOP / TRIAL #3",
+      "summary": "(Optional Now or Later) From Crossroads WP go SE through Fellshrine → Complete Lab Trial #3",
+      "layout_tell": "Follow the road SE through Fellshrine Ruins into The Crypt; hug outer walls to spot the Trial icon.",
+      "next_exit": "Complete Trial of Ascendancy (Spinning Blades/Discs) → Relog to Town",
+      "portal_tip": "Can be skipped and run anytime later via The Crossroads Waypoint!",
+      "badges": [
+        {
+          "label": "LAB TRIAL #3",
+          "color": "amber"
+        },
+        {
+          "label": "OPTIONAL TIMING",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "From Crossroads WP, run SE along Fellshrine road into The Crypt"
+        },
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "Tag WP & complete Trial of Ascendancy (Normal Trial 3/6)"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Logout to Town → Take WP to The Riverways"
+        }
+      ],
+      "boss_info": "Risen Dead & Necromancers: Curses and Chaos poison clouds on death.",
+      "gem_reward": "Unlocks Normal Lab Trial 3 of 6.",
+      "variants": [
+        {
+          "title": "Four-Corner Grid",
+          "desc": "Trial spawns in one of the far corners away from entrance."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Crypt Corridors",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "⚡ Lab Trial #3",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s10_wetlands",
+      "act": 2,
+      "step_number": 10,
+      "zone_name": "The Wetlands",
+      "area_level": 16,
+      "compass": "CENTER + NW ↖",
+      "summary": "From Riverways WP go North → Kill Oak in center camp → Poison Tree Roots NW → Enter Vaal Ruins",
+      "layout_tell": "Oak's bandit camp is ALWAYS in the exact center of The Wetlands; the Waypoint & Tree Roots are along the NW cliff wall.",
+      "next_exit": "Kill Oak (loot Amulet) → Tag WP by Tree Roots → Poison Roots → Enter The Vaal Ruins",
+      "portal_tip": "Talk to Eramir in Town for The Apex if you killed all 3 Bandits (+1 Passive Point)!",
+      "badges": [
+        {
+          "label": "BANDIT #3: OAK",
+          "color": "rose"
+        },
+        {
+          "label": "+1 SKILL PT (3 BANDITS)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Find central wooden palisade → Kill Oak & take Oak's Amulet"
+        },
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Find Waypoint right next to the Undying Blockage (NW wall)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Poison Tree Roots → Enter The Vaal Ruins"
+        }
+      ],
+      "boss_info": "Oak: Uses Immortal Call, Enduring Cry, and Leap Slam (Physical).",
+      "gem_reward": "Deal with the Bandits (Eramir): Grants +1 Passive Skill Point (or Bandit buff).",
+      "variants": [
+        {
+          "title": "Center Camp / NW Exit",
+          "desc": "Oak is dead-center; Vaal Ruins exit is always on the NW/NE rock wall."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Oak (Center Camp)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↖ WP + Vaal Ruins",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s11_vaal_ruins",
+      "act": 2,
+      "step_number": 11,
+      "zone_name": "The Vaal Ruins",
+      "area_level": 18,
+      "compass": "S-CURVE / WALL",
+      "summary": "Navigate corridors to the Ancient Seal → Click Seal to release darkness → Exit to Northern Forest",
+      "layout_tell": "When you find a long straight corridor heading away from the entrance, follow its general direction after it turns.",
+      "next_exit": "Break the Ancient Seal → Enter The Northern Forest",
+      "portal_tip": "Do not backtrack after breaking the Ancient Seal — the exit is always just past it!",
+      "badges": [
+        {
+          "label": "BREAK ANCIENT SEAL",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT → FOREST",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow outer rooms toward the opposite corner from entrance"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Click the Ancient Seal ball (triggers screen darkness)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Continue past the Seal into The Northern Forest"
+        }
+      ],
+      "boss_info": "Ancient Construct & Vaal Fallen: Chaos spitters and elemental Constructs.",
+      "gem_reward": "Unlocks Act 2 finale zones.",
+      "variants": [
+        {
+          "title": "S-Shape Ruins",
+          "desc": "Exit and Ancient Seal are always paired together at the end."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Ancient Seal",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "→ Northern Forest",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s12_northern_forest",
+      "act": 2,
+      "step_number": 12,
+      "zone_name": "The Northern Forest",
+      "area_level": 18,
+      "compass": "NE ↗ (RIVER)",
+      "summary": "Hug the coastline/ cliff North-East straight to The Caverns entrance",
+      "layout_tell": "Linear forest zone: keep moving North-East; skip The Dread Thicket in Act 2.",
+      "next_exit": "Enter The Caverns at the North-East end",
+      "portal_tip": "Ignore Dread Thicket in Act 2 (only needed in Act 7)",
+      "badges": [
+        {
+          "label": "RUN STRAIGHT NE ↗",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run North-East along the water/cliff edge"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Caverns at the top-right"
+        }
+      ],
+      "boss_info": "No required boss.",
+      "gem_reward": "None.",
+      "variants": [
+        {
+          "title": "Linear NE Corridor",
+          "desc": "Always starts SW and exits NE into The Caverns."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SW)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Waypoint",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↗ The Caverns",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s13_caverns_and_pyramid",
+      "act": 2,
+      "step_number": 13,
+      "zone_name": "The Caverns",
+      "area_level": 19,
+      "compass": "STAIRS UP ↑",
+      "summary": "Tag Waypoint → Climb 4 Pyramid levels (each exit is in the opposite/diagonal corner) → Kill Vaal Oversoul",
+      "layout_tell": "In The Ancient Pyramid Levels 1–3, the stairs up are ALWAYS in one of the 3 corners away from your entry stairs (usually diagonal!).",
+      "next_exit": "Place The Apex → Kill Vaal Oversoul → Enter City of Sarn (Act 3)",
+      "portal_tip": "Craft Topaz/Ruby rings if low on Lightning/Fire resist before Vaal Oversoul!",
+      "badges": [
+        {
+          "label": "DIAGONAL CORNERS",
+          "color": "amber"
+        },
+        {
+          "label": "ACT 2 BOSS: OVERSOUL",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Caverns Waypoint → Find stairs into The Ancient Pyramid"
+        },
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Climb 3 Pyramid floors by checking diagonal/adjacent corners"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Click Altar with The Apex → Kill Vaal Oversoul → Exit to Act 3"
+        }
+      ],
+      "boss_info": "Vaal Oversoul: Heavy Lightning Laser (Shock!) + Fire/Physical Slam + Falling Rocks. Never get hit by two consecutive lasers!",
+      "gem_reward": "Completes Act 2 and opens Act 3 (The City of Sarn).",
+      "variants": [
+        {
+          "title": "Diagonal Corner Stairs",
+          "desc": "Each pyramid floor is a square; stairs spawn in the corners."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Caverns WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "3 Pyramid Floors",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Vaal Oversoul → Act 3",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    }
+  ]
+}

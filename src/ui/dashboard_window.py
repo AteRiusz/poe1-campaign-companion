@@ -3,17 +3,18 @@ Second-Screen Tactical Dashboard (`DashboardWindow`) for PoE1 Speedrun Companion
 
 Provides:
 - Full Mission Control view for Monitor 2 (Action Pills, Speedrunner Layout Tell,
-  Large Vector Topology Map, and Interactive Act Route Timeline).
-- Live Opacity Slider (25%–100%) controlling both the Dashboard and the In-Game Overlay.
+  Large Vector Topology Map, Interactive Act 1–10 Route Timeline, and Dedicated
+  Labyrinth Trials Tracker).
+- Window mode is permanently locked at 100% opacity (`1.0`).
+- Overlay-only Opacity Slider (25%–100%) shown only when In-Game Overlay Mode is active.
 - Collapsible Settings Panel with Extra Info toggles (OFF by default: Boss Damage/Resist,
   Quest Gem/Vendor Rewards, and Seed Layout Variations).
-- One-click toggle for the In-Game Click-Through HUD Overlay + Drag-Position Lock toggle.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
+from typing import Dict, Optional
 
 from PyQt6.QtCore import QTimer, Qt
 from PyQt6.QtGui import QKeySequence, QShortcut
@@ -27,13 +28,14 @@ from PyQt6.QtWidgets import (
     QListWidgetItem,
     QMainWindow,
     QPushButton,
+    QScrollArea,
     QSlider,
     QVBoxLayout,
     QWidget,
 )
 
 from src.log_watcher import ClientLogTailer
-from src.route_engine import RouteEngine, RouteStep
+from src.route_engine import LabyrinthTrial, RouteEngine, RouteStep
 from src.settings_manager import SettingsManager
 from src.ui.map_canvas import TopologyMapWidget
 from src.ui.overlay_window import OverlayWindow, TAG_STYLES
@@ -53,10 +55,14 @@ class DashboardWindow(QMainWindow):
         self.settings_mgr = settings_mgr
         self.tailer = tailer or ClientLogTailer(self.settings_mgr.settings.client_log_path)
         self.overlay = OverlayWindow(self.settings_mgr)
+        self.selected_lab_tier: str = "Normal"
+        self._user_overrode_lab_tier: bool = False
+        self.lab_tier_buttons: Dict[str, QPushButton] = {}
 
         self.setWindowTitle("PoE1 Campaign Speedrun Companion — Tactical Dashboard")
-        self.resize(1120, 720)
-        self.setWindowOpacity(self.settings_mgr.settings.opacity)
+        self.resize(1180, 760)
+        # Window mode is always locked at 100% opacity
+        self.setWindowOpacity(1.0)
 
         self._build_ui()
         self._bind_shortcuts()
@@ -67,13 +73,13 @@ class DashboardWindow(QMainWindow):
         self.poll_timer.timeout.connect(self.poll_client_log)
         self.poll_timer.start()
 
-        # Do initial poll & UI render
-        self.poll_client_log()
-        self.refresh_ui()
-
         if self.settings_mgr.settings.ui_mode in ("overlay", "both"):
             self.overlay.show()
-            self._update_overlay_button_state()
+
+        # Do initial poll & UI render
+        self.poll_client_log()
+        self._update_overlay_button_state()
+        self.refresh_ui()
 
     def _bind_shortcuts(self) -> None:
         shortcut_next = QShortcut(QKeySequence("Alt+]"), self)
@@ -166,7 +172,7 @@ class DashboardWindow(QMainWindow):
         self.btn_toggle_overlay.clicked.connect(self.toggle_overlay)
         top_layout.addWidget(self.btn_toggle_overlay)
 
-        self.btn_toggle_settings = QPushButton("⚙️ Settings & Opacity")
+        self.btn_toggle_settings = QPushButton("⚙️ Settings")
         self.btn_toggle_settings.clicked.connect(self.toggle_settings_drawer)
         top_layout.addWidget(self.btn_toggle_settings)
 
@@ -183,23 +189,29 @@ class DashboardWindow(QMainWindow):
         row_sliders = QHBoxLayout()
         row_sliders.setSpacing(16)
 
-        # Opacity Slider (25% - 100%)
-        opacity_lbl = QLabel("Opacity:")
+        # Opacity Slider Group (25% - 100%, visible ONLY when in Overlay Mode)
+        self.opacity_group = QWidget()
+        opacity_group_layout = QHBoxLayout(self.opacity_group)
+        opacity_group_layout.setContentsMargins(0, 0, 16, 0)
+        opacity_group_layout.setSpacing(10)
+
+        opacity_lbl = QLabel("Overlay Opacity:")
         opacity_lbl.setStyleSheet("font-size: 12px; font-weight: bold; color: #fbbf24;")
-        row_sliders.addWidget(opacity_lbl)
+        opacity_group_layout.addWidget(opacity_lbl)
 
         self.opacity_slider = QSlider(Qt.Orientation.Horizontal)
         self.opacity_slider.setRange(25, 100)
         self.opacity_slider.setValue(int(round(self.settings_mgr.settings.opacity * 100)))
         self.opacity_slider.setFixedWidth(180)
         self.opacity_slider.valueChanged.connect(self.on_opacity_changed)
-        row_sliders.addWidget(self.opacity_slider)
+        opacity_group_layout.addWidget(self.opacity_slider)
 
         self.opacity_value_label = QLabel(f"{int(round(self.settings_mgr.settings.opacity * 100))}%")
         self.opacity_value_label.setStyleSheet("font-family: Consolas; font-size: 12px; color: #fde68a;")
-        row_sliders.addWidget(self.opacity_value_label)
+        opacity_group_layout.addWidget(self.opacity_value_label)
 
-        row_sliders.addSpacing(20)
+        self.opacity_group.setVisible(False)
+        row_sliders.addWidget(self.opacity_group)
 
         # Extra Info Checkboxes (OFF BY DEFAULT)
         extra_title = QLabel("Extra Info (Off by default):")
@@ -231,6 +243,7 @@ class DashboardWindow(QMainWindow):
         self.chk_click_through = QCheckBox("🔒 Lock Overlay Click-Through (Uncheck to drag HUD position)")
         self.chk_click_through.setChecked(self.settings_mgr.settings.overlay_click_through)
         self.chk_click_through.toggled.connect(self.overlay.set_click_through)
+        self.chk_click_through.setVisible(False)
         row_paths.addWidget(self.chk_click_through)
 
         self.log_status_label = QLabel("")
@@ -284,7 +297,7 @@ class DashboardWindow(QMainWindow):
         left_layout.addStretch(1)
         grid_row.addWidget(left_card, stretch=4)
 
-        # ---- Center Column (5/12): Large Vector Topology Schematic ----
+        # ---- Center Column (4/12): Large Vector Topology Schematic ----
         center_card = QFrame()
         center_card.setProperty("class", "Card")
         center_layout = QVBoxLayout(center_card)
@@ -309,8 +322,8 @@ class DashboardWindow(QMainWindow):
 
         # Color Legend Bar
         legend_lbl = QLabel(
-            "🟢 Emerald = Primary Exit / Main Path    🟡 Amber = Quest / Trial / +1 Pt    "
-            "🔵 Sky = Waypoint / Portal    🔴 Rose = Boss"
+            "🟢 Emerald = Exit / Main    🟡 Amber = Quest / Trial / +1 Pt    "
+            "🔵 Sky = WP / Portal    🔴 Rose = Boss"
         )
         legend_lbl.setStyleSheet("font-size: 11px; color: #9ca3af; padding-top: 4px;")
         center_layout.addWidget(legend_lbl)
@@ -324,18 +337,22 @@ class DashboardWindow(QMainWindow):
         self.variants_box.setVisible(False)
         center_layout.addWidget(self.variants_box)
 
-        grid_row.addWidget(center_card, stretch=5)
+        grid_row.addWidget(center_card, stretch=4)
 
-        # ---- Right Column (3/12): Route Timeline & Manual Controls ----
-        right_card = QFrame()
-        right_card.setProperty("class", "Card")
-        right_layout = QVBoxLayout(right_card)
-        right_layout.setContentsMargins(14, 12, 14, 12)
-        right_layout.setSpacing(8)
+        # ---- Right Column (4/12): Route Timeline + Dedicated Lab Trials Tracker ----
+        right_col = QVBoxLayout()
+        right_col.setSpacing(10)
 
-        lbl_route = QLabel("CAMPAIGN ROUTE TIMELINE")
+        # Top Right Card: Campaign Route Timeline (Acts 1-10)
+        route_card = QFrame()
+        route_card.setProperty("class", "Card")
+        route_layout = QVBoxLayout(route_card)
+        route_layout.setContentsMargins(12, 10, 12, 10)
+        route_layout.setSpacing(6)
+
+        lbl_route = QLabel("CAMPAIGN ROUTE TIMELINE (ACTS 1–10)")
         lbl_route.setStyleSheet("font-size: 11px; font-weight: bold; color: #9ca3af;")
-        right_layout.addWidget(lbl_route)
+        route_layout.addWidget(lbl_route)
 
         self.route_list = QListWidget()
         self.route_list.setStyleSheet(
@@ -348,7 +365,7 @@ class DashboardWindow(QMainWindow):
                 font-size: 12px;
             }
             QListWidget::item {
-                padding: 6px 8px;
+                padding: 5px 8px;
                 border-radius: 4px;
             }
             QListWidget::item:selected {
@@ -363,7 +380,7 @@ class DashboardWindow(QMainWindow):
             item.setData(Qt.ItemDataRole.UserRole, idx)
             self.route_list.addItem(item)
         self.route_list.currentRowChanged.connect(self.on_route_list_selected)
-        right_layout.addWidget(self.route_list, stretch=1)
+        route_layout.addWidget(self.route_list, stretch=1)
 
         nav_row = QHBoxLayout()
         btn_prev = QPushButton("← Prev (Alt+[)")
@@ -372,9 +389,51 @@ class DashboardWindow(QMainWindow):
         btn_next.clicked.connect(self.on_next_step)
         nav_row.addWidget(btn_prev)
         nav_row.addWidget(btn_next)
-        right_layout.addLayout(nav_row)
+        route_layout.addLayout(nav_row)
 
-        grid_row.addWidget(right_card, stretch=3)
+        right_col.addWidget(route_card, stretch=5)
+
+        # Bottom Right Card: Dedicated Labyrinth Trials Tracker (6 Normal / 3 Cruel / 3 Merciless)
+        trials_card = QFrame()
+        trials_card.setProperty("class", "Card")
+        trials_layout = QVBoxLayout(trials_card)
+        trials_layout.setContentsMargins(12, 10, 12, 10)
+        trials_layout.setSpacing(6)
+
+        trials_header = QHBoxLayout()
+        lbl_trials = QLabel("⚡ LABYRINTH TRIALS TRACKER (RUN ANYTIME)")
+        lbl_trials.setStyleSheet("font-size: 11px; font-weight: bold; color: #fbbf24;")
+        trials_header.addWidget(lbl_trials)
+        trials_header.addStretch(1)
+        trials_layout.addLayout(trials_header)
+
+        # Tier Selector Buttons (Normal | Cruel | Merciless)
+        tier_row = QHBoxLayout()
+        tier_row.setSpacing(6)
+        for tier_name in ("Normal", "Cruel", "Merciless"):
+            btn = QPushButton(tier_name)
+            btn.setCursor(Qt.CursorShape.PointingHandCursor)
+            btn.clicked.connect(lambda _checked=False, t=tier_name: self.on_select_lab_tier(t))
+            self.lab_tier_buttons[tier_name] = btn
+            tier_row.addWidget(btn)
+        trials_layout.addLayout(tier_row)
+
+        # Scrollable list of trials for the active tier
+        self.trials_scroll = QScrollArea()
+        self.trials_scroll.setWidgetResizable(True)
+        self.trials_scroll.setStyleSheet(
+            "QScrollArea { border: 1px solid #1f2937; border-radius: 6px; background-color: #0b0e14; }"
+        )
+        self.trials_list_widget = QWidget()
+        self.trials_list_layout = QVBoxLayout(self.trials_list_widget)
+        self.trials_list_layout.setContentsMargins(6, 6, 6, 6)
+        self.trials_list_layout.setSpacing(6)
+        self.trials_scroll.setWidget(self.trials_list_widget)
+        trials_layout.addWidget(self.trials_scroll, stretch=1)
+
+        right_col.addWidget(trials_card, stretch=6)
+        grid_row.addLayout(right_col, stretch=4)
+
         root_layout.addLayout(grid_row, stretch=1)
 
     def poll_client_log(self) -> None:
@@ -384,6 +443,9 @@ class DashboardWindow(QMainWindow):
         for evt in events:
             if self.engine.process_log_event(evt):
                 changed = True
+                # Persist newly unlocked trials when entering their unlock_zone or trial zone
+                if evt.event_type == "ZONE_ENTERED" and evt.zone_name:
+                    self._check_trial_unlocks_on_zone(evt.zone_name)
         if changed:
             self.refresh_ui()
 
@@ -391,13 +453,31 @@ class DashboardWindow(QMainWindow):
         status_prefix = "🟢 Connected:" if log_exists else "🟡 Waiting for:"
         self.log_status_label.setText(f"{status_prefix} {self.tailer.log_path}")
 
+    def _check_trial_unlocks_on_zone(self, zone_name: str) -> None:
+        norm = zone_name.strip().lower()
+        current_act = self.engine.current_step.act
+        for t in self.engine.trials:
+            if t.act == current_act and norm in (t.unlock_zone.lower(), t.zone_name.lower()):
+                self.settings_mgr.mark_trial_unlocked(t.trial_id)
+
     def refresh_ui(self) -> None:
-        """Synchronize both DashboardWindow and OverlayWindow with current RouteStep & Settings."""
+        """Synchronize DashboardWindow, OverlayWindow, and Lab Trials Tracker."""
         step: RouteStep = self.engine.current_step
         cfg = self.settings_mgr.settings
 
-        self.setWindowOpacity(cfg.opacity)
+        # Window mode is always locked at 100% opacity; only the In-Game Overlay uses cfg.opacity
+        self.setWindowOpacity(1.0)
         self.overlay.render_step(step, cfg)
+        self._update_overlay_button_state()
+
+        # Auto-select Lab tier matching current Act unless user manually clicked a tier tab
+        if not self._user_overrode_lab_tier:
+            if step.act <= 5:
+                self.selected_lab_tier = "Normal"
+            elif step.act <= 7:
+                self.selected_lab_tier = "Cruel"
+            else:
+                self.selected_lab_tier = "Merciless"
 
         self.act_header_label.setText(f"ACT {step.act} • STEP {step.step_number}")
         lvl_suffix = f" (Lvl {step.area_level})" if step.area_level else ""
@@ -455,10 +535,103 @@ class DashboardWindow(QMainWindow):
         self.route_list.setCurrentRow(self.engine.current_index)
         self.route_list.blockSignals(False)
 
+        # Refresh Dedicated Labyrinth Trials Tracker
+        self._refresh_trials_tracker()
+
+    def _refresh_trials_tracker(self) -> None:
+        cfg = self.settings_mgr.settings
+
+        # Update counts on the 3 tier buttons
+        for tier_name, btn in self.lab_tier_buttons.items():
+            tier_trials = self.engine.get_trials_by_tier(tier_name)
+            done_count = sum(
+                1
+                for t in tier_trials
+                if self.engine.get_trial_status(t, cfg.unlocked_trials, cfg.completed_trials) == "completed"
+            )
+            btn.setText(f"{tier_name} ({done_count}/{len(tier_trials)})")
+            if tier_name == self.selected_lab_tier:
+                btn.setStyleSheet(
+                    "background-color: #451a03; color: #fde68a; border: 1px solid #f59e0b; "
+                    "border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: bold;"
+                )
+            else:
+                btn.setStyleSheet(
+                    "background-color: #161b26; color: #9ca3af; border: 1px solid #262b38; "
+                    "border-radius: 6px; padding: 4px 8px; font-size: 11px;"
+                )
+
+        # Populate trial cards for the selected tier
+        self._clear_layout(self.trials_list_layout)
+        active_trials = self.engine.get_trials_by_tier(self.selected_lab_tier)
+
+        for trial in active_trials:
+            status = self.engine.get_trial_status(trial, cfg.unlocked_trials, cfg.completed_trials)
+            row_frame = QFrame()
+            if status == "completed":
+                row_frame.setStyleSheet(
+                    "background-color: #052e16; border: 1px solid #10b981; border-radius: 6px;"
+                )
+                badge_text = "✅ COMPLETED"
+                badge_color = "#6ee7b7"
+                sub_text = f"Act {trial.act} • {trial.trap_type}"
+            elif status == "unlocked":
+                row_frame.setStyleSheet(
+                    "background-color: #271705; border: 1px solid #f59e0b; border-radius: 6px;"
+                )
+                badge_text = "🔓 UNLOCKED — READY TO RUN"
+                badge_color = "#fcd34d"
+                sub_text = f"📍 Waypoint: {trial.waypoint_hint}\n💡 {trial.layout_hint} ({trial.trap_type})"
+            else:
+                row_frame.setStyleSheet(
+                    "background-color: #11141c; border: 1px solid #1f2937; border-radius: 6px;"
+                )
+                badge_text = f"🔒 LOCKED (Act {trial.act})"
+                badge_color = "#6b7280"
+                sub_text = f"Unlocks when you reach: {trial.unlock_zone} (Act {trial.act})"
+
+            r_layout = QVBoxLayout(row_frame)
+            r_layout.setContentsMargins(8, 6, 8, 6)
+            r_layout.setSpacing(3)
+
+            top_r = QHBoxLayout()
+            chk = QCheckBox(f"Act {trial.act}: {trial.zone_name}")
+            chk.setChecked(status == "completed")
+            chk.setStyleSheet("font-size: 12px; font-weight: bold; color: #f5f5f4; border: none;")
+            chk.toggled.connect(
+                lambda checked, tid=trial.trial_id: self.on_trial_checkbox_toggled(tid, checked)
+            )
+            top_r.addWidget(chk)
+            top_r.addStretch(1)
+
+            status_lbl = QLabel(badge_text)
+            status_lbl.setStyleSheet(f"font-size: 10px; font-weight: bold; color: {badge_color}; border: none;")
+            top_r.addWidget(status_lbl)
+            r_layout.addLayout(top_r)
+
+            hint_lbl = QLabel(sub_text)
+            hint_lbl.setWordWrap(True)
+            hint_lbl.setStyleSheet("font-size: 11px; color: #d6d3d1; border: none;")
+            r_layout.addWidget(hint_lbl)
+
+            self.trials_list_layout.addWidget(row_frame)
+
+        self.trials_list_layout.addStretch(1)
+
+    def on_select_lab_tier(self, tier_name: str) -> None:
+        self._user_overrode_lab_tier = True
+        self.selected_lab_tier = tier_name
+        self._refresh_trials_tracker()
+
+    def on_trial_checkbox_toggled(self, trial_id: str, completed: bool) -> None:
+        self.settings_mgr.set_trial_completed(trial_id, completed)
+        self._refresh_trials_tracker()
+
     def on_opacity_changed(self, slider_value: int) -> None:
         opacity = self.settings_mgr.set_opacity(slider_value / 100.0)
         self.opacity_value_label.setText(f"{int(round(opacity * 100))}%")
-        self.setWindowOpacity(opacity)
+        # Window mode stays locked at 100% (1.0); slider applies only to the In-Game Overlay
+        self.setWindowOpacity(1.0)
         self.overlay.set_overlay_opacity(opacity)
 
     def on_extra_toggle(self, field_name: str, enabled: bool) -> None:
@@ -480,10 +653,15 @@ class DashboardWindow(QMainWindow):
         self._update_overlay_button_state()
 
     def _update_overlay_button_state(self) -> None:
-        if self.overlay.isVisible():
+        in_overlay_mode = self.overlay.isVisible()
+        self.opacity_group.setVisible(in_overlay_mode)
+        self.chk_click_through.setVisible(in_overlay_mode)
+        if in_overlay_mode:
             self.btn_toggle_overlay.setText("🟢 Hide In-Game Overlay (F9)")
+            self.btn_toggle_settings.setText("⚙️ Settings & Opacity")
         else:
             self.btn_toggle_overlay.setText("🖥️ Show In-Game Overlay (F9)")
+            self.btn_toggle_settings.setText("⚙️ Settings")
 
     def on_next_step(self) -> None:
         self.engine.next_step()

@@ -1,0 +1,507 @@
+{
+  "schema_version": "1.0",
+  "act": 9,
+  "title": "Act 9 Speedrun Route",
+  "steps": [
+    {
+      "step_id": "a9_s01_blood_aqueduct",
+      "act": 9,
+      "step_number": 1,
+      "zone_name": "The Blood Aqueduct",
+      "area_level": 61,
+      "compass": "LINEAR NW ↖",
+      "summary": "Run straight North-West along the aqueduct channels into Highgate (Act 9 Town)",
+      "layout_tell": "Identical to Act 4 Aqueduct: cross side bridges whenever a gate blocks your lane.",
+      "next_exit": "Enter Highgate → Exit top-right into The Descent",
+      "portal_tip": "Best XP farming zone in the campaign if you want to hit Level 60–62 quickly!",
+      "badges": [
+        {
+          "label": "LINEAR NW ↖",
+          "color": "emerald"
+        },
+        {
+          "label": "GREAT XP FARM",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run straight NW along the blood channels into Highgate"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "In Highgate, exit top-right into The Descent"
+        }
+      ],
+      "boss_info": "No required boss.",
+      "gem_reward": "Unlocks Act 9 Highgate.",
+      "variants": [
+        {
+          "title": "Parallel Channels",
+          "desc": "Straight NW run into Town."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Blood Channels",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "↖ Highgate",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a9_s02_descent_vastiri_desert",
+      "act": 9,
+      "step_number": 2,
+      "zone_name": "The Vastiri Desert",
+      "area_level": 61,
+      "compass": "STORM BLADE → OASIS (+1 PT SHAKARI)",
+      "summary": "Descend via Supply Hoist into Vastiri Desert → Tag WP → Clear Storm-Weathered Chest (Storm Blade) → Open The Oasis & Kill Shakari (+1 Pt!)",
+      "layout_tell": "In Vastiri Desert: find the Waypoint & the Storm-Weathered Chest; after getting Bottled Storm from Town, head to the outer edge for The Oasis!",
+      "next_exit": "Kill Shakari in The Oasis (+1 Skill Pt!) → Exit North of Desert into The Foothills",
+      "portal_tip": "After looting the Storm Blade, talk to Petarus & Sin in Town to get the Bottled Storm that clears the sandstorm blocking The Oasis!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (SHAKARI)",
+          "color": "amber"
+        },
+        {
+          "label": "GET STORM BLADE",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Vastiri Desert Waypoint & clear ambush at Storm-Weathered Chest (Storm Blade)"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Get Bottled Storm from Town → Enter The Oasis → Kill Shakari (+1 Skill Pt!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Take North exit of Vastiri Desert into The Foothills"
+        }
+      ],
+      "boss_info": "Shakari, Queen of the Sands: Burrowing tail slams & quicksand traps. Keep moving along the dry sand!",
+      "gem_reward": "Queen of the Sands (Irasha in Town): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Desert Perimeter",
+          "desc": "Foothills exit is always at the top (North); Oasis is along the East/NE wall."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Storm Blade → The Oasis (+1 Pt)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↑ The Foothills",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a9_s03_foothills_boiling_lake",
+      "act": 9,
+      "step_number": 3,
+      "zone_name": "The Foothills",
+      "area_level": 62,
+      "compass": "NE (BOILING LAKE) → NW (TUNNEL)",
+      "summary": "Tag Waypoint (North-East) → Enter The Boiling Lake to kill The Basilisk (Basilisk Acid) → Exit North-West into The Tunnel",
+      "layout_tell": "In The Foothills: North-East = Waypoint & The Boiling Lake; North-West = The Tunnel!",
+      "next_exit": "Kill The Basilisk in Boiling Lake (Acid) → Enter The Tunnel (NW)",
+      "portal_tip": "In The Boiling Lake, follow the dry stone islands North-East to the petrified soldiers & The Basilisk!",
+      "badges": [
+        {
+          "label": "GET BASILISK ACID",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT NW → TUNNEL",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Head NE to tag The Foothills Waypoint"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter The Boiling Lake (NE) → Kill The Basilisk & loot Basilisk Acid"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Return to Foothills & head North-West into The Tunnel"
+        }
+      ],
+      "boss_info": "The Basilisk: Petrifying gaze beam — stand behind stone statues or run behind him when he channels!",
+      "gem_reward": "Basilisk Acid is 1 of 2 items needed for Sin to open The Belly of the Beast.",
+      "variants": [
+        {
+          "title": "Foothills Fork",
+          "desc": "NE = WP + Boiling Lake; NW = The Tunnel."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (S)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "NE: WP + Boiling Lake (Acid)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↖ The Tunnel",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a9_s04_the_tunnel",
+      "act": 9,
+      "step_number": 4,
+      "zone_name": "The Tunnel",
+      "area_level": 62,
+      "compass": "MERCILESS TRIAL #2 → NORTH ↑",
+      "summary": "Complete Merciless Lab Trial #2 (usually right before or next to the Waypoint!) → Continue North into The Quarry",
+      "layout_tell": "⚡ TUNNEL TRIAL TELL: Merciless Trial #2 almost always spawns within 1 screen of The Tunnel Waypoint!",
+      "next_exit": "Complete Merciless Trial #2 → Enter The Quarry",
+      "portal_tip": "Can also be run anytime via The Tunnel Waypoint!",
+      "badges": [
+        {
+          "label": "MERCILESS TRIAL #2",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT → QUARRY",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "Complete Merciless Lab Trial #2 (Roomba Discs & Spikes — 2/3)"
+        },
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag The Tunnel Waypoint"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Follow tracks North into The Quarry"
+        }
+      ],
+      "boss_info": "Tunnel miners & constructs.",
+      "gem_reward": "Unlocks Merciless Lab Trial 2 of 3.",
+      "variants": [
+        {
+          "title": "Linear North Shaft",
+          "desc": "Trial is along the main path near the WP."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (S)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "WP + Merciless Trial #2",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "↑ The Quarry",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a9_s05_the_quarry",
+      "act": 9,
+      "step_number": 5,
+      "zone_name": "The Quarry",
+      "area_level": 63,
+      "compass": "CENTER WP → GARUKHAN (+1 PT) & REFINERY",
+      "summary": "Run to the exact CENTER of the zone to tag the Waypoint & Sin → Check NW & NE walls for Garukhan (+1 Pt!) & The Refinery!",
+      "layout_tell": "⚡ QUARRY TELL: Waypoint & Sin are ALWAYS dead-center; Shrine of the Winds (Garukhan +1 Pt) and The Refinery are ALWAYS at the North-West and North-East edges!",
+      "next_exit": "Kill Garukhan (+1 Skill Pt!) + Loot Trarthan Powder in The Refinery → Give to Sin at Center WP → Enter Belly of the Beast",
+      "portal_tip": "After killing General Adus & looting Trarthan Powder in The Refinery, Logout → Take WP back to The Quarry center!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (GARUKHAN)",
+          "color": "amber"
+        },
+        {
+          "label": "GET TRARTHAN POWDER",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Run to the center of The Quarry & tag the Waypoint"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Check NW/NE edge for Shrine of the Winds → Kill Kira & Garukhan (+1 Pt!)"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Enter The Refinery (other top corner) → Kill General Adus & loot Trarthan Powder"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Talk to Sin at Quarry WP to open The Belly of the Beast"
+        }
+      ],
+      "boss_info": "Garukhan, Queen of the Winds (Physical/Bleed sand tornadoes) & General Adus (Heavy Lightning slams in Refinery).",
+      "gem_reward": "The Ruler of Highgate (Irasha in Town): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Center Hub + Top Corners",
+          "desc": "Center = WP/Sin; NW & NE = Shrine of the Winds & Refinery."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "NW: Garukhan (+1 Pt)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Center: WP + Sin",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "NE: Refinery (Powder)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a9_s06_belly_and_rotting_core",
+      "act": 9,
+      "step_number": 6,
+      "zone_name": "The Rotting Core",
+      "area_level": 64,
+      "compass": "3 GUARDIAN PORTALS → DEPRAVED TRINITY",
+      "summary": "Run NW through Belly of the Beast into The Rotting Core → Enter Black Heart → Defeat Shavronne, Maligaro & Doedre → Kill The Depraved Trinity",
+      "layout_tell": "In The Rotting Core, follow the main fleshy bridges to Sin & the Black Heart portal, then clear the 3 rapid boss rooms.",
+      "next_exit": "Kill The Depraved Trinity → Sail with Lilly Roth to Oriath Docks (Act 10)",
+      "portal_tip": "After killing the 3 bosses in their sub-portals, Sin opens the final portal to The Depraved Trinity!",
+      "badges": [
+        {
+          "label": "ACT 9 BOSS: DEPRAVED TRINITY",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run through Belly of the Beast & Rotting Core into The Black Heart"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Defeat Doedre, Maligaro & Shavronne in their 3 sequential portals"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill The Depraved Trinity → Sail with Lilly to Act 10"
+        }
+      ],
+      "boss_info": "The Depraved Trinity: Combines Fire/Lightning/Chaos attacks and rising blood walls.",
+      "gem_reward": "Completes Act 9 and opens Act 10 (Oriath Docks).",
+      "variants": [
+        {
+          "title": "Linear Boss Gauntlet",
+          "desc": "Three quick sub-arenas followed by the Trinity arena."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Belly of the Beast",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "3 Sub-Boss Portals",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Depraved Trinity → Act 10",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,894 @@
+{
+  "schema_version": "1.0",
+  "act": 6,
+  "title": "Act 6 Speedrun Route",
+  "steps": [
+    {
+      "step_id": "a6_s01_twilight_strand",
+      "act": 6,
+      "step_number": 1,
+      "zone_name": "The Twilight Strand",
+      "area_level": 45,
+      "compass": "CLEAR ALL (OPTIONAL)",
+      "summary": "(Optional) Clear all monsters here to unlock Lilly Roth's ALL-GEMS vendor shop in Town!",
+      "layout_tell": "Watch the remaining monster counter in the top-right corner until it hits 0.",
+      "next_exit": "Clear mobs (or skip) → Exit to Lioneye's Watch → Enter The Coast",
+      "portal_tip": "Only needed if your build requires buying off-class gems from Lilly Roth!",
+      "badges": [
+        {
+          "label": "UNLOCKS ALL GEMS (LILLY)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Clear all monsters along the beach (Fallen from Grace)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Return to Lioneye's Watch → Exit East into The Coast"
+        }
+      ],
+      "boss_info": "Cleared strand has rare/unique undead.",
+      "gem_reward": "Fallen from Grace (Lilly Roth): Unlocks all Skill & Support Gems for 1 Scroll of Wisdom/Transmutation!",
+      "variants": [
+        {
+          "title": "Beach Sweep",
+          "desc": "Clear down one side of the beach and back up the other."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Town Gate",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Clear Beach",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Lilly All-Gems Unlocked",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s02_the_coast_act6",
+      "act": 6,
+      "step_number": 2,
+      "zone_name": "The Coast",
+      "area_level": 45,
+      "compass": "NE ↗",
+      "summary": "Hug the coastline North-East → Tag Waypoint at the end → Enter The Mud Flats",
+      "layout_tell": "Same layout as Act 1: follow the water edge North-East straight to the Waypoint.",
+      "next_exit": "Tag WP → Enter The Mud Flats",
+      "portal_tip": "Watch out for Fire totems if your Fire Resistance dropped after Kitava!",
+      "badges": [
+        {
+          "label": "RUN NE ↗",
+          "color": "emerald"
+        },
+        {
+          "label": "FIRE RESIST CHECK!",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run North-East along the beach shoreline"
+        },
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Waypoint at the end & enter The Mud Flats"
+        }
+      ],
+      "boss_info": "Karui Fire Totems: Cast Scorching Ray (degen lowers Fire Resist!).",
+      "gem_reward": "None.",
+      "variants": [
+        {
+          "title": "NE Shoreline",
+          "desc": "Identical topology to Act 1 Coast."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SW)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Waypoint",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↗ The Mud Flats",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s03_mud_flats_act6",
+      "act": 6,
+      "step_number": 3,
+      "zone_name": "The Mud Flats",
+      "area_level": 46,
+      "compass": "NE (QUEEN) → NW (FORTRESS)",
+      "summary": "Find & kill The Dishonoured Queen (usually NE/Center) for Eye of Conquest → Exit North-West to The Karui Fortress",
+      "layout_tell": "The Dishonoured Queen spawns in a Karui camp (usually NE); the locked gate to The Karui Fortress is along the NW cliff!",
+      "next_exit": "Loot Eye of Conquest → Open North-West Gate → Enter The Karui Fortress",
+      "portal_tip": "You MUST pick up the Eye of Conquest to open the Karui Fortress gate!",
+      "badges": [
+        {
+          "label": "KILL DISHONOURED QUEEN",
+          "color": "rose"
+        },
+        {
+          "label": "EXIT NW ↖",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill The Dishonoured Queen (NE/Center) & loot Eye of Conquest"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Follow top cliff wall North-West into The Karui Fortress"
+        }
+      ],
+      "boss_info": "The Dishonoured Queen: Summons Karui warriors & fire totems.",
+      "gem_reward": "Unlocks Karui Fortress.",
+      "variants": [
+        {
+          "title": "NE Boss / NW Exit",
+          "desc": "Queen is right-of-center; Fortress gate is top-left."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "NE: Dishonoured Queen",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↖ Karui Fortress",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s04_karui_fortress",
+      "act": 6,
+      "step_number": 4,
+      "zone_name": "The Karui Fortress",
+      "area_level": 46,
+      "compass": "NORTH ↑ (+1 PT TUKOHAMA)",
+      "summary": "Head North into Tukohama's Keep → Kill Tukohama (+1 Skill Pt!) → Exit North of arena into The Ridge",
+      "layout_tell": "Tukohama's Keep is in the center-north of the zone; the exit to The Ridge is at the top of his circular arena.",
+      "next_exit": "Kill Tukohama (+1 Pt) → Exit North into The Ridge",
+      "portal_tip": "Destroy the glowing Shield Totem when Tukohama becomes invulnerable!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (TUKOHAMA)",
+          "color": "amber"
+        },
+        {
+          "label": "PANTHEON BOSS",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter Tukohama's Keep → Kill Tukohama, War's Herald (+1 Pt!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Take the North exit out of Tukohama's arena into The Ridge"
+        }
+      ],
+      "boss_info": "Tukohama, War's Herald: Scorching Ray rotating beams + heavy Fire slams.",
+      "gem_reward": "The Father of War (Tarkleigh): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Keep Pass-Through",
+          "desc": "Enter Keep from South, exit Keep from North."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (S)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Tukohama (+1 Pt)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↑ The Ridge",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s05_the_ridge",
+      "act": 6,
+      "step_number": 5,
+      "zone_name": "The Ridge",
+      "area_level": 46,
+      "compass": "CIRCLE LOOP → NE ↗",
+      "summary": "Tag Waypoint near entrance → Follow outer ridge pathway to The Lower Prison entrance",
+      "layout_tell": "Pick left or right outer path and follow it to the opposite end where The Lower Prison gate sits.",
+      "next_exit": "Enter The Lower Prison",
+      "portal_tip": "No required quests in The Ridge",
+      "badges": [
+        {
+          "label": "RUN TO LOWER PRISON",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Waypoint right inside entrance"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Follow ridge path to The Lower Prison"
+        }
+      ],
+      "boss_info": "Fleetfreak (Optional unique): Skip.",
+      "gem_reward": "None.",
+      "variants": [
+        {
+          "title": "Oval Ridge",
+          "desc": "Exit is across from the entrance."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Ridge Path",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "↗ The Lower Prison",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s06_lower_prison_act6",
+      "act": 6,
+      "step_number": 6,
+      "zone_name": "The Lower Prison",
+      "area_level": 47,
+      "compass": "CRUEL TRIAL #1 → TOWER",
+      "summary": "Tag Waypoint → Complete Cruel Lab Trial #1 → Find exit stairs to Shavronne's Tower",
+      "layout_tell": "Just like Act 1: hug outer perimeter walls from the Waypoint to find Cruel Trial #1 and the stairs to Shavronne's Tower.",
+      "next_exit": "Complete Cruel Trial #1 → Enter Shavronne's Tower",
+      "portal_tip": "Cruel Trial #1 can also be run later via The Lower Prison Waypoint!",
+      "badges": [
+        {
+          "label": "CRUEL TRIAL #1",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT → TOWER",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Waypoint at entrance"
+        },
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "(Now or Later) Complete Cruel Lab Trial #1 (Flame & Spike Traps)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Take stairs into Shavronne's Tower"
+        }
+      ],
+      "boss_info": "Goatmen & Necromancers.",
+      "gem_reward": "Unlocks Cruel Lab Trial 1 of 3.",
+      "variants": [
+        {
+          "title": "Outer Perimeter Grid",
+          "desc": "Trial and Tower stairs spawn in outer rooms."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Cruel Trial #1",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "→ Shavronne's Tower",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s07_shavronnes_tower",
+      "act": 6,
+      "step_number": 7,
+      "zone_name": "Shavronne's Tower",
+      "area_level": 48,
+      "compass": "CLIMB 3 FLOORS ↑",
+      "summary": "Climb 3 prison/tower floors → Kill Shavronne & Reassembled Brutus on the roof → Exit to Prisoner's Gate",
+      "layout_tell": "Each floor's stairs are along the outer edge opposite where you entered.",
+      "next_exit": "Kill Shavronne & Brutus → Exit through Prison Rooftop to Prisoner's Gate",
+      "portal_tip": "Do not attack Shavronne while she has her thorny Lightning reflection aura up!",
+      "badges": [
+        {
+          "label": "BOSS: SHAVRONNE & BRUTUS",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Climb 3 floors of Shavronne's Tower to the Prison Rooftop"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Shavronne the Returned & Reassembled Brutus"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Talk to Sin & walk out into Prisoner's Gate"
+        }
+      ],
+      "boss_info": "Shavronne & Brutus: Lightning storms, floating levitation slam, and physical charges.",
+      "gem_reward": "Unlocks Prisoner's Gate.",
+      "variants": [
+        {
+          "title": "3-Floor Tower",
+          "desc": "Check opposite corners on each floor."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Tower Base",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "3 Floors Up",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "Shavronne → Prisoner's Gate",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s08_prisoners_gate_act6",
+      "act": 6,
+      "step_number": 8,
+      "zone_name": "Prisoner's Gate",
+      "area_level": 47,
+      "compass": "ROAD TO CLIFF (+1 PT ABBERATH) → WEST",
+      "summary": "Tag Waypoint → Follow road to cliff edge (Valley of the Fire Drinker) & Kill Abberath (+1 Pt!) → Exit West to Western Forest",
+      "layout_tell": "⚡ ABBERATH TELL: Follow the cobblestone road straight to the dead-end cliff to enter Abberath's arena (+1 Skill Pt); the exit to Western Forest is off the road to the West!",
+      "next_exit": "Kill Abberath (+1 Skill Pt!) → Exit West into The Western Forest",
+      "portal_tip": "Never skip Abberath — he gives +1 Passive Skill Point + Pantheon!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (ABBERATH)",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT WEST ←",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Waypoint & follow cobblestone road to Valley of the Fire Drinker"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Abberath, the Cloven One (2 rooms) for +1 Passive Skill Point!"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Exit arena & head West into The Western Forest"
+        }
+      ],
+      "boss_info": "Abberath, the Cloven One: Heavy Fire Hoof-trail & Meteor Storm. Keep moving!",
+      "gem_reward": "The Cloven One (Bestel in Town): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Road to Abberath",
+          "desc": "Road leads to Abberath; Western Forest is on the non-road side."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Abberath (+1 Pt)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "← Western Forest",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s09_western_forest_riverways",
+      "act": 6,
+      "step_number": 9,
+      "zone_name": "The Western Forest",
+      "area_level": 48,
+      "compass": "FOLLOW ROAD NE ↗",
+      "summary": "Stay on the main cobblestone road through Western Forest into The Riverways → Tag Riverways WP!",
+      "layout_tell": "Do NOT leave the cobblestone road in Act 6 Western Forest — it leads 100% straight to The Riverways!",
+      "next_exit": "Follow road into The Riverways → Tag WP → Go North to The Wetlands",
+      "portal_tip": "Tag The Riverways Waypoint so you can come right back after killing Ryslatha in The Wetlands!",
+      "badges": [
+        {
+          "label": "STAY ON ROAD ↗",
+          "color": "emerald"
+        },
+        {
+          "label": "TAG RIVERWAYS WP!",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow the cobblestone road NE through Western Forest into The Riverways"
+        },
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag The Riverways Waypoint along the road"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "From Riverways WP, head North (past 2 pillars) into The Wetlands"
+        }
+      ],
+      "boss_info": "No boss here.",
+      "gem_reward": "Connects to The Wetlands (+1 Skill Point).",
+      "variants": [
+        {
+          "title": "100% Road Path",
+          "desc": "Road connects Prisoner's Gate → Western Forest → Riverways WP."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Western Forest Road",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Riverways WP",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↑ The Wetlands (Ryslatha)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s10_wetlands_act6",
+      "act": 6,
+      "step_number": 10,
+      "zone_name": "The Wetlands",
+      "area_level": 48,
+      "compass": "NW ↖ (+1 PT RYSLATHA)",
+      "summary": "Head North-West in The Wetlands → Enter The Spawning Ground → Kill Ryslatha (+1 Skill Pt!) → Logout to Riverways WP",
+      "layout_tell": "The Spawning Ground entrance is always along the North-West / West perimeter of The Wetlands.",
+      "next_exit": "Kill Ryslatha (+1 Skill Pt!) → Logout → Take WP to Riverways → Go SE to Southern Forest",
+      "portal_tip": "⚡ LOGOUT after killing Ryslatha → Claim +1 Skill Point from Tarkleigh → WP to Riverways!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (RYSLATHA)",
+          "color": "amber"
+        },
+        {
+          "label": "LOGOUT ON KILL",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Find The Spawning Ground (NW) → Kill Ryslatha, the Puppet Mistress (+1 Pt!)"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Logout to Town → Claim +1 Pt from Tarkleigh → Take WP to The Riverways"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "From Riverways WP, follow road East/South-East into The Southern Forest"
+        }
+      ],
+      "boss_info": "Ryslatha, the Puppet Mistress: Spawns exploding larvae eggs — crush the eggs by walking over them before they hatch!",
+      "gem_reward": "The Puppet Mistress (Tarkleigh): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "NW Spawning Ground",
+          "desc": "Follow left/top wall to the tree cave."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (S)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Spawning Ground (NW)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "Ryslatha (+1 Pt)",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a6_s11_beacon_and_brine_king",
+      "act": 6,
+      "step_number": 11,
+      "zone_name": "The Beacon",
+      "area_level": 49,
+      "compass": "ESCORT PILLARS → BRINE KING",
+      "summary": "Run through Southern Forest & Cavern of Anger → In The Beacon, escort 2 Fuel Carts → Sail to Brine King's Reef → Kill The Brine King",
+      "layout_tell": "In The Brine King's Reef: ALWAYS hug the LEFT (Counter-Clockwise) shoreline from the boat to reach the boss fastest!",
+      "next_exit": "Light Beacon → Sail to Reef → Hug LEFT wall → Kill The Brine King → Sail to Act 7",
+      "portal_tip": "Unlock Soul of the Brine King in your Pantheon (`Y` key) right after killing him for Stun Immunity!",
+      "badges": [
+        {
+          "label": "HUG LEFT IN REEF ↺",
+          "color": "amber"
+        },
+        {
+          "label": "ACT 6 BOSS: BRINE KING",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Beacon WP → Stand in the 2 fuel circles to push them to the tower"
+        },
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Light Beacon & board Weylam's ship → In Reef, hug LEFT shoreline"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill The Brine King → Take Weylam's boat to Act 7"
+        }
+      ],
+      "boss_info": "The Brine King: Shrinking water ring with Lightning bolts & Cold waves. Stay inside the dry eye of the storm!",
+      "gem_reward": "Unlocks Major Pantheon: Soul of the Brine King & opens Act 7.",
+      "variants": [
+        {
+          "title": "Left-Hug Reef",
+          "desc": "Counter-clockwise shoreline is half the distance of clockwise."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "The Beacon WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Left Shoreline (Reef)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "Brine King → Act 7",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    }
+  ]
+}

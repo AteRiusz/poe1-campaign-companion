@@ -1,0 +1,1005 @@
+{
+  "schema_version": "1.0",
+  "act": 3,
+  "title": "Act 3 Speedrun Route",
+  "steps": [
+    {
+      "step_id": "a3_s01_city_of_sarn",
+      "act": 3,
+      "step_number": 1,
+      "zone_name": "The City of Sarn",
+      "area_level": 23,
+      "compass": "NW ↖ (COAST)",
+      "summary": "Hug top-right water edge around curve → Defeat Guard Captain → Rescue Clarissa → Enter Sarn Encampment",
+      "layout_tell": "Follow the river curve from East to North-West; Clarissa is always fighting guards right before the Town staircase.",
+      "next_exit": "Talk to Clarissa → Enter The Sarn Encampment",
+      "portal_tip": "Always talk to Clarissa before entering Town so she gives Sewer Keys later!",
+      "badges": [
+        {
+          "label": "RESCUE CLARISSA",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT → TOWN",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow the curved river path North-West"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Kill Blackguards around Clarissa & talk to her!"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Climb stairs into The Sarn Encampment"
+        }
+      ],
+      "boss_info": "Guard Captain: Uses Glacial Hammer; easy kill.",
+      "gem_reward": "Clarissa unlocks the Sewer Keys after Crematorium.",
+      "variants": [
+        {
+          "title": "Curved River Path",
+          "desc": "Always curves from SE around the water to NW town stairs."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Clarissa (Quest)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "↖ Sarn Encampment",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s02_the_slums",
+      "act": 3,
+      "step_number": 2,
+      "zone_name": "The Slums",
+      "area_level": 24,
+      "compass": "NORTH ↑",
+      "summary": "Exit Sarn Encampment North → Climb metal stairs & head North/North-East to The Crematorium",
+      "layout_tell": "Ignore the locked Sewer Grating for now; climb metal stairs heading generally North to find The Crematorium.",
+      "next_exit": "Enter The Crematorium",
+      "portal_tip": "No Waypoint in The Slums — Crematorium WP is right inside its entrance!",
+      "badges": [
+        {
+          "label": "HEAD NORTH ↑",
+          "color": "emerald"
+        },
+        {
+          "label": "FIND CREMATORIUM",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run North/North-East up the metal staircases"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Crematorium"
+        }
+      ],
+      "boss_info": "No boss in The Slums.",
+      "gem_reward": "Leads to Crematorium (Lvl 24 Curse & Guard skill gems).",
+      "variants": [
+        {
+          "title": "Rooftop Stairs",
+          "desc": "Crematorium is always on the upper northern half of The Slums."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Sarn Exit",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Metal Rooftops",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "↑ The Crematorium",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s03_crematorium",
+      "act": 3,
+      "step_number": 3,
+      "zone_name": "The Crematorium",
+      "area_level": 25,
+      "compass": "TRIAL #4 + PIETY",
+      "summary": "Tag Waypoint → Complete Lab Trial #4 (Fire Furnaces) → Defeat Piety → Take Tolman's Bracelet → Logout",
+      "layout_tell": "Lab Trial #4 is usually along the first main outer wall; Piety & Tolman are at the far end past narrow dungeon bridges.",
+      "next_exit": "Loot Tolman's Bracelet → Logout to Town → Get Sewer Keys from Clarissa",
+      "portal_tip": "⚡ LOGOUT after looting Tolman's Bracelet → Talk to Clarissa (Sewer Keys) & Maramoa (Lvl 24 Gems)!",
+      "badges": [
+        {
+          "label": "LAB TRIAL #4",
+          "color": "amber"
+        },
+        {
+          "label": "KILL PIETY (50%)",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Waypoint right inside entrance"
+        },
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "Complete Trial of Ascendancy (Normal Trial 4/6 — Fire Grates)"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Damage Piety to 50% HP → Click Tolman for Bracelet → Relog to Town"
+        }
+      ],
+      "boss_info": "Piety: Casts Lightning Storm & Ball Lightning (high Lightning damage!). Equip Topaz Rings!",
+      "gem_reward": "Lost in Love (Maramoa): Unlocks Lvl 24 Curse, Brand & Banner Gems (Flammability, Conductivity, Frostbite, Sniper's Mark, Determination, Grace, Pride, Hatred, Wrath, Zealotry, Anger)!",
+      "variants": [
+        {
+          "title": "Looping Dungeon",
+          "desc": "Hug left or right perimeter wall to hit Trial then Piety's arena."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Lab Trial #4",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Piety + Tolman",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s04_the_sewers",
+      "act": 3,
+      "step_number": 4,
+      "zone_name": "The Sewers",
+      "area_level": 26,
+      "compass": "3 BUSTS (+1 PT)",
+      "summary": "Enter Sewers from Slums → Collect 1st Bust → Tag WP → Collect 2nd & 3rd Busts → Exit to Marketplace",
+      "layout_tell": "1st Platinum Bust is ALWAYS before the Waypoint; 2nd and 3rd Busts are ALWAYS after the Waypoint!",
+      "next_exit": "Collect all 3 Platinum Busts (+1 Skill Point) → Exit to The Marketplace",
+      "portal_tip": "Rule of thumb: 1 Bust before WP, 2 Busts after WP!",
+      "badges": [
+        {
+          "label": "3 BUSTS (+1 PT)",
+          "color": "amber"
+        },
+        {
+          "label": "1 BEFORE / 2 AFTER WP",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Find 1st Platinum Bust in side stash before the Waypoint"
+        },
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag The Sewers Waypoint"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Loot 2nd & 3rd Busts after WP → Climb ladder to The Marketplace"
+        }
+      ],
+      "boss_info": "Chaos Spitters & Undying Grapplers (Discharge): Do not stand in large packs when they have Endurance/Power charges.",
+      "gem_reward": "Victario's Secrets (Hargan): Book of Skill (+1 Passive Skill Point + 2 Respec Points).",
+      "variants": [
+        {
+          "title": "Linear Waterway",
+          "desc": "1st Bust is pre-WP; 2nd & 3rd Busts are post-WP near Marketplace exit."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Bust #1 (Pre-WP)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Sewers WP",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "Busts #2/#3 → Marketplace",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s05_marketplace_catacombs",
+      "act": 3,
+      "step_number": 5,
+      "zone_name": "The Marketplace",
+      "area_level": 26,
+      "compass": "NE ↗ (+ TRIAL #5)",
+      "summary": "Run North-East through broken arches → Tag WP → (Optional: Enter Catacombs for Trial #5) → Exit to Battlefront",
+      "layout_tell": "Walk NE through two narrow broken statue bottlenecks; The Catacombs (Trial #5) is right near the Waypoint, and Battlefront is further NE.",
+      "next_exit": "Enter The Battlefront (NE past WP)",
+      "portal_tip": "Tag Marketplace WP so you can run The Catacombs (Lab Trial #5) anytime!",
+      "badges": [
+        {
+          "label": "LAB TRIAL #5 (CATACOMBS)",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT NE → BATTLEFRONT",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Head North-East through the narrow broken arches to the Waypoint"
+        },
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "(Now or Later) Enter The Catacombs near WP for Lab Trial #5"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Continue North-East from WP into The Battlefront"
+        }
+      ],
+      "boss_info": "Marceus the Defaced (near exit): Uses Cyclone & Summon Statues.",
+      "gem_reward": "Normal Lab Trial 5 of 6 is inside The Catacombs.",
+      "variants": [
+        {
+          "title": "NE Diagonal Street",
+          "desc": "WP and Catacombs sit mid-zone; Battlefront is at the top-right."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Sewers Exit (SW)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "WP + Catacombs (Trial #5)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↗ The Battlefront",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s06_battlefront",
+      "act": 3,
+      "step_number": 6,
+      "zone_name": "The Battlefront",
+      "area_level": 27,
+      "compass": "WP CENTER → SW & N",
+      "summary": "Head to Center Waypoint → Go SW for Ribbon Spool → Go NW to The Docks OR North to Solaris Temple",
+      "layout_tell": "From the central Waypoint: South-West = Blackguard Chest (Ribbon Spool), North-West = The Docks, North-East = Solaris Temple.",
+      "next_exit": "Loot Ribbon Spool (SW) → Enter The Docks (NW) for Sulphite → Then Solaris Temple (NE)",
+      "portal_tip": "Tag The Battlefront Waypoint at the center so you can jump straight to Solaris after The Docks!",
+      "badges": [
+        {
+          "label": "RIBBON SPOOL (SW)",
+          "color": "amber"
+        },
+        {
+          "label": "DOCKS (NW) + SOLARIS (NE)",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Run to the center-left ridge & tag The Battlefront Waypoint"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Drop South-West from WP → Loot Ribbon Spool from Blackguard Chest"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Head North-West into The Docks (grab Sulphite, then WP back for Solaris)"
+        }
+      ],
+      "boss_info": "Captain Aurelianus (guards Ribbon Spool): Fire/Physical shield charge.",
+      "gem_reward": "Ribbon Spool + Thaumetic Sulphite unlock Infernal Talc at Lady Dialla.",
+      "variants": [
+        {
+          "title": "3-Way Hub from WP",
+          "desc": "SW = Spool, NW = Docks, NE = Solaris Stairs."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "WP + Spool (SW)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "The Docks (NW)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "↗ Solaris Temple",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s07_the_docks",
+      "act": 3,
+      "step_number": 7,
+      "zone_name": "The Docks",
+      "area_level": 29,
+      "compass": "WEST PIERS ←",
+      "summary": "Check long wooden piers on the West/South-West edge → Loot Thaumetic Sulphite → Logout or WP to Battlefront",
+      "layout_tell": "The Supply Container (Thaumetic Sulphite) always spawns at the end of one of the long wooden piers extending over the water.",
+      "next_exit": "Loot Thaumetic Sulphite → Teleport to Battlefront WP → Enter Solaris Temple Level 1",
+      "portal_tip": "⚡ LOGOUT after clicking Supply Container → Take WP to Battlefront → Climb NE stairs to Solaris!",
+      "badges": [
+        {
+          "label": "LOOT SULPHITE",
+          "color": "amber"
+        },
+        {
+          "label": "GREAT XP ZONE",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Search the wooden piers for the Supply Container → Loot Sulphite"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Relog to Town → Take WP to Battlefront → Enter Solaris Temple (NE)"
+        }
+      ],
+      "boss_info": "Voidbearers (Fire-breathing dogs): High Fire shotgun damage if multiple breathe on you at once!",
+      "gem_reward": "Combines with Ribbon Spool at Lady Dialla in Solaris Level 2.",
+      "variants": [
+        {
+          "title": "Parallel Piers",
+          "desc": "Check piers along the outer water edge."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (NE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Wooden Piers",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Supply Container (Sulphite)",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s08_solaris_temple",
+      "act": 3,
+      "step_number": 8,
+      "zone_name": "The Solaris Temple Level 1",
+      "area_level": 27,
+      "compass": "CARPET PATH",
+      "summary": "Follow the golden carpet through Solaris 1 → Tag Solaris 2 WP → Talk to Lady Dialla for Infernal Talc",
+      "layout_tell": "Follow the red/gold carpet on the floor: it connects the entrance straight to Level 2 and Lady Dialla!",
+      "next_exit": "Get Infernal Talc from Dialla → Take Solaris 2 WP to The Sewers → Burn Undying Blockage",
+      "portal_tip": "Do NOT logout after talking to Dialla — use the Waypoint right next to her to go to The Sewers!",
+      "badges": [
+        {
+          "label": "FOLLOW CARPET",
+          "color": "emerald"
+        },
+        {
+          "label": "GET INFERNAL TALC",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow the carpet through Solaris Level 1 into Level 2"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Tag Solaris 2 WP & talk to Lady Dialla for Infernal Talc"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Take WP to The Sewers → Burn Undying Blockage → Enter Ebony Barracks"
+        }
+      ],
+      "boss_info": "Solaris Ribbon curtains: Cast Fireball & Flameblast.",
+      "gem_reward": "Unlocks Ebony Barracks & Level 28 Main Skill Gems after killing Gravicius!",
+      "variants": [
+        {
+          "title": "Carpet-Guided Temple",
+          "desc": "Never leave the main carpet unless a door is blocked."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Solaris 1 Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Follow Carpet",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "Dialla + WP → Sewers",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s09_ebony_barracks",
+      "act": 3,
+      "step_number": 9,
+      "zone_name": "The Ebony Barracks",
+      "area_level": 29,
+      "compass": "NORTH ↑",
+      "summary": "Tag Waypoint immediately → Head North up the stone stairs → Kill General Gravicius → Enter Lunaris Temple",
+      "layout_tell": "From the Waypoint right outside the Sewer exit, always head straight NORTH along the water/stairs to find General Gravicius.",
+      "next_exit": "Kill General Gravicius → Continue North-West into The Lunaris Temple Level 1",
+      "portal_tip": "Ignore the East path (Imperial Gardens) until you have the Tower Key from Piety!",
+      "badges": [
+        {
+          "label": "KILL GRAVICIUS (LVL 28 GEMS!)",
+          "color": "rose"
+        },
+        {
+          "label": "HEAD NORTH ↑",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Ebony Barracks Waypoint right outside Sewer exit"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Climb stairs North → Kill General Gravicius (unlocks Lvl 28 Gems!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Continue North-West from Gravicius into Lunaris Temple Level 1"
+        }
+      ],
+      "boss_info": "General Gravicius: Casts Firestorm & Molten Shell (high Fire damage!). Ruby Ring helps.",
+      "gem_reward": "Sever the Right Hand (Maramoa): Unlocks ALL Level 28 Active Skill Gems (Cyclone, Ballista, Tornado Shot, Crackling Lance, Boneshatter, Armageddon Brand, Eye of Winter, etc.)!",
+      "variants": [
+        {
+          "title": "North Staircase",
+          "desc": "North from WP leads to Gravicius & Lunaris; East leads to Gardens."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "General Gravicius",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↖ Lunaris Temple",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s10_lunaris_temple",
+      "act": 3,
+      "step_number": 10,
+      "zone_name": "The Lunaris Temple Level 1",
+      "area_level": 29,
+      "compass": "CARTS TELL!",
+      "summary": "Follow carpet in Lvl 1 → Tag WP → In Lvl 2 at cages: Pick side with 1 WAGON (never 2 wagons!) → Kill Piety",
+      "layout_tell": "⚡ BEST TELL IN ACT 3: Near the end of Lunaris Level 2, look at the wooden carts beside the stairs: 1 Cart = Correct Path to Piety, 2 Carts = Dead End!",
+      "next_exit": "Kill Piety → Loot Tower Key → Logout to Town",
+      "portal_tip": "⚡ LOGOUT after looting Tower Key → Claim +2 Passive Skill Points from Grigor in Town!",
+      "badges": [
+        {
+          "label": "1 CART = RIGHT WAY",
+          "color": "amber"
+        },
+        {
+          "label": "+2 PASSIVE POINTS!",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Follow carpet through Level 1, tag WP, and enter Level 2"
+        },
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Climb 3 sets of stairs in Lvl 2 → At final fork, go to the 1-CART side"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Piety & loot Tower Key → Logout → Get +2 Skill Pts from Grigor!"
+        }
+      ],
+      "boss_info": "Piety: Transforms into Ice Form (high Cold bow shots — hide behind pillars!) and Fire Form (melee chase — run away!). Destroy blue/red portals before she touches them!",
+      "gem_reward": "Piety's Pets (Grigor in Town): Book of Skill (+2 Passive Skill Points!) + Lvl 31 Support Gems at Clarissa!",
+      "variants": [
+        {
+          "title": "1 Cart vs 2 Carts Tell",
+          "desc": "Always walk past the single wagon/cart to reach Piety's portal."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Lunaris 1 WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Lvl 2 (1 Cart Side!)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Piety (+2 Skill Pts)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s11_imperial_gardens",
+      "act": 3,
+      "step_number": 11,
+      "zone_name": "The Imperial Gardens",
+      "area_level": 30,
+      "compass": "FOLLOW ROAD → NW / NE",
+      "summary": "From Ebony Barracks WP go East → Follow tiled road to Gardens WP → Complete Trial #6 (NW) → Enter Sceptre of God (NE)",
+      "layout_tell": "Follow the stone tiled road to the Waypoint: from the WP, North-West leads to Lab Trial #6 (Normal Lab 6/6!), and North-East leads to The Sceptre of God.",
+      "next_exit": "Complete Lab Trial #6 (NW) → Unlock & Enter The Sceptre of God (NE)",
+      "portal_tip": "Once Trial #6 is done, all 6 Normal Labyrinth Trials are unlocked!",
+      "badges": [
+        {
+          "label": "LAB TRIAL #6 (FINAL!)",
+          "color": "amber"
+        },
+        {
+          "label": "OPEN SCEPTRE OF GOD",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Follow tiled road from entrance to the central Waypoint"
+        },
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "Take NW path to complete Trial of Ascendancy (Normal Trial 6/6!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Take NE path from WP → Use Tower Key on Sceptre of God door"
+        }
+      ],
+      "boss_info": "Porcupine Goliaths: Explode into physical spikes on death — do not kill a whole pack while standing on top of them!",
+      "gem_reward": "Completing Trial #6 unlocks the Normal Lord's Labyrinth (First Ascendancy)! Skip The Library unless you need niche vendor gems.",
+      "variants": [
+        {
+          "title": "Tiled Road Fork",
+          "desc": "At WP: NW = Lab Trial #6, SW = Library, NE = Sceptre of God."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Gardens WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "↖ Lab Trial #6",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "↗ Sceptre of God",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a3_s12_sceptre_of_god",
+      "act": 3,
+      "step_number": 12,
+      "zone_name": "The Sceptre of God",
+      "area_level": 32,
+      "compass": "DIAGONAL CORNERS ↑",
+      "summary": "Climb 6 floors of Sceptre & Upper Sceptre (check corners for stairs) → Kill Dominus on Rooftop → Enter Aqueduct",
+      "layout_tell": "Each floor is a 4-corner grid: stairs up almost always spawn in one of the corners diagonal or adjacent to where you entered.",
+      "next_exit": "Kill Dominus (2 Phases) → Walk into The Aqueduct (Act 4)",
+      "portal_tip": "In Dominus Phase 2 (Blood Rain), stand INSIDE his golden proximity shield bubble to avoid bleeding!",
+      "badges": [
+        {
+          "label": "ACT 3 BOSS: DOMINUS",
+          "color": "rose"
+        },
+        {
+          "label": "STAND IN SHIELD (PHASE 2)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Climb 3 floors to Sceptre WP, then 3 floors of Upper Sceptre"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Dominus Phase 1 (Touch of God slam) & Phase 2 (stay inside bubble!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Aqueduct (Act 4)"
+        }
+      ],
+      "boss_info": "Dominus, High Templar: Phase 1 deals heavy Lightning slam ('The Touch of God!'). Phase 2 stacks Corrupting Blood unless you stand inside his golden shield.",
+      "gem_reward": "Completes Act 3 and opens Act 4.",
+      "variants": [
+        {
+          "title": "4-Corner Tower Floors",
+          "desc": "Dash along outer walls from corner to corner to find stairs fast."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Sceptre Entry",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Mid-Tower WP",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "Dominus → Aqueduct",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    }
+  ]
+}

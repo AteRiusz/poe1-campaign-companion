@@ -1,0 +1,741 @@
+{
+  "schema_version": "1.0",
+  "act": 8,
+  "title": "Act 8 Speedrun Route",
+  "steps": [
+    {
+      "step_id": "a8_s01_sarn_ramparts",
+      "act": 8,
+      "step_number": 1,
+      "zone_name": "The Sarn Ramparts",
+      "area_level": 55,
+      "compass": "CLIMB WALL → NW ↖",
+      "summary": "Run NE to climb stairs onto the rampart wall → Then run straight North-West along the wall into The Sarn Encampment",
+      "layout_tell": "Two-part linear zone: bottom path goes NE to stairs, top wall path goes NW to Town.",
+      "next_exit": "Enter The Sarn Encampment → Exit into The Toxic Conduits",
+      "portal_tip": "Enter The Toxic Conduits via the sewer grate right below Clarissa in Town!",
+      "badges": [
+        {
+          "label": "LINEAR WALL RUN ↖",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Climb onto the rampart wall & run NW to the end"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Drop down into The Sarn Encampment → Enter The Toxic Conduits"
+        }
+      ],
+      "boss_info": "No required boss.",
+      "gem_reward": "Unlocks Act 8 Sarn Encampment.",
+      "variants": [
+        {
+          "title": "U-Turn Rampart Wall",
+          "desc": "Run NE on ground, then NW on top of the wall."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Climb Rampart Stairs",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "↖ Sarn Encampment",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a8_s02_toxic_conduits_doedre",
+      "act": 8,
+      "step_number": 2,
+      "zone_name": "The Toxic Conduits",
+      "area_level": 56,
+      "compass": "BLACK SPLASH TELL → DOEDRE",
+      "summary": "Look at the black sludge splash at the entrance grate — follow that direction to Doedre's Cesspool → Kill Doedre",
+      "layout_tell": "⚡ BLACK SPLASH TELL: At the very first intersection in Toxic Conduits, a black ink/sludge stain on the floor points toward Doedre's Cesspool!",
+      "next_exit": "Kill Doedre the Vile → Tag Sewer Outlet WP → Exit RIGHT into The Quay",
+      "portal_tip": "Click the Valve in the middle of Doedre's arena whenever her cauldron stacks get high!",
+      "badges": [
+        {
+          "label": "BLACK SPLASH TELL!",
+          "color": "amber"
+        },
+        {
+          "label": "KILL DOEDRE",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow the black sludge splash direction into Doedre's Cesspool"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Open Loose Grate → Kill Doedre the Vile (use Valve in center!)"
+        },
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Sewer Outlet WP → Take the RIGHT exit into The Quay"
+        }
+      ],
+      "boss_info": "Doedre the Vile: Rotates Purple (Enfeeble), Red (Physical/Bleed), and Green (Temp Chains/Chaos) phases.",
+      "gem_reward": "Unlocks both Solaris and Lunaris wings.",
+      "variants": [
+        {
+          "title": "Sludge Pointer",
+          "desc": "Black floor splash at start points toward the exit."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (Check Splash!)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Doedre's Cesspool",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "WP → Right to The Quay",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a8_s03_the_quay",
+      "act": 8,
+      "step_number": 3,
+      "zone_name": "The Quay",
+      "area_level": 56,
+      "compass": "LONG WALL → ANKH + TOLMAN (+1 PT)",
+      "summary": "Follow main dock road: 1st wooden pier bridge holds Ankh of Eternity → Further along road is Resurrection Site (Tolman +1 Pt!) → Exit to Grain Gate",
+      "layout_tell": "Never miss the Ankh of Eternity BEFORE reaching Clarissa & Tolman's arena!",
+      "next_exit": "Loot Ankh of Eternity → Resurrect Tolman (+1 Skill Pt!) → Enter The Grain Gate",
+      "portal_tip": "The Ankh of Eternity is always in a Sealed Casket across a narrow wooden bridge on the water side!",
+      "badges": [
+        {
+          "label": "LOOT ANKH FIRST!",
+          "color": "amber"
+        },
+        {
+          "label": "+1 SKILL PT (TOLMAN)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Check water-side wooden bridge for Sealed Casket → Loot Ankh of Eternity"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Find Clarissa at Resurrection Site → Survive waves & kill Tolman (+1 Pt!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Continue along the dock wall into The Grain Gate"
+        }
+      ],
+      "boss_info": "Undying wave ambush at Tolman's arena.",
+      "gem_reward": "Love is Dead (Clarissa in Town): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Linear Dockside",
+          "desc": "Order along path: Entrance → Ankh Bridge → Tolman Arena → Grain Gate."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "1. Ankh of Eternity",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "2. Tolman (+1 Pt) → Grain Gate",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a8_s04_grain_gate",
+      "act": 8,
+      "step_number": 4,
+      "zone_name": "The Grain Gate",
+      "area_level": 57,
+      "compass": "CORPSE DOOR TELL (+1 PT GEMLINGS)",
+      "summary": "Tag Waypoint → Kill Gemling Legionnaires in central trench (+1 Skill Pt!) → Follow doors with a CORPSE outside → Exit to Imperial Fields",
+      "layout_tell": "⚡ CORPSE TELL: Whenever you approach a warehouse building in Grain Gate, look for a dead Blackguard corpse lying right outside the doorway — that doorway is ALWAYS the main path!",
+      "next_exit": "Kill Gemling Legionnaires (+1 Pt) → Follow Corpse Doorways → Enter The Imperial Fields",
+      "portal_tip": "Gemling Legionnaires spawn in an open courtyard midway through the zone!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (GEMLINGS)",
+          "color": "amber"
+        },
+        {
+          "label": "CORPSE BY DOOR TELL!",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Waypoint right inside entrance"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Find & kill the Gemling Legionnaires squad (+1 Passive Skill Point!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter warehouses marked by a dead corpse outside → Exit to Imperial Fields"
+        }
+      ],
+      "boss_info": "Gemling Legionnaires: Trio of elemental/physical officers — focus them down one by one.",
+      "gem_reward": "The Gemling Legion (Maramoa): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Corpse-Marked Warehouses",
+          "desc": "Dead body next to door = guaranteed right building."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Gemling Legion (+1 Pt)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "Corpse Doors → Imperial Fields",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a8_s05_imperial_fields_solaris",
+      "act": 8,
+      "step_number": 5,
+      "zone_name": "The Imperial Fields",
+      "area_level": 57,
+      "compass": "FOLLOW ROAD NW ↖ → SOLARIS",
+      "summary": "Follow the cobblestone road North-West to the Waypoint, then take the right stone path into The Solaris Temple Level 1",
+      "layout_tell": "Follow the main stone road; past the Waypoint it splits Left (Solaris Concourse) and Right/Up (Solaris Temple).",
+      "next_exit": "Enter The Solaris Temple Level 1",
+      "portal_tip": "Enter Solaris Temple directly from Imperial Fields to grab the Sun Orb!",
+      "badges": [
+        {
+          "label": "FOLLOW ROAD NW ↖",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow cobblestone road NW to the Waypoint"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Continue North-East into The Solaris Temple Level 1"
+        }
+      ],
+      "boss_info": "No required boss.",
+      "gem_reward": "Leads to Solaris Temple.",
+      "variants": [
+        {
+          "title": "Road to Solaris",
+          "desc": "Cobblestone road connects Grain Gate to Solaris."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SE)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Waypoint",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↗ Solaris Temple 1",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a8_s06_solaris_temple_act8",
+      "act": 8,
+      "step_number": 6,
+      "zone_name": "The Solaris Temple Level 1",
+      "area_level": 58,
+      "compass": "TAG WP → SUN ORB → CONCOURSE",
+      "summary": "Tag Solaris 1 WP → Find stairs to Level 2 → Kill Dawn & loot Sun Orb → Take WP back to Solaris 1 & exit to Solaris Concourse",
+      "layout_tell": "Follow carpet to the Solaris 1 Waypoint; after getting the Sun Orb in Level 2, logout/WP back to Solaris 1 and exit West into Solaris Concourse!",
+      "next_exit": "Kill Dawn in Level 2 (Sun Orb) → Exit Solaris 1 West into The Solaris Concourse",
+      "portal_tip": "⚡ Tag the Solaris Level 1 Waypoint — it sits right next to the Solaris Concourse exit!",
+      "badges": [
+        {
+          "label": "GET SUN ORB (LVL 2)",
+          "color": "amber"
+        },
+        {
+          "label": "EXIT → CONCOURSE",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Solaris Temple Level 1 Waypoint (right beside Concourse door)"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter Level 2 → Kill Dawn, Harbinger of Solaris & loot Sun Orb"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Return to Solaris 1 WP → Exit West into The Solaris Concourse"
+        }
+      ],
+      "boss_info": "Dawn, Harbinger of Solaris: Heavy Fire beams & degens.",
+      "gem_reward": "Sun Orb (1 of 2 orbs required for Harbour Bridge).",
+      "variants": [
+        {
+          "title": "Carpet to Level 2",
+          "desc": "Follow red/gold carpet through both levels."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Solaris 1 WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Solaris 2: Kill Dawn (Sun Orb)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "← Solaris Concourse",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a8_s07_solaris_concourse_bath_house",
+      "act": 8,
+      "step_number": 7,
+      "zone_name": "The Bath House",
+      "area_level": 58,
+      "compass": "MERCILESS TRIAL #1 + YUGUL (+1 PT)",
+      "summary": "Cross Solaris Concourse (tag WP) & enter The Bath House (skip Harbour Bridge for now) → Do Merciless Trial #1 & High Gardens (Yugul +1 Pt!)",
+      "layout_tell": "In The Bath House: North-West/West = Merciless Lab Trial #1 & High Gardens (Yugul +1 Pt); North-East = Exit to Lunaris Concourse!",
+      "next_exit": "Complete Merciless Trial #1 + Kill Yugul in High Gardens (+1 Pt) → Exit NE to The Lunaris Concourse",
+      "portal_tip": "Loot Wings of Vastiri from Hector Titucius' tomb inside The Bath House while passing through!",
+      "badges": [
+        {
+          "label": "MERCILESS TRIAL #1",
+          "color": "amber"
+        },
+        {
+          "label": "+1 SKILL PT (YUGUL)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "Complete Merciless Lab Trial #1 (1/3) & loot Wings of Vastiri"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter The High Gardens (NW) → Kill Yugul, Reflection of Terror (+1 Pt!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Exit Bath House (NE) into The Lunaris Concourse"
+        }
+      ],
+      "boss_info": "Yugul, Reflection of Terror: Spawns tracking Cold orbs — keep moving in circles and never stand still in cold balls!",
+      "gem_reward": "Reflection of Terror (Hargan): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Bath House 3 Exits",
+          "desc": "West/NW = Trial #1 + High Gardens; NE = Lunaris Concourse."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "NW: Trial #1 + High Gardens (+1 Pt)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↗ Lunaris Concourse",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a8_s08_lunaris_concourse_and_temple",
+      "act": 8,
+      "step_number": 8,
+      "zone_name": "The Lunaris Concourse",
+      "area_level": 59,
+      "compass": "TAG WP → MOON ORB IN LUNARIS 2",
+      "summary": "Run North to tag Lunaris Concourse Waypoint → Enter Lunaris Temple 1 & 2 → Kill Dusk & loot Moon Orb → Logout to Concourse WP",
+      "layout_tell": "Tag The Lunaris Concourse Waypoint right outside Lunaris Temple so you can teleport right back after looting the Moon Orb!",
+      "next_exit": "Kill Dusk in Lunaris Level 2 (Moon Orb) → Logout → Take WP to Lunaris Concourse → Go South to Harbour Bridge",
+      "portal_tip": "⚡ LOGOUT after picking up the Moon Orb → Take WP to Lunaris Concourse → Run South into The Harbour Bridge!",
+      "badges": [
+        {
+          "label": "TAG CONCOURSE WP!",
+          "color": "sky"
+        },
+        {
+          "label": "GET MOON ORB",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag The Lunaris Concourse Waypoint right in front of Lunaris Temple"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Traverse Lunaris Temple 1 & 2 → Kill Dusk & pick up Moon Orb"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Logout to Town → Take WP to Lunaris Concourse → Go South to Harbour Bridge"
+        }
+      ],
+      "boss_info": "Dusk, Harbinger of Lunaris: Heavy Cold projectiles & freezing cascades.",
+      "gem_reward": "Moon Orb (2 of 2 orbs required for Harbour Bridge).",
+      "variants": [
+        {
+          "title": "Concourse North-South",
+          "desc": "North = Lunaris Temple, South = Harbour Bridge."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Concourse WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Lunaris 2: Kill Dusk (Moon Orb)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↓ The Harbour Bridge",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a8_s09_harbour_bridge",
+      "act": 8,
+      "step_number": 9,
+      "zone_name": "The Harbour Bridge",
+      "area_level": 60,
+      "compass": "STRAIGHT TO CENTER → SOLARIS & LUNARIS",
+      "summary": "Run straight along The Harbour Bridge into The Sky Shrine → Activate Statue → Kill Solaris & Lunaris → Enter Blood Aqueduct (Act 9)",
+      "layout_tell": "100% linear bridge; The Sky Shrine boss arena is in the exact center.",
+      "next_exit": "Kill Solaris & Lunaris → Exit to The Blood Aqueduct (Act 9)",
+      "portal_tip": "Stand close to Solaris during her spear attacks and away from Lunaris's vortexes!",
+      "badges": [
+        {
+          "label": "ACT 8 BOSS: SOLARIS & LUNARIS",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run straight to the center of The Harbour Bridge → Enter The Sky Shrine"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Touch Statue → Defeat Solaris & Lunaris"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Exit into The Blood Aqueduct (Act 9)"
+        }
+      ],
+      "boss_info": "Solaris (Fire) & Lunaris (Cold): Swap phases at 50% HP. Unlocks Major Pantheon: Soul of Solaris & Soul of Lunaris!",
+      "gem_reward": "Completes Act 8 and opens Act 9.",
+      "variants": [
+        {
+          "title": "Linear Bridge",
+          "desc": "Boss arena is dead-center on the bridge."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Sky Shrine (Solaris & Lunaris)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "→ Blood Aqueduct (Act 9)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    }
+  ]
+}

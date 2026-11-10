@@ -2,6 +2,9 @@
 
 This repository is structured specifically so AI agents can add zones, modify campaign routes, adjust visual schematics, or tweak UI behavior with zero friction.
 
+> [!IMPORTANT]
+> **Git Commit & Push Policy:** NEVER run `git commit` or `git push` on your own. Always leave code changes in the working tree and wait for the user to explicitly decide when to commit and push.
+
 ---
 
 ## 1. Directory & File Map
@@ -13,9 +16,20 @@ C:\Projects\poe1-campaign-companion\
 ├── main.py                       # App entry point (initializes SettingsManager, RouteEngine, DashboardWindow)
 ├── run_companion.bat             # Double-click launcher (runs main.py via .venv\Scripts\pythonw.exe)
 ├── config\
-│   └── user_settings.json        # Auto-generated user preferences (opacity, extra info toggles, log path)
+│   └── user_settings.json        # Auto-generated user preferences (opacity, extra info toggles, trial states)
 ├── data\
-│   └── campaign_route.json       # Declarative campaign steps, actions, layout tells & vector topology nodes
+│   ├── acts\
+│   │   ├── act1.json             # Act 1 zone-by-zone route & topology maps (16 steps)
+│   │   ├── act2.json             # Act 2 zone-by-zone route & topology maps (13 steps)
+│   │   ├── act3.json             # Act 3 zone-by-zone route & topology maps (12 steps)
+│   │   ├── act4.json             # Act 4 zone-by-zone route & topology maps (11 steps)
+│   │   ├── act5.json             # Act 5 zone-by-zone route & topology maps (9 steps)
+│   │   ├── act6.json             # Act 6 zone-by-zone route & topology maps (11 steps)
+│   │   ├── act7.json             # Act 7 zone-by-zone route & topology maps (9 steps)
+│   │   ├── act8.json             # Act 8 zone-by-zone route & topology maps (9 steps)
+│   │   ├── act9.json             # Act 9 zone-by-zone route & topology maps (6 steps)
+│   │   └── act10.json            # Act 10 zone-by-zone route & topology maps (7 steps)
+│   └── labyrinth_trials.json     # All 12 Campaign Labyrinth Trials (6 Normal, 3 Cruel, 3 Merciless)
 ├── src\
 │   ├── __init__.py
 │   ├── settings_manager.py       # AppSettings dataclass & SettingsManager JSON persistence
@@ -59,22 +73,28 @@ C:\Projects\poe1-campaign-companion\
 
 ### B. `src/settings_manager.py`
 * **`AppSettings`**:
-  * `opacity: float = 0.92` (`0.25` to `1.00`, controlled by the live Opacity Slider)
+  * `opacity: float = 0.92` (`0.25` to `1.00`, controlled by the live Overlay Opacity Slider; applies **only** to `OverlayWindow`, while `DashboardWindow` is always locked at `1.0` / 100% opacity, and the opacity slider widget `self.opacity_group` is only visible when `OverlayWindow` is active)
   * `ui_mode: str = "dashboard"` (`"dashboard"` | `"overlay"` | `"both"`)
   * `overlay_click_through: bool = True` (uses `Qt.WindowType.WindowTransparentForInput`)
   * **Optional Extra Info Flags (Must default to `False` / OFF):**
     * `show_boss_info: bool = False`
     * `show_gem_rewards: bool = False`
     * `show_variants: bool = False`
+  * **Labyrinth Trial Tracking:**
+    * `unlocked_trials: List[str]` and `completed_trials: List[str]` persist across sessions via `mark_trial_unlocked()` and `set_trial_completed()`.
 
 ### C. `src/route_engine.py`
+* Loads all per-Act JSON files (`data/acts/act1.json` .. `act10.json`, `103` steps total) in numerical Act order and all 12 Labyrinth Trials (`data/labyrinth_trials.json`).
 * **`RouteEngine.on_zone_entered(zone_name: str) -> RouteStep`**:
   1. Searches forward up to 8 steps from `current_index` first (so revisiting hubs like `The Submerged Passage` or `The Crossroads` advances to the next logical pass).
   2. Falls back to the nearest matching step across the campaign.
   3. If the player enters an unmapped zone or Endgame Map (e.g., `Dunes`), sets `active_fallback` via `build_fallback_step()` without losing `current_index`.
+* **`RouteEngine.get_trial_status(trial, unlocked_ids, completed_ids) -> str`**:
+  Computes `'locked' | 'unlocked' | 'completed'` for each of the 12 Labyrinth Trials (`6` Normal, `3` Cruel, `3` Merciless), automatically unlocking trials when the player reaches their `unlock_zone` or progresses past their Act.
 
 ### D. `src/ui/map_canvas.py` (`TopologyMapWidget`)
 * Renders normalized `0.0 .. 1.0` coordinates from `step.topology` (`nodes` and `edges`) using `QPainter`.
+* **`compute_label_rects(w: float, h: float)`**: 2D collision-avoiding tooltip placement solver that checks immediate cardinal/diagonal offsets around each node first, then searches a distance-sorted 2D grid across the canvas to guarantee **0.0px overlap** between any two tooltip pills and **0.0px overlap** with any node circle.
 * Supported `node["type"]` values and colors:
   * `"start"` (`#a8a29e` Stone)
   * `"wp"` (`#38bdf8` Sky Blue)
@@ -89,9 +109,9 @@ C:\Projects\poe1-campaign-companion\
 
 ---
 
-## 4. How to Add or Edit Campaign Zones (`data/campaign_route.json`)
+## 4. How to Add or Edit Campaign Zones (`data/acts/act1.json` .. `act10.json`)
 
-To add a new step or modify an existing zone, edit `data/campaign_route.json`. No Python code changes are required.
+To add a new step or modify an existing zone, edit the corresponding Act file in `data/acts/actN.json` (or `data/labyrinth_trials.json` for Labyrinth Trials). No Python code changes are required.
 
 ```json
 {

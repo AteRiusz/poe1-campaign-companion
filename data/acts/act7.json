@@ -1,0 +1,740 @@
+{
+  "schema_version": "1.0",
+  "act": 7,
+  "title": "Act 7 Speedrun Route",
+  "steps": [
+    {
+      "step_id": "a7_s01_broken_bridge",
+      "act": 7,
+      "step_number": 1,
+      "zone_name": "The Broken Bridge",
+      "area_level": 50,
+      "compass": "FOLLOW ROAD SW ↙",
+      "summary": "Follow the cobblestone road South-West from Town straight to The Crossroads",
+      "layout_tell": "Optional: Pick up Dirty Lockbox (Silver Locket for Weylam's flask reward) in the ruined fort along the road.",
+      "next_exit": "Enter The Crossroads → Tag Waypoint immediately",
+      "portal_tip": "Stay on the road the entire way",
+      "badges": [
+        {
+          "label": "FOLLOW ROAD SW ↙",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Follow cobblestone road SW (loot Silver Locket if you want a utility flask)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Crossroads & tag the Waypoint"
+        }
+      ],
+      "boss_info": "Corrupted Kraityn guards (optional).",
+      "gem_reward": "Silver Locket gives a Jade/Granite/Quartz Flask from Weylam.",
+      "variants": [
+        {
+          "title": "SW Road",
+          "desc": "Direct road from Bridge Encampment to Crossroads."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (NE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Silver Locket (Road)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "↙ The Crossroads",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a7_s02_crossroads_and_crypt",
+      "act": 7,
+      "step_number": 2,
+      "zone_name": "The Crypt",
+      "area_level": 51,
+      "compass": "CRUEL TRIAL #2 + MALIGARO'S MAP",
+      "summary": "Tag Crossroads WP → Go SE through Fellshrine into The Crypt → Do Cruel Trial #2 on Lvl 1 → Loot Maligaro's Map on Lvl 2",
+      "layout_tell": "In The Crypt Level 1: find both Cruel Lab Trial #2 and the Sarcophagus stairs to Level 2.",
+      "next_exit": "Loot Maligaro's Map in Crypt Lvl 2 → Logout to Town → Take WP to Crossroads → Go NW to Chamber of Sins",
+      "portal_tip": "⚡ LOGOUT after looting Maligaro's Map from the Container of Sins in Level 2!",
+      "badges": [
+        {
+          "label": "CRUEL TRIAL #2",
+          "color": "amber"
+        },
+        {
+          "label": "LOOT MALIGARO'S MAP",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Crossroads WP → Run SE through Fellshrine into The Crypt"
+        },
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "On Crypt Level 1: Complete Cruel Lab Trial #2 & open Sarcophagus to Lvl 2"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "On Crypt Level 2: Loot Maligaro's Map → Logout → WP to Crossroads (go NW)"
+        }
+      ],
+      "boss_info": "Rotting Necromancers & Chaos spiders.",
+      "gem_reward": "Maligaro's Map is required to open Maligaro's Sanctum in Chamber of Sins.",
+      "variants": [
+        {
+          "title": "4-Corner Crypt",
+          "desc": "Loop outer hallways to reveal Trial and Sarcophagus stairs."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Lvl 1: Cruel Trial #2",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Lvl 2: Maligaro's Map",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a7_s03_chamber_of_sins_1",
+      "act": 7,
+      "step_number": 3,
+      "zone_name": "The Chamber of Sins Level 1",
+      "area_level": 51,
+      "compass": "MAP DEVICE TELL!",
+      "summary": "Tag WP → Put Maligaro's Map in Device → Kill Maligaro for Venom → Trade to Silk → Take hallway Map Device points to!",
+      "layout_tell": "⚡ MAP DEVICE TELL: The broken carpet & Map Device in the center room ALWAYS point down the hallway to Level 2!",
+      "next_exit": "Kill Maligaro → Trade Black Venom to Silk for Obsidian Key → Enter Chamber of Sins Level 2",
+      "portal_tip": "In Maligaro's Sanctum, hug island edges until you see TWO bridges side-by-side leading to Maligaro's Workshop!",
+      "badges": [
+        {
+          "label": "MAP DEVICE POINTS TO EXIT!",
+          "color": "amber"
+        },
+        {
+          "label": "KILL MALIGARO",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag WP & insert Maligaro's Map into the Map Device"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter Sanctum → Kill Maligaro → Loot Black Venom"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Give Black Venom to Silk for Obsidian Key → Take Map Device hallway to Lvl 2"
+        }
+      ],
+      "boss_info": "Maligaro, the Artist: Summons Fidelitas & Chaos degens; avoid Chaos rune traps on the ground.",
+      "gem_reward": "Obsidian Key opens the secret passage in Level 2.",
+      "variants": [
+        {
+          "title": "Center Compass Room",
+          "desc": "Map Device orientation guarantees you pick the right hallway."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "WP + Maligaro's Sanctum",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "→ Chamber of Sins Lvl 2",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a7_s04_chamber_of_sins_2",
+      "act": 7,
+      "step_number": 4,
+      "zone_name": "The Chamber of Sins Level 2",
+      "area_level": 52,
+      "compass": "CRUEL TRIAL #3 → SECRET DOOR",
+      "summary": "Complete Cruel Lab Trial #3 (Cruel Lab 3/3!) → Find long narrow hallway & open Secret Passage with Obsidian Key → Enter The Den",
+      "layout_tell": "Cruel Trial #3 is usually in the North-East/South-East wing; the Secret Passage to The Den is at the end of a long narrow bridge hallway.",
+      "next_exit": "Complete Cruel Trial #3 → Open Secret Passage → Traverse The Den into The Ashen Fields",
+      "portal_tip": "Once Cruel Trial #3 is done, you have all 3 Trials for Cruel Labyrinth!",
+      "badges": [
+        {
+          "label": "CRUEL TRIAL #3 (FINAL!)",
+          "color": "amber"
+        },
+        {
+          "label": "OPEN SECRET PASSAGE",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "Complete Cruel Lab Trial #3 (Sawblades & Spikes — 3/3 Cruel Trials!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Use Obsidian Key on Secret Passage → Run through The Den into The Ashen Fields"
+        }
+      ],
+      "boss_info": "Chaos/Lightning sins monsters.",
+      "gem_reward": "Unlocks Cruel Lord's Labyrinth (Second Ascendancy)!",
+      "variants": [
+        {
+          "title": "Trial + Secret Tunnel",
+          "desc": "Secret tunnel replaces Fidelitas's arena from Act 2."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Cruel Trial #3",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "→ The Den / Ashen Fields",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a7_s05_ashen_fields",
+      "act": 7,
+      "step_number": 5,
+      "zone_name": "The Ashen Fields",
+      "area_level": 53,
+      "compass": "FOLLOW ROAD SW → KILL GREUST (+1 PT)",
+      "summary": "Tag Waypoint → Follow road South-West into The Fortress Encampment → Kill Ralakesh/Greust (+1 Skill Pt!) → Enter Northern Forest",
+      "layout_tell": "Follow the road/fence West/South-West straight into Greust's palisade arena.",
+      "next_exit": "Kill Greust (+1 Skill Pt!) → Exit West of arena into The Northern Forest",
+      "portal_tip": "Hide behind the stone pillars inside Greust's arena when he fires his green spear barrage!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (GREUST)",
+          "color": "amber"
+        },
+        {
+          "label": "BOSS: GREUST",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Waypoint & follow the path SW to The Fortress Encampment"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Greust, Lord of the Forest (+1 Passive Skill Point!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Exit West out of the arena into The Northern Forest"
+        }
+      ],
+      "boss_info": "Greust / Ralakesh: Heavy Physical spear barrage. Stand behind stone pillars during his channeled volley!",
+      "gem_reward": "The Master of a Million Faces (Eramir): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "SW Palisade",
+          "desc": "Arena sits between Ashen Fields and Northern Forest."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Greust (+1 Pt)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "← Northern Forest",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a7_s06_northern_forest_dread_thicket",
+      "act": 7,
+      "step_number": 6,
+      "zone_name": "The Dread Thicket",
+      "area_level": 53,
+      "compass": "7 FIREFLIES + GRUTHKUL (+1 PT)",
+      "summary": "From Northern Forest enter The Dread Thicket → Collect all 7 Fireflies → Kill Gruthkul in Den of Despair (+1 Skill Pt!)",
+      "layout_tell": "Loop around the outer circle of Dread Thicket to grab all 7 Fireflies; Gruthkul's cave (Den of Despair) is usually near the center/inner ring.",
+      "next_exit": "Collect 7 Fireflies + Kill Gruthkul (+1 Pt) → Exit Dread Thicket & head North in Northern Forest to The Causeway",
+      "portal_tip": "Make sure your quest tracker says 7/7 Fireflies before leaving The Dread Thicket!",
+      "badges": [
+        {
+          "label": "7/7 FIREFLIES",
+          "color": "amber"
+        },
+        {
+          "label": "+1 SKILL PT (GRUTHKUL)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Click all 7 Firefly shrines scattered around The Dread Thicket"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter Den of Despair → Kill Gruthkul, Mother of Despair (+1 Skill Pt!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Return to Northern Forest & head North-East to The Causeway"
+        }
+      ],
+      "boss_info": "Gruthkul, Mother of Despair: Heavy Physical/Bleed slams & slowing black projectiles. Keep moving!",
+      "gem_reward": "Queen of Despair (Eramir in Town): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Circular Thicket",
+          "desc": "Sweep outer loop for 7 Fireflies and inner cave for Gruthkul."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Dread Thicket Entry",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "7 Fireflies",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Gruthkul (+1 Pt) → Causeway",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a7_s07_the_causeway",
+      "act": 7,
+      "step_number": 7,
+      "zone_name": "The Causeway",
+      "area_level": 54,
+      "compass": "NE ↗ (+1 PT KISHARA'S STAR)",
+      "summary": "Run North-East up the stone causeway → Tag WP → Loot Kishara's Star right before the exit (+1 Skill Pt!) → Enter Vaal City",
+      "layout_tell": "⚡ KISHARA'S STAR TELL: Kishara's Lockbox (+1 Skill Point) is ALWAYS 1 screen before the Vaal City exit gate!",
+      "next_exit": "Loot Kishara's Star (+1 Pt) at end of zone → Enter The Vaal City",
+      "portal_tip": "Never exit The Causeway without clicking Kishara's Lockbox right next to the exit stairs!",
+      "badges": [
+        {
+          "label": "+1 PT (KISHARA'S STAR)",
+          "color": "amber"
+        },
+        {
+          "label": "LINEAR NE ↗",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run North-East along the ruined stone causeway & tag Waypoint"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Click Kishara's Lockbox right before the exit stairs (+1 Skill Pt!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Vaal City"
+        }
+      ],
+      "boss_info": "Vaal Fallen & Constructs.",
+      "gem_reward": "Kishara's Star (Weylam Roth): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Linear NE Bridge",
+          "desc": "Star is guaranteed right next to the top-right exit."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SW)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Waypoint",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "↗ Kishara's Star + Vaal City",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a7_s08_vaal_city",
+      "act": 7,
+      "step_number": 8,
+      "zone_name": "The Vaal City",
+      "area_level": 54,
+      "compass": "OUTER WALL INWARD ALLEY TELL!",
+      "summary": "Hug outer brick perimeter until you find a narrow dead-end alley pointing INWARD → Follow its direction to Center WP & Yeena!",
+      "layout_tell": "⚡ VAAL CITY TELL: Do not wander the maze! Run along the outer wall until you see a tiny dead-end nook pointing toward the middle — walk straight inward from there to find Yeena!",
+      "next_exit": "Talk to Yeena (7 Fireflies) → Tag WP → Enter The Temple of Decay Level 1",
+      "portal_tip": "Teleport to Town from Vaal City WP to claim your +3 Passive Skill Points from Eramir & Weylam!",
+      "badges": [
+        {
+          "label": "INWARD ALLEY TELL",
+          "color": "amber"
+        },
+        {
+          "label": "GIVE 7 FIREFLIES TO YEENA",
+          "color": "quest"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Find central snake temple → Tag Waypoint & talk to Yeena"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Descend into The Temple of Decay Level 1"
+        }
+      ],
+      "boss_info": "Snake spitters (Chaos damage).",
+      "gem_reward": "Opens The Temple of Decay.",
+      "variants": [
+        {
+          "title": "Center Snake Temple",
+          "desc": "Yeena and the WP are always near the center of the city."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Outer Wall Alley Tell",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Center WP + Yeena → Temple",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a7_s09_temple_of_decay",
+      "act": 7,
+      "step_number": 9,
+      "zone_name": "The Temple of Decay Level 1",
+      "area_level": 54,
+      "compass": "DESCEND 2 LEVELS → ARAKAALI",
+      "summary": "Descend through Temple of Decay Level 1 & Level 2 → Kill Arakaali, Spinner of Shadows → Exit to Sarn Ramparts (Act 8)",
+      "layout_tell": "In Temple of Decay, each sub-floor stairs is in the opposite corner from where you entered.",
+      "next_exit": "Kill Arakaali → Walk out into The Sarn Ramparts (Act 8)",
+      "portal_tip": "In Arakaali's fight, watch which side she turns her head toward — she fires her laser barrage to THAT side!",
+      "badges": [
+        {
+          "label": "ACT 7 BOSS: ARAKAALI",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Navigate through Temple of Decay Level 1 and Level 2"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Arakaali, Spinner of Shadows (Chaos/Lightning lasers)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Exit north into The Sarn Ramparts (Act 8)"
+        }
+      ],
+      "boss_info": "Arakaali, Spinner of Shadows: Heavy Chaos & Lightning lasers + Spider web barrages.",
+      "gem_reward": "Completes Act 7 and unlocks Major Pantheon: Soul of Arakaali (Chaos DoT reduction!).",
+      "variants": [
+        {
+          "title": "Corner-to-Corner Floors",
+          "desc": "Move diagonally across each web sub-floor."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Temple Lvl 1",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Temple Lvl 2",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "Arakaali → Act 8",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    }
+  ]
+}

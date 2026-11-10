@@ -1,0 +1,575 @@
+{
+  "schema_version": "1.0",
+  "act": 10,
+  "title": "Act 10 Speedrun Route",
+  "steps": [
+    {
+      "step_id": "a10_s01_cathedral_rooftop",
+      "act": 10,
+      "step_number": 1,
+      "zone_name": "The Cathedral Rooftop",
+      "area_level": 64,
+      "compass": "LEFT TO BANNON → SE ↘",
+      "summary": "Enter Cathedral Apex immediately on the LEFT → Rescue Bannon → Exit apex & run South-East down the rooftop to The Ravaged Square",
+      "layout_tell": "Do NOT run down the rooftop before rescuing Bannon in the room right next to the entrance!",
+      "next_exit": "Rescue Bannon → Run SE down rooftop → Enter The Ravaged Square",
+      "portal_tip": "Talk to Bannon before leaving the Cathedral Apex!",
+      "badges": [
+        {
+          "label": "RESCUE BANNON FIRST!",
+          "color": "amber"
+        },
+        {
+          "label": "RUN SE ↘",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Enter Cathedral Apex on the left → Kill cultists & rescue Bannon"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Exit Apex & run straight South-East into The Ravaged Square"
+        }
+      ],
+      "boss_info": "Kitava Cultists.",
+      "gem_reward": "Unlocks Bannon in Town.",
+      "variants": [
+        {
+          "title": "Linear SE Rooftop",
+          "desc": "Apex is at the start; Ravaged Square is at the SE end."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + Rescue Bannon",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Rooftop Bridge",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "↘ The Ravaged Square",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a10_s02_ravaged_square",
+      "act": 10,
+      "step_number": 2,
+      "zone_name": "The Ravaged Square",
+      "area_level": 64,
+      "compass": "SW (VILENTA +1 PT) & NW (WP + TRIAL #3)",
+      "summary": "In Ravaged Square: South-West = The Control Blocks (Vilenta +1 Pt!); North-West = Waypoint & The Ossuary (Merciless Trial #3!); South-East = Torched Courts",
+      "layout_tell": "⚡ RAVAGED SQUARE CORNERS: SW = Control Blocks (+1 Pt), NW = Waypoint + The Ossuary (Merciless Trial #3), SE = Torched Courts!",
+      "next_exit": "Tag NW Waypoint → Do Control Blocks (SW) & The Ossuary (NW) → Exit SE to The Torched Courts",
+      "portal_tip": "Tag the North-West Waypoint right outside The Ossuary so you have a permanent hub for Act 10!",
+      "badges": [
+        {
+          "label": "+1 PT IN CONTROL BLOCKS (SW)",
+          "color": "amber"
+        },
+        {
+          "label": "TRIAL #3 IN OSSUARY (NW)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Run to the North-West corner & tag The Ravaged Square Waypoint"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Ossuary (right beside WP) OR The Control Blocks (SW corner)"
+        }
+      ],
+      "boss_info": "Risen Kitava Heralds.",
+      "gem_reward": "Hub connecting all Act 10 objectives.",
+      "variants": [
+        {
+          "title": "Fixed Corner Hub",
+          "desc": "NW = WP + Ossuary, SW = Control Blocks, SE = Torched Courts."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "SW: Control Blocks (+1 Pt)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "NW: WP + Ossuary (Trial #3)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "wp"
+          },
+          {
+            "id": "exit",
+            "label": "SE: Torched Courts",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a10_s03_control_blocks_act10",
+      "act": 10,
+      "step_number": 3,
+      "zone_name": "The Control Blocks",
+      "area_level": 65,
+      "compass": "HUG LEFT → KILL VILENTA (+1 PT)",
+      "summary": "Tag Waypoint → Hug the LEFT/West perimeter (jump across cage gaps) to the end → Kill Vilenta (+1 Skill Pt!) → Logout",
+      "layout_tell": "Just like Act 5: follow the left/outer wall to the arena at the far end of the zone.",
+      "next_exit": "Kill Vilenta (+1 Skill Pt!) → Logout → Claim Book of Skill from Lani → WP to Ravaged Square",
+      "portal_tip": "⚡ LOGOUT after killing Vilenta → Claim +1 Passive Skill Point from Lani in Oriath Docks!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (VILENTA)",
+          "color": "amber"
+        },
+        {
+          "label": "LOGOUT ON KILL",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Navigate along the left side (use movement skill over broken cages)"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter Arena at far end → Kill Vilenta (+1 Passive Skill Point!)"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Relog to Town → Claim +1 Pt from Lani → WP to Ravaged Square"
+        }
+      ],
+      "boss_info": "Vilenta: Bombing runs & portal lasers — stay close to her when she lands on the ground.",
+      "gem_reward": "Vilenta's Vengeance (Lani): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Left Wall Route",
+          "desc": "Arena is always at the opposite end from entrance."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Left Cage Shortcuts",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "Vilenta (+1 Skill Pt)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a10_s04_the_ossuary_act10",
+      "act": 10,
+      "step_number": 4,
+      "zone_name": "The Ossuary",
+      "area_level": 65,
+      "compass": "MERCILESS TRIAL #3 (FINAL!)",
+      "summary": "Enter The Ossuary from Ravaged Square WP → Complete Merciless Lab Trial #3 (3/3 Merciless Trials!)",
+      "layout_tell": "Search the upper bone corridors for the Trial of Ascendancy plaque.",
+      "next_exit": "Complete Merciless Trial #3 → Return to Ravaged Square & go SE to The Torched Courts",
+      "portal_tip": "🏆 All 3 Merciless Labyrinth Trials are now complete! Run Merciless Lab BEFORE fighting Kitava!",
+      "badges": [
+        {
+          "label": "MERCILESS TRIAL #3 (FINAL!)",
+          "color": "amber"
+        },
+        {
+          "label": "MERC LAB READY!",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "TRIAL",
+          "color": "amber",
+          "text": "Find & complete Merciless Lab Trial #3 (Poison Darts & Lava Grates)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Return to Ravaged Square & head South-East into The Torched Courts"
+        }
+      ],
+      "boss_info": "Bone Husks & Risen Dead.",
+      "gem_reward": "Completes all 3 Merciless Labyrinth Trials (3rd Ascendancy unlocked)!",
+      "variants": [
+        {
+          "title": "Upper Loop Trial",
+          "desc": "Trial spawns on the main bone floor."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Bone Corridors",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "⚡ Merciless Trial #3",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a10_s05_torched_desecrated_chambers",
+      "act": 10,
+      "step_number": 5,
+      "zone_name": "The Desecrated Chambers",
+      "area_level": 66,
+      "compass": "CCW SPIRAL ↺ → KILL AVARIUS",
+      "summary": "Loop Clockwise through Torched Courts into Desecrated Chambers → Tag WP → Spiral Counter-Clockwise (Go Left!) → Kill Avarius for Staff",
+      "layout_tell": "Exact same layout as Act 5 Chamber of Innocence: from the Waypoint, go LEFT and spiral Counter-Clockwise to the Sanctum!",
+      "next_exit": "Kill Avarius, Reassembled → Loot The Staff of Purity → Logout → Talk to Bannon & Sin in Town",
+      "portal_tip": "⚡ LOGOUT after looting The Staff of Purity → Talk to Bannon/Sin → WP to Ravaged Square!",
+      "badges": [
+        {
+          "label": "GO LEFT AT WP (CCW ↺)",
+          "color": "amber"
+        },
+        {
+          "label": "KILL AVARIUS (STAFF)",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Desecrated Chambers WP & go LEFT (Counter-Clockwise spiral)"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter Sanctum of Innocence → Kill Avarius, Reassembled & loot Staff of Purity"
+        },
+        {
+          "tag": "PORTAL",
+          "color": "sky",
+          "text": "Logout to Town → Give Staff to Bannon → WP to Ravaged Square (Center)"
+        }
+      ],
+      "boss_info": "Avarius, Reassembled: Bullet-hell chaos/holy orbs & physical slams.",
+      "gem_reward": "Staff of Purity allows Sin to open The Canals in the center of Ravaged Square.",
+      "variants": [
+        {
+          "title": "Fixed CCW Spiral",
+          "desc": "Identical spiral to Act 5 Chamber of Innocence."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "CCW Spiral (Go Left!)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Avarius (Staff of Purity)",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a10_s06_the_canals",
+      "act": 10,
+      "step_number": 6,
+      "zone_name": "The Canals",
+      "area_level": 67,
+      "compass": "LINEAR NW ↖",
+      "summary": "Meet Sin in the center of Ravaged Square → Enter The Canals → Follow the blood channel North-West into The Feeding Trough",
+      "layout_tell": "100% linear canal zone: cross side bridges whenever a grate blocks your side of the canal.",
+      "next_exit": "Enter The Feeding Trough",
+      "portal_tip": "⚡ LAST CHANCE: Run your Merciless Labyrinth now if you haven't yet (before Kitava's -30% resist penalty)!",
+      "badges": [
+        {
+          "label": "LINEAR NW ↖",
+          "color": "emerald"
+        },
+        {
+          "label": "DO MERC LAB BEFORE KITAVA!",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run straight North-West along the canals"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Feeding Trough at the top-left"
+        }
+      ],
+      "boss_info": "Kitava Heralds & Devourers.",
+      "gem_reward": "Leads to final boss.",
+      "variants": [
+        {
+          "title": "Linear Canal",
+          "desc": "Direct NW path to The Feeding Trough."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Canal Bridges",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "↖ The Feeding Trough",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a10_s07_feeding_trough",
+      "act": 10,
+      "step_number": 7,
+      "zone_name": "The Feeding Trough",
+      "area_level": 67,
+      "compass": "LINEAR NW ↖ → KITAVA (+2 PTS!)",
+      "summary": "Run straight North-West along the trough → Talk to Sin at Altar of Hunger → Kill Kitava (+2 Passive Skill Points!)",
+      "layout_tell": "100% linear path straight to the Altar of Hunger.",
+      "next_exit": "Kill Kitava, the Insatiable → Claim +2 Passive Skill Points from Lani in Oriath → Enter Endgame Maps!",
+      "portal_tip": "🎉 Congratulations! Talk to Lani for your final +2 Skill Points (24/24 Campaign Points) and Lilly Roth to sail to Karui Shores!",
+      "badges": [
+        {
+          "label": "FINAL BOSS: KITAVA",
+          "color": "rose"
+        },
+        {
+          "label": "+2 PASSIVE POINTS!",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run straight NW along The Feeding Trough to Sin"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Enter Altar of Hunger → Kill Kitava, the Insatiable (3 Heart phases)"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Claim Book of Skill (+2 Passive Points!) from Lani → Sail to Karui Shores!"
+        }
+      ],
+      "boss_info": "Kitava, the Insatiable: Full-arena fire breath (run to opposite corner!), X-blasts, and Sin's Heart phases. Applies final -30% All Resistances.",
+      "gem_reward": "An End to Hunger (Lani): Book of Skill (+2 Passive Skill Points — Campaign Complete)!",
+      "variants": [
+        {
+          "title": "Straight NW Corridor",
+          "desc": "Direct run to Altar of Hunger."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Altar of Hunger",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "Kitava (+2 Pts → Endgame!)",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    }
+  ]
+}

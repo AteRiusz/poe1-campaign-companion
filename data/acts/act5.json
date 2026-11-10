@@ -1,0 +1,726 @@
+{
+  "schema_version": "1.0",
+  "act": 5,
+  "title": "Act 5 Speedrun Route",
+  "steps": [
+    {
+      "step_id": "a5_s01_slave_pens",
+      "act": 5,
+      "step_number": 1,
+      "zone_name": "The Slave Pens",
+      "area_level": 41,
+      "compass": "NORTH ↑",
+      "summary": "Climb ramps heading North → Kill Overseer Krow at the top platform → Climb into Overseer's Tower",
+      "layout_tell": "Whenever you hit a wall, take the wooden/stone ramp going UP and NORTH.",
+      "next_exit": "Kill Overseer Krow → Enter Overseer's Tower (Act 5 Town)",
+      "portal_tip": "After talking to NPCs in Town, exit down into The Control Blocks",
+      "badges": [
+        {
+          "label": "KILL OVERSEER KROW",
+          "color": "rose"
+        },
+        {
+          "label": "HEAD NORTH ↑",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run North up the slave pen ramps"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Overseer Krow at the top gate → Enter Overseer's Tower"
+        }
+      ],
+      "boss_info": "Overseer Krow: Lightning/Physical mace slams & add waves.",
+      "gem_reward": "Unlocks Act 5 Town (Lani, Vilenta, Utula).",
+      "variants": [
+        {
+          "title": "Vertical North Climb",
+          "desc": "Starts at bottom dock and exits at the top-center."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (South)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Wooden Ramps",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "↑ Krow → Town",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a5_s02_control_blocks",
+      "act": 5,
+      "step_number": 2,
+      "zone_name": "The Control Blocks",
+      "area_level": 42,
+      "compass": "LEFT (MIASMETER) → NE",
+      "summary": "Hug the LEFT (West) wall to loot the Miasmeter → Then head North-East → Kill Justicar Casticus (+1 Pt)",
+      "layout_tell": "⚡ CONTROL BLOCKS TELL: Miasmeter is ALWAYS along the West/Left perimeter; Casticus & the exit are ALWAYS at the North-East end!",
+      "next_exit": "Loot Miasmeter (Left) + Kill Casticus for Eyes of Zeal (+1 Pt) → Enter Oriath Square",
+      "portal_tip": "You can leap/dash through the broken cage bars on the right if you want a shortcut after Miasmeter!",
+      "badges": [
+        {
+          "label": "+1 SKILL PT (MIASMETER)",
+          "color": "amber"
+        },
+        {
+          "label": "KILL CASTICUS",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "Hug LEFT wall to find Experimental Supplies → Loot Miasmeter"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Head North-East → Kill Justicar Casticus & loot Eyes of Zeal"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter Oriath Square"
+        }
+      ],
+      "boss_info": "Justicar Casticus: Golden projectiles & ground degens.",
+      "gem_reward": "In Service to Science (Vilenta): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "West Quest / NE Exit",
+          "desc": "Left wall holds Miasmeter; top-right holds Casticus."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Left: Miasmeter",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "NE: Casticus → Oriath Sq",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a5_s03_oriath_square",
+      "act": 5,
+      "step_number": 3,
+      "zone_name": "Oriath Square",
+      "area_level": 43,
+      "compass": "HUG LEFT/NE WALL ↗",
+      "summary": "Tag Waypoint → Bridge is out, so loop North-West then North-East to The Templar Courts",
+      "layout_tell": "From the Waypoint near entrance, head North-East along the main streets to the Templar Courts gate.",
+      "next_exit": "Enter The Templar Courts (North-East)",
+      "portal_tip": "No side quests in Oriath Square — run straight through",
+      "badges": [
+        {
+          "label": "RUN NE ↗",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Waypoint near entrance"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Follow perimeter streets NE into The Templar Courts"
+        }
+      ],
+      "boss_info": "Oriath Templars & Hounds.",
+      "gem_reward": "None.",
+      "variants": [
+        {
+          "title": "NE City Loop",
+          "desc": "Exit is always in the top-right corner of the square."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "City Streets",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "↗ Templar Courts",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a5_s04_templar_courts",
+      "act": 5,
+      "step_number": 4,
+      "zone_name": "The Templar Courts",
+      "area_level": 43,
+      "compass": "CLOCKWISE ↻",
+      "summary": "Loop Clockwise (Up → Right → Down) around the outer halls → Enter The Chamber of Innocence",
+      "layout_tell": "The Templar Courts is always a U-turn / Clockwise loop starting SW and exiting SE.",
+      "next_exit": "Enter The Chamber of Innocence",
+      "portal_tip": "Stay along the outer hallways to avoid dead-end courtyards",
+      "badges": [
+        {
+          "label": "CLOCKWISE LOOP ↻",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run North-West, then East, then South-East around the loop"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Chamber of Innocence"
+        }
+      ],
+      "boss_info": "Templar Flamecallers: Watch out for synchronized Flameblasts.",
+      "gem_reward": "None.",
+      "variants": [
+        {
+          "title": "Clockwise U-Loop",
+          "desc": "Always loops around the central courtyard."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SW)",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "North Hallway",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "↘ Chamber of Innocence",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a5_s05_chamber_of_innocence",
+      "act": 5,
+      "step_number": 5,
+      "zone_name": "The Chamber of Innocence",
+      "area_level": 43,
+      "compass": "CCW SPIRAL ↺",
+      "summary": "Tag Waypoint → Spiral Counter-Clockwise (Left → Down → Right → Up) → Kill High Templar Avarius / Innocence",
+      "layout_tell": "⚡ SPIRAL TELL: From the Waypoint, ALWAYS go Left (NW) first, then loop Counter-Clockwise to the Sanctum!",
+      "next_exit": "Kill Avarius / Innocence → Exit via The Torched Courts",
+      "portal_tip": "Hide behind a frozen statue whenever Innocence casts his giant golden bullet-hell orb!",
+      "badges": [
+        {
+          "label": "GO LEFT FROM WP (CCW ↺)",
+          "color": "amber"
+        },
+        {
+          "label": "BOSS: INNOCENCE",
+          "color": "rose"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Tag Waypoint & head LEFT (West) to start the counter-clockwise spiral"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill High Templar Avarius & Innocence (hide behind statues for orb!)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Talk to Sin & Bannon → Exit right into The Torched Courts"
+        }
+      ],
+      "boss_info": "Innocence, God-Emperor: Massive Fire & Physical damage. Bullet-hell orb deals lethal Fire damage unless blocked by a statue.",
+      "gem_reward": "Opens the second half of Act 5.",
+      "variants": [
+        {
+          "title": "Fixed CCW Spiral",
+          "desc": "Always goes West → South → East → North → Center."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start + WP",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "CCW Spiral (Go Left!)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "Innocence → Torched Courts",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a5_s06_torched_courts",
+      "act": 5,
+      "step_number": 6,
+      "zone_name": "The Torched Courts",
+      "area_level": 44,
+      "compass": "COUNTER-CLOCKWISE ↺",
+      "summary": "Run the exact reverse loop of Templar Courts (Up → Left → Down) → Enter The Ruined Square",
+      "layout_tell": "Torched Courts is the mirror of Templar Courts: loop Counter-Clockwise to the South-West exit.",
+      "next_exit": "Enter The Ruined Square",
+      "portal_tip": "Run straight through without stopping",
+      "badges": [
+        {
+          "label": "CCW LOOP ↺",
+          "color": "emerald"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Loop North, then West, then South-West"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Ruined Square"
+        }
+      ],
+      "boss_info": "Kitava Heralds: Leap slam + Mortar projectiles.",
+      "gem_reward": "None.",
+      "variants": [
+        {
+          "title": "CCW U-Loop",
+          "desc": "Starts SE and exits SW into Ruined Square."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "North Hall",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "main"
+          },
+          {
+            "id": "exit",
+            "label": "↙ The Ruined Square",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a5_s07_ruined_square",
+      "act": 5,
+      "step_number": 7,
+      "zone_name": "The Ruined Square",
+      "area_level": 44,
+      "compass": "NW (WP + OSSUARY) → S → NE",
+      "summary": "Hug top wall to North-West corner → TAG WAYPOINT → Enter The Ossuary right beside the WP!",
+      "layout_tell": "⚡ RUINED SQUARE CORNERS: NW = Waypoint + The Ossuary; South = The Reliquary (+1 Pt); NE = Cathedral Rooftop (Kitava)!",
+      "next_exit": "Tag NW Waypoint → Enter The Ossuary",
+      "portal_tip": "Always tag the NW Waypoint right outside The Ossuary so you can teleport back after Reliquary!",
+      "badges": [
+        {
+          "label": "NW = WP + OSSUARY",
+          "color": "sky"
+        },
+        {
+          "label": "S = RELIQUARY (+1 PT)",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "WP",
+          "color": "sky",
+          "text": "Head North-West to the top-left corner & TAG WAYPOINT"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Enter The Ossuary right next to the Waypoint"
+        }
+      ],
+      "boss_info": "Utula (Optional unique boss in square): Skip during speed leveling.",
+      "gem_reward": "Hub zone for Act 5 finale.",
+      "variants": [
+        {
+          "title": "Fixed Corner POIs",
+          "desc": "NW = Ossuary + WP, S = Reliquary, NE = Cathedral Rooftop."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "NW: WP + Ossuary",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "S: Reliquary (+1 Pt)",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "NE: Cathedral Rooftop",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a5_s08_ossuary_and_reliquary",
+      "act": 5,
+      "step_number": 8,
+      "zone_name": "The Ossuary",
+      "area_level": 44,
+      "compass": "CLOCKWISE LOOP → SIGN OF PURITY",
+      "summary": "Loop Clockwise to back tomb → Loot Sign of Purity → Then do The Reliquary (3 Torments = +1 Skill Pt!)",
+      "layout_tell": "In The Ossuary, the Sign of Purity is always at the opposite end of the figure-8 loop from the entrance.",
+      "next_exit": "Loot Sign of Purity → Exit to Ruined Square → Do Reliquary (South) → Go NE to Cathedral Rooftop",
+      "portal_tip": "In The Reliquary, check the 3 outer corners for Kitava's Torments (+1 Passive Skill Point)!",
+      "badges": [
+        {
+          "label": "GET SIGN OF PURITY",
+          "color": "amber"
+        },
+        {
+          "label": "+1 PT IN RELIQUARY",
+          "color": "amber"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "In The Ossuary: Loop to back room → Click Tomb for Sign of Purity"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "In Ruined Square: Go South to The Reliquary → Loot 3 Torments (+1 Pt)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Take WP to Ruined Square → Go NE into The Cathedral Rooftop"
+        }
+      ],
+      "boss_info": "Bone Husks: Cast bone nova spikes on death.",
+      "gem_reward": "Kitava's Torments (Lani in Town): Book of Skill (+1 Passive Skill Point)!",
+      "variants": [
+        {
+          "title": "Circular Tomb",
+          "desc": "Exit shortcut opens right behind the Sign of Purity."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start",
+            "x": 0.16,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Sign of Purity",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "quest"
+          },
+          {
+            "id": "exit",
+            "label": "→ Reliquary / Rooftop",
+            "x": 0.84,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a5_s09_cathedral_rooftop",
+      "act": 5,
+      "step_number": 9,
+      "zone_name": "The Cathedral Rooftop",
+      "area_level": 45,
+      "compass": "NW ↖ TO KITAVA",
+      "summary": "Run straight North-West along the rooftop → Place Sign of Purity → Kill Kitava → Sail with Lilly to Act 6",
+      "layout_tell": "100% linear rooftop leading North-West into the Cathedral Apex.",
+      "next_exit": "Kill Kitava → Talk to Lilly Roth on boat → Enter Act 6",
+      "portal_tip": "⚡ WARNING: Defeating Act 5 Kitava applies a permanent -30% to All Resistances!",
+      "badges": [
+        {
+          "label": "ACT 5 BOSS: KITAVA",
+          "color": "rose"
+        },
+        {
+          "label": "-30% ALL RESISTS AFTER!",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Run NW along the rooftop into the Cathedral Apex"
+        },
+        {
+          "tag": "BOSS",
+          "color": "rose",
+          "text": "Kill Kitava (dodge sweeping fire/X-blast & kill Heart adds)"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "Sail with Lilly Roth to Lioneye's Watch (Act 6)"
+        }
+      ],
+      "boss_info": "Kitava, the Insatiable: Heavy Physical & Fire sweeping slams, X-blasts, and dark ground degen.",
+      "gem_reward": "Completes Part 1 (Acts 1–5) and opens Act 6.",
+      "variants": [
+        {
+          "title": "Linear NW Rooftop",
+          "desc": "Direct path to Cathedral Apex."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start (SE)",
+            "x": 0.84,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "mid",
+            "label": "Cathedral Apex",
+            "x": 0.5,
+            "y": 0.5,
+            "type": "boss"
+          },
+          {
+            "id": "exit",
+            "label": "↖ Kitava → Act 6",
+            "x": 0.16,
+            "y": 0.2,
+            "type": "exit"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "mid",
+            "style": "main"
+          },
+          {
+            "from": "mid",
+            "to": "exit",
+            "style": "main"
+          }
+        ]
+      }
+    }
+  ]
+}

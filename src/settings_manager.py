@@ -1,16 +1,17 @@
 """
 Settings manager for PoE1 Campaign Speedrun Companion.
 
-Handles persistent user configuration (opacity slider, active UI mode,
-Client.txt log path, and optional extra info toggles which are OFF by default).
+Handles persistent user configuration (overlay opacity slider, active UI mode,
+Client.txt log path, optional extra info toggles which are OFF by default, and
+Labyrinth Trial unlock/completion state).
 """
 
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 DEFAULT_STEAM_LOG_PATHS = [
     Path(r"C:\Program Files (x86)\Steam\steamapps\common\Path of Exile\logs\Client.txt"),
@@ -35,7 +36,7 @@ def detect_default_client_log() -> str:
 class AppSettings:
     """User-configurable settings. Extra info flags are OFF by default."""
 
-    opacity: float = 0.92  # Range: 0.25 to 1.00
+    opacity: float = 0.92  # Range: 0.25 to 1.00 (Applies only in Overlay Mode)
     ui_mode: str = "dashboard"  # "overlay" | "dashboard" | "both"
     overlay_click_through: bool = True
     overlay_x: int = 980
@@ -48,10 +49,16 @@ class AppSettings:
     show_gem_rewards: bool = False
     show_variants: bool = False
 
+    # Persistent Labyrinth Trial states (trial_id strings)
+    unlocked_trials: List[str] = field(default_factory=list)
+    completed_trials: List[str] = field(default_factory=list)
+
     def __post_init__(self) -> None:
         if not self.client_log_path:
             self.client_log_path = detect_default_client_log()
         self.opacity = max(0.25, min(1.0, float(self.opacity)))
+        self.unlocked_trials = list(self.unlocked_trials or [])
+        self.completed_trials = list(self.completed_trials or [])
 
 
 class SettingsManager:
@@ -85,7 +92,7 @@ class SettingsManager:
         )
 
     def set_opacity(self, opacity: float) -> float:
-        """Set window opacity clamped between 0.25 and 1.00 and save."""
+        """Set overlay opacity clamped between 0.25 and 1.00 and save."""
         self.settings.opacity = max(0.25, min(1.0, round(float(opacity), 2)))
         self.save()
         return self.settings.opacity
@@ -95,4 +102,24 @@ class SettingsManager:
         if field_name not in ("show_boss_info", "show_gem_rewards", "show_variants"):
             raise ValueError(f"Unknown extra info setting: {field_name}")
         setattr(self.settings, field_name, bool(enabled))
+        self.save()
+
+    def mark_trial_unlocked(self, trial_id: str) -> bool:
+        """Mark a Labyrinth Trial as unlocked if not already unlocked."""
+        if trial_id not in self.settings.unlocked_trials:
+            self.settings.unlocked_trials.append(trial_id)
+            self.save()
+            return True
+        return False
+
+    def set_trial_completed(self, trial_id: str, completed: bool) -> None:
+        """Mark a Labyrinth Trial as completed or uncompleted and save."""
+        if completed:
+            if trial_id not in self.settings.completed_trials:
+                self.settings.completed_trials.append(trial_id)
+            if trial_id not in self.settings.unlocked_trials:
+                self.settings.unlocked_trials.append(trial_id)
+        else:
+            if trial_id in self.settings.completed_trials:
+                self.settings.completed_trials.remove(trial_id)
         self.save()
