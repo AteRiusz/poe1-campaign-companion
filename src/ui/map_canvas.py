@@ -1,32 +1,24 @@
 """
-Topology Map Canvas (`TopologyMapWidget`) for PoE1 Campaign Companion.
+Vector Topology Map Canvas (`TopologyMapWidget`) for PoE1 Campaign Companion.
 
-Supports two rendering modes:
-1. **Embedded Static Graphic Files (`assets/maps/<step_id>.png`)**:
-   Loads pre-rendered, high-DPI static map graphics from `assets/maps/` (and
-   `assets/maps/compact/` for the in-game overlay) so layouts are 100% static,
-   inspectable on disk, and can be edited with any image tool.
-2. **Vector QPainter Renderer (Generator & Fallback)**:
-   Draws the compass grid (`N / S / E / W`), directional edge arrows, glowing
-   nodes, and 2D collision-free tooltip pills (`compute_label_rects`) used both
-   to generate the static `.png` files and as a fallback for unmapped zones.
+Renders the simplified zone schematic (`nodes` and `edges` normalized in 0.0..1.0 coordinates)
+live at native widget resolution using antialiased PyQt6 QPainter vector graphics, with a
+2D collision-free tooltip placement solver so node tooltips never overlap each other or any node circles.
 """
 
 from __future__ import annotations
 
 import math
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
 from PyQt6.QtCore import QPointF, QRectF, Qt
 from PyQt6.QtGui import (
     QColor,
     QFont,
     QFontMetricsF,
-    QImage,
     QPainter,
     QPen,
-    QPixmap,
     QPolygonF,
 )
 from PyQt6.QtWidgets import QWidget
@@ -40,8 +32,6 @@ NODE_COLORS: Dict[str, str] = {
     "exit": "#10b981",    # Emerald green (Primary Exit)
 }
 
-ASSETS_MAPS_DIR = Path(__file__).resolve().parent.parent.parent / "assets" / "maps"
-
 
 def _intersection_area(a: QRectF, b: QRectF) -> float:
     inter = a.intersected(b)
@@ -51,13 +41,8 @@ def _intersection_area(a: QRectF, b: QRectF) -> float:
 
 
 class TopologyMapWidget(QWidget):
-    """
-    Displays the simplified area layout map for the current campaign step.
-    Loads the embedded static `.png` graphic from `assets/maps/` when available,
-    and falls back to antialiased QPainter vector rendering for dynamic/unmapped zones.
-    """
+    """Custom QWidget that draws a crisp vector node-and-edge layout map for the current zone."""
 
-    _pixmap_cache: Dict[str, QPixmap] = {}
     _fonts_loaded: bool = False
 
     @classmethod
@@ -79,30 +64,17 @@ class TopologyMapWidget(QWidget):
         self.compact = compact
         self.topology: Dict[str, Any] = {"nodes": [], "edges": []}
         self.compass_label: str = ""
-        self.step_id: str = ""
-        self.prefer_static_asset: bool = True
         self.setMinimumHeight(140 if compact else 230)
 
     def set_topology(
         self,
         topology: Dict[str, Any],
         compass_label: str = "",
-        step_id: str = "",
     ) -> None:
-        """Update the zone topology graph (and optional `step_id` for static PNG lookup) and repaint."""
+        """Update the zone topology graph in memory and trigger a native vector repaint."""
         self.topology = topology or {"nodes": [], "edges": []}
         self.compass_label = compass_label
-        self.step_id = step_id or str(self.topology.get("step_id", ""))
         self.update()
-
-    def get_static_asset_path(self, step_id: Optional[str] = None) -> Optional[Path]:
-        """Return the path to the embedded static `.png` graphic for `step_id`, if it exists."""
-        sid = step_id if step_id is not None else self.step_id
-        if not sid:
-            return None
-        subdir = ASSETS_MAPS_DIR / "compact" if self.compact else ASSETS_MAPS_DIR
-        candidate = subdir / f"{sid}.png"
-        return candidate if candidate.exists() else None
 
     def _compute_node_positions(self, w: float, h: float) -> Tuple[Dict[str, QPointF], float]:
         radius = 4.5 if self.compact else 6.5
@@ -118,16 +90,6 @@ class TopologyMapWidget(QWidget):
             ny = pad_y + float(n.get("y", 0.5)) * usable_h
             node_coords[str(n.get("id", ""))] = QPointF(nx, ny)
         return node_coords, radius
-
-    @staticmethod
-    def _compass_marker_obstacles(w: float, h: float) -> List[QRectF]:
-        """Return small bounding rects for the N/S/W/E cardinal edge markers so labels avoid them."""
-        return [
-            QRectF(w / 2.0 - 10.0, 2.0, 20.0, 14.0),          # N
-            QRectF(w / 2.0 - 10.0, h - 16.0, 20.0, 14.0),     # S
-            QRectF(2.0, h / 2.0 - 8.0, 16.0, 16.0),           # W
-            QRectF(w - 18.0, h / 2.0 - 8.0, 16.0, 16.0),      # E
-        ]
 
     def compute_label_rects(self, w: float, h: float) -> List[Tuple[Dict[str, Any], QPointF, QRectF]]:
         """
@@ -208,7 +170,6 @@ class TopologyMapWidget(QWidget):
             grid_candidates: List[Tuple[float, float]] = [
                 (cx_s, cy_s) for cx_s in x_slots for cy_s in y_slots
             ]
-
             grid_candidates.sort(
                 key=lambda pos: (pos[0] + box_w / 2.0 - pt.x()) ** 2 + (pos[1] + box_h / 2.0 - pt.y()) ** 2
             )
@@ -242,7 +203,7 @@ class TopologyMapWidget(QWidget):
 
     @staticmethod
     def _draw_edge_arrow(painter: QPainter, p1: QPointF, p2: QPointF, color: QColor, size: float = 6.0) -> None:
-        """Draw a small directional arrowhead at the midpoint of edge `p1 -> p2`."""
+        """Draw a directional arrowhead along the midpoint of edge `p1 -> p2`."""
         dx = p2.x() - p1.x()
         dy = p2.y() - p1.y()
         length = math.hypot(dx, dy)
@@ -263,19 +224,21 @@ class TopologyMapWidget(QWidget):
         painter.drawPolygon(QPolygonF([tip, left, right]))
         painter.restore()
 
-    def paint_vector_topology(self, painter: QPainter, w: float, h: float) -> None:
-        """Render the complete compass rose, edges, glowing nodes, and collision-free labels."""
+    def paintEvent(self, _event: Any) -> None:
+        painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
-        rect = QRectF(0.0, 0.0, w, h)
 
-        # 0. Dark slate-stone background with subtle border & cardinal compass rose
+        rect = self.rect()
+        w = float(rect.width())
+        h = float(rect.height())
+
+        # Dark slate-stone background with subtle border & cardinal N/S/W/E guides
         painter.fillRect(rect, QColor("#090b10"))
         border_pen = QPen(QColor("#292524"), 1.2)
         painter.setPen(border_pen)
-        painter.drawRoundedRect(rect.adjusted(1.0, 1.0, -1.0, -1.0), 8.0, 8.0)
+        painter.drawRoundedRect(rect.adjusted(1, 1, -1, -1), 8.0, 8.0)
 
-        # Subtle compass crosshair lines & N / S / W / E labels
-        grid_pen = QPen(QColor(255, 255, 255, 16), 1.0, Qt.PenStyle.DotLine)
+        grid_pen = QPen(QColor(255, 255, 255, 14), 1.0, Qt.PenStyle.DotLine)
         painter.setPen(grid_pen)
         painter.drawLine(QPointF(w / 2.0, 16.0), QPointF(w / 2.0, h - 16.0))
         painter.drawLine(QPointF(18.0, h / 2.0), QPointF(w - 18.0, h / 2.0))
@@ -290,6 +253,7 @@ class TopologyMapWidget(QWidget):
 
         nodes: List[Dict[str, Any]] = self.topology.get("nodes", [])
         edges: List[Dict[str, Any]] = self.topology.get("edges", [])
+
         if not nodes:
             return
 
@@ -374,37 +338,3 @@ class TopologyMapWidget(QWidget):
 
             painter.setPen(QColor("#f5f5f4"))
             painter.drawText(lrect, Qt.AlignmentFlag.AlignCenter, label)
-
-    def render_to_image(self, width: int, height: int, scale: float = 2.0) -> QImage:
-        """Render the current topology to a crisp HiDPI `QImage` for saving to `assets/maps/*.png`."""
-        img = QImage(int(width * scale), int(height * scale), QImage.Format.Format_ARGB32_Premultiplied)
-        img.setDevicePixelRatio(scale)
-        img.fill(Qt.GlobalColor.transparent)
-        painter = QPainter(img)
-        self.paint_vector_topology(painter, float(width), float(height))
-        painter.end()
-        return img
-
-    def paintEvent(self, _event: Any) -> None:
-        painter = QPainter(self)
-        painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
-        painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform, True)
-
-        rect = self.rect()
-        w = float(rect.width())
-        h = float(rect.height())
-
-        # Prefer embedded static graphic file from `assets/maps/` when available
-        if self.prefer_static_asset and self.step_id:
-            asset_path = self.get_static_asset_path(self.step_id)
-            if asset_path is not None:
-                cache_key = f"{asset_path}:{asset_path.stat().st_mtime_ns}"
-                pix = self._pixmap_cache.get(cache_key)
-                if pix is None:
-                    pix = QPixmap(str(asset_path))
-                    self._pixmap_cache[cache_key] = pix
-                if not pix.isNull():
-                    painter.drawPixmap(rect, pix)
-                    return
-
-        self.paint_vector_topology(painter, w, h)

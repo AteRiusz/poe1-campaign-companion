@@ -21,7 +21,7 @@ Instead of alt-tabbing to read long paragraphs from a walkthrough, this app tail
     * 🔵 **Sky (`[WP]` / `[PORTAL]`):** Waypoints & speedrunner portal/logout tricks
     * 🔴 **Rose (`[BOSS]`):** Required boss fights
   * **Speedrunner "Layout Tell":** 1-line heuristic explaining how to read the zone's random seed generation (e.g., *"The 3 small stones next to The Ledge Waypoint always point toward The Climb exit"*).
-  * **Embedded Static Topology Maps (`assets/maps/`):** High-DPI pre-rendered static `.png` area maps (with `N / S / W / E` compass markers, directional path arrows, and non-overlapping tooltip pills) embedded directly into the app, with automatic QPainter fallback for custom/unmapped zones.
+  * **Collision-Free Vector Topology Map:** Antialiased live QPainter vector schematic showing `N / S / W / E` compass guides, directional path arrows, and non-overlapping tooltip pills at native widget resolution.
 * **Complete Acts 1–10 Campaign Route & Dedicated Labyrinth Trials Tracker:**
   * **Modular Per-Act Route (`data/acts/act1.json` .. `act10.json`):** `103` zone-by-zone steps covering all 10 Acts, all 24 Passive Skill Point quests, and major Pantheon bosses.
   * **Run-Anytime Labyrinth Trials Tracker (`Normal 0/6`, `Cruel 0/3`, `Merciless 0/3`):** Tracks `🔒 Locked` → `🔓 Unlocked — Ready to Run` → `✅ Completed` states across all 12 campaign trials, displaying the exact **Waypoint Hint** and **Trap Type** for any unlocked/skipped trials.
@@ -82,14 +82,10 @@ poe1-campaign-companion/
 ├── requirements.txt          # Python dependencies (PyQt6, pytest)
 ├── main.py                   # Application entry point
 ├── run_companion.bat         # Windows double-click launcher
-├── assets/
-│   └── maps/                     # Pre-rendered static .png map graphics (103 full + 103 compact)
 ├── data/
 │   ├── acts/
 │   │   └── act1.json .. act10.json # Per-Act declarative steps, layout tells & compass-accurate nodes
 │   └── labyrinth_trials.json       # All 12 Campaign Labyrinth Trials (Locked → Unlocked → Completed)
-├── scripts/
-│   └── generate_map_assets.py    # Regenerates static .png map graphics in assets/maps/
 ├── src/
 │   ├── log_watcher.py        # Non-blocking Client.txt regex parser & incremental tailer
 │   ├── route_engine.py       # Stateful campaign step tracker with forward-lookahead matching

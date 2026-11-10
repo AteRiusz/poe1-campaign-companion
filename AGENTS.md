@@ -17,8 +17,6 @@ C:\Projects\poe1-campaign-companion\
 ├── run_companion.bat             # Double-click launcher (runs main.py via .venv\Scripts\pythonw.exe)
 ├── config\
 │   └── user_settings.json        # Auto-generated user preferences (opacity, extra info toggles, trial states)
-├── assets\
-│   └── maps\                     # Embedded static .png map graphics (103 full-size + 103 compact in compact/)
 ├── data\
 │   ├── acts\
 │   │   ├── act1.json             # Act 1 zone-by-zone route & topology maps (16 steps)
@@ -32,8 +30,6 @@ C:\Projects\poe1-campaign-companion\
 │   │   ├── act9.json             # Act 9 zone-by-zone route & topology maps (6 steps)
 │   │   └── act10.json            # Act 10 zone-by-zone route & topology maps (7 steps)
 │   └── labyrinth_trials.json     # All 12 Campaign Labyrinth Trials (6 Normal, 3 Cruel, 3 Merciless)
-├── scripts\
-│   └── generate_map_assets.py    # Generates static .png map graphics in assets/maps/ from data/acts/*.json
 ├── src\
 │   ├── __init__.py
 │   ├── settings_manager.py       # AppSettings dataclass & SettingsManager JSON persistence
@@ -96,14 +92,12 @@ C:\Projects\poe1-campaign-companion\
 * **`RouteEngine.get_trial_status(trial, unlocked_ids, completed_ids) -> str`**:
   Computes `'locked' | 'unlocked' | 'completed'` for each of the 12 Labyrinth Trials (`6` Normal, `3` Cruel, `3` Merciless), automatically unlocking trials when the player reaches their `unlock_zone` or progresses past their Act.
 
-### D. `src/ui/map_canvas.py` (`TopologyMapWidget`) & `scripts/generate_map_assets.py`
-* **Embedded Static Graphic Files (`assets/maps/<step_id>.png` & `assets/maps/compact/<step_id>.png`)**:
-  * All 103 campaign zones are pre-rendered into static 2x HiDPI `.png` image files in `assets/maps/` (and `assets/maps/compact/` for the in-game overlay).
-  * `TopologyMapWidget` loads these static `.png` files directly via an in-memory `QPixmap` cache so layouts are 100% static and can also be inspected or hand-edited with any image editor.
-  * Whenever you modify node coordinates in `data/acts/act*.json`, run `C:\Projects\poe1-campaign-companion\.venv\Scripts\python.exe C:\Projects\poe1-campaign-companion\scripts\generate_map_assets.py` to regenerate the static `.png` files.
-* **Vector QPainter Fallback & Compass Audit**:
-  * Renders normalized `0.0 .. 1.0` coordinates from `step.topology` (`nodes` and `edges`) with `N / S / W / E` cardinal compass markers and directional edge arrows.
-  * **`compute_label_rects(w: float, h: float)`**: 2D collision-avoiding tooltip placement solver that guarantees **0.0px overlap** between any two tooltip pills and **0.0px overlap** with any node circle.
+### D. `src/ui/map_canvas.py` (`TopologyMapWidget`)
+* **Live Vector Rendering (`paintEvent` on step change / resize):**
+  * On startup, `RouteEngine` loads the lightweight `topology` dicts (`nodes` and `edges`) from `data/acts/act1.json` .. `act10.json` into memory with zero graphics pre-rendering overhead.
+  * When the active step changes (`set_topology`) or the window resizes, `paintEvent` dynamically maps normalized `0.0 .. 1.0` coordinates to the widget's exact current pixel dimensions using `QPainter` vector graphics (`< 0.5ms`), keeping node circles perfectly round and pill text crisp at any aspect ratio.
+  * Renders `N / S / W / E` cardinal compass markers, a subtle center crosshair grid, and directional edge arrowheads.
+* **`compute_label_rects(w: float, h: float)`**: 2D collision-avoiding tooltip placement solver that guarantees **0.0px overlap** between any two tooltip pills and **0.0px overlap** with any node circle in both full Dashboard and compact Overlay modes.
 * Supported `node["type"]` values and colors:
   * `"start"` (`#a8a29e` Stone)
   * `"wp"` (`#38bdf8` Sky Blue)

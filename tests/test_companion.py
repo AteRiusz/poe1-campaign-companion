@@ -285,22 +285,3 @@ def test_topology_compass_quadrants_across_all_103_steps() -> None:
                     assert 0.35 <= x <= 0.65 and 0.35 <= y <= 0.65, f"{sid} '{lbl}' at ({x},{y}) must be near Center"
 
 
-def test_embedded_static_map_png_assets_exist_and_load(qapp: QApplication) -> None:
-    from PyQt6.QtGui import QPixmap
-
-    engine = RouteEngine()
-    full_widget = TopologyMapWidget(compact=False)
-    compact_widget = TopologyMapWidget(compact=True)
-
-    for step in engine.steps:
-        full_path = full_widget.get_static_asset_path(step.step_id)
-        compact_path = compact_widget.get_static_asset_path(step.step_id)
-
-        assert full_path is not None and full_path.exists(), f"Missing static PNG for {step.step_id}"
-        assert compact_path is not None and compact_path.exists(), f"Missing compact PNG for {step.step_id}"
-
-        pix_full = QPixmap(str(full_path))
-        pix_compact = QPixmap(str(compact_path))
-        assert not pix_full.isNull() and pix_full.width() >= 380
-        assert not pix_compact.isNull() and pix_compact.width() >= 210
-
