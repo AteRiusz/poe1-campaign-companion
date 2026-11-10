@@ -1,0 +1,19 @@
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Python bytecode & caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Local user settings (auto-generated on first run)
+config/user_settings.json
+
+# OS / IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

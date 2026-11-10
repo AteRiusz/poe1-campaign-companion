@@ -1,0 +1,9 @@
+[project]
+name = "poe1-campaign-companion"
+version = "0.1.0"
+description = "Real-time Path of Exile 1 Campaign Speedrun Companion (In-Game Overlay + Second-Screen Dashboard)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
