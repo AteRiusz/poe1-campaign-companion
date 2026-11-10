@@ -79,9 +79,105 @@
       }
     },
     {
-      "step_id": "a2_s02_old_fields",
+      "step_id": "a2_s02_forest_encampment",
       "act": 2,
       "step_number": 2,
+      "zone_name": "The Forest Encampment",
+      "area_level": 13,
+      "compass": "NE ↗ (1ST EXIT)",
+      "summary": "Act 2 Town Hub (3 Exits) → Take the North-East (NE) exit first into The Old Fields (West exit to The Riverways is used later)",
+      "layout_tell": "The Forest Encampment has 3 exits: SE = The Southern Forest (where you came from), NE (top-right past Greust) = The Old Fields (GO HERE FIRST), and West (left across wooden bridge) = The Riverways (take this later after Chamber of Sins Level 2).",
+      "next_exit": "Take NE Exit (top-right) → Enter The Old Fields",
+      "portal_tip": "Go NE to The Old Fields first; use the West exit to The Riverways later after Chamber of Sins Level 2",
+      "badges": [
+        {
+          "label": "1ST EXIT: NE ↗ OLD FIELDS",
+          "color": "emerald"
+        },
+        {
+          "label": "2ND EXIT: WEST ← RIVERWAYS",
+          "color": "sky"
+        }
+      ],
+      "actions": [
+        {
+          "tag": "MAIN",
+          "color": "emerald",
+          "text": "Check Yeena & Greust for 3-links / movement boots"
+        },
+        {
+          "tag": "EXIT",
+          "color": "emerald",
+          "text": "1st Route (Now): Exit North-East (top-right past Greust) into The Old Fields"
+        },
+        {
+          "tag": "QUEST",
+          "color": "amber",
+          "text": "2nd Route (After Chamber of Sins 2): Exit West across the bridge into The Riverways"
+        }
+      ],
+      "boss_info": "Safe Town Hub (Eramir, Yeena, Greust, Silk, Helena).",
+      "gem_reward": "Yeena sells Lvl 8 & Lvl 12 Skill/Support Gems; completing Chamber of Sins 2 unlocks Lvl 16 Heralds.",
+      "variants": [
+        {
+          "title": "3-Exit Town Hub",
+          "desc": "SE = Southern Forest (entry), NE = The Old Fields (1st exit), W = The Riverways (2nd exit after Fidelitas)."
+        }
+      ],
+      "topology": {
+        "nodes": [
+          {
+            "id": "start",
+            "label": "↘ Southern Forest",
+            "x": 0.78,
+            "y": 0.8,
+            "type": "start"
+          },
+          {
+            "id": "wp",
+            "label": "Town WP + NPCs",
+            "x": 0.5,
+            "y": 0.52,
+            "type": "wp"
+          },
+          {
+            "id": "old_fields",
+            "label": "↗ NE: Old Fields (1st)",
+            "x": 0.82,
+            "y": 0.2,
+            "type": "exit"
+          },
+          {
+            "id": "riverways",
+            "label": "← W: Riverways (2nd)",
+            "x": 0.18,
+            "y": 0.54,
+            "type": "quest"
+          }
+        ],
+        "edges": [
+          {
+            "from": "start",
+            "to": "wp",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "old_fields",
+            "style": "main"
+          },
+          {
+            "from": "wp",
+            "to": "riverways",
+            "style": "branch"
+          }
+        ]
+      }
+    },
+    {
+      "step_id": "a2_s03_old_fields",
+      "act": 2,
+      "step_number": 3,
       "zone_name": "The Old Fields",
       "area_level": 14,
       "compass": "FOLLOW ROAD ↗",
@@ -163,9 +259,9 @@
       }
     },
     {
-      "step_id": "a2_s03_crossroads",
+      "step_id": "a2_s04_crossroads",
       "act": 2,
-      "step_number": 3,
+      "step_number": 4,
       "zone_name": "The Crossroads",
       "area_level": 15,
       "compass": "4-WAY HUB",
@@ -271,9 +367,9 @@
       }
     },
     {
-      "step_id": "a2_s04_chamber_of_sins_1",
+      "step_id": "a2_s05_chamber_of_sins_1",
       "act": 2,
-      "step_number": 4,
+      "step_number": 5,
       "zone_name": "The Chamber of Sins Level 1",
       "area_level": 15,
       "compass": "CHECK MAP DEVICE",
@@ -355,9 +451,9 @@
       }
     },
     {
-      "step_id": "a2_s05_chamber_of_sins_2",
+      "step_id": "a2_s06_chamber_of_sins_2",
       "act": 2,
-      "step_number": 5,
+      "step_number": 6,
       "zone_name": "The Chamber of Sins Level 2",
       "area_level": 16,
       "compass": "TRIAL + FIDELITAS",
@@ -439,9 +535,9 @@
       }
     },
     {
-      "step_id": "a2_s06_riverways",
+      "step_id": "a2_s07_riverways",
       "act": 2,
-      "step_number": 6,
+      "step_number": 7,
       "zone_name": "The Riverways",
       "area_level": 15,
       "compass": "FOLLOW ROAD ↖",
@@ -535,9 +631,9 @@
       }
     },
     {
-      "step_id": "a2_s07_western_forest",
+      "step_id": "a2_s08_western_forest",
       "act": 2,
-      "step_number": 7,
+      "step_number": 8,
       "zone_name": "The Western Forest",
       "area_level": 17,
       "compass": "ROAD + TORCH TELL",
@@ -647,9 +743,9 @@
       }
     },
     {
-      "step_id": "a2_s08_broken_bridge",
+      "step_id": "a2_s09_broken_bridge",
       "act": 2,
-      "step_number": 8,
+      "step_number": 9,
       "zone_name": "The Broken Bridge",
       "area_level": 16,
       "compass": "FOLLOW ROAD ↗",
@@ -731,9 +827,9 @@
       }
     },
     {
-      "step_id": "a2_s09_crypt_level_1",
+      "step_id": "a2_s10_crypt_level_1",
       "act": 2,
-      "step_number": 9,
+      "step_number": 10,
       "zone_name": "The Crypt Level 1",
       "area_level": 17,
       "compass": "LOOP / TRIAL #3",
@@ -815,9 +911,9 @@
       }
     },
     {
-      "step_id": "a2_s10_wetlands",
+      "step_id": "a2_s11_wetlands",
       "act": 2,
-      "step_number": 10,
+      "step_number": 11,
       "zone_name": "The Wetlands",
       "area_level": 16,
       "compass": "CENTER + NW ↖",
@@ -899,9 +995,9 @@
       }
     },
     {
-      "step_id": "a2_s11_vaal_ruins",
+      "step_id": "a2_s12_vaal_ruins",
       "act": 2,
-      "step_number": 11,
+      "step_number": 12,
       "zone_name": "The Vaal Ruins",
       "area_level": 18,
       "compass": "S-CURVE / WALL",
@@ -995,9 +1091,9 @@
       }
     },
     {
-      "step_id": "a2_s12_northern_forest",
+      "step_id": "a2_s13_northern_forest",
       "act": 2,
-      "step_number": 12,
+      "step_number": 13,
       "zone_name": "The Northern Forest",
       "area_level": 18,
       "compass": "NE ↗ (RIVER)",
@@ -1070,9 +1166,9 @@
       }
     },
     {
-      "step_id": "a2_s13_caverns_and_pyramid",
+      "step_id": "a2_s14_caverns_and_pyramid",
       "act": 2,
-      "step_number": 13,
+      "step_number": 14,
       "zone_name": "The Caverns",
       "area_level": 19,
       "compass": "STAIRS UP ↑",

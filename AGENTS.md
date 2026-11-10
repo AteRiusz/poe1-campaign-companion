@@ -17,10 +17,12 @@ C:\Projects\poe1-campaign-companion\
 ├── run_companion.bat             # Double-click launcher (runs main.py via .venv\Scripts\pythonw.exe)
 ├── config\
 │   └── user_settings.json        # Auto-generated user preferences (opacity, extra info toggles, trial states)
+├── logs\
+│   └── companion.log             # Auto-generated startup, hotkey & crash diagnostic log
 ├── data\
 │   ├── acts\
 │   │   ├── act1.json             # Act 1 zone-by-zone route & topology maps (16 steps)
-│   │   ├── act2.json             # Act 2 zone-by-zone route & topology maps (13 steps)
+│   │   ├── act2.json             # Act 2 zone-by-zone route & topology maps (14 steps)
 │   │   ├── act3.json             # Act 3 zone-by-zone route & topology maps (12 steps)
 │   │   ├── act4.json             # Act 4 zone-by-zone route & topology maps (11 steps)
 │   │   ├── act5.json             # Act 5 zone-by-zone route & topology maps (9 steps)
@@ -32,6 +34,7 @@ C:\Projects\poe1-campaign-companion\
 │   └── labyrinth_trials.json     # All 12 Campaign Labyrinth Trials (6 Normal, 3 Cruel, 3 Merciless)
 ├── src\
 │   ├── __init__.py
+│   ├── logger.py                 # File + stderr logger & faulthandler setup (writes to logs/companion.log)
 │   ├── settings_manager.py       # AppSettings dataclass & SettingsManager JSON persistence
 │   ├── log_watcher.py            # Regex parser & non-blocking ClientLogTailer for PoE's Client.txt
 │   ├── route_engine.py           # Stateful RouteEngine & RouteStep model with forward-lookahead matching
@@ -84,15 +87,22 @@ C:\Projects\poe1-campaign-companion\
     * `unlocked_trials: List[str]` and `completed_trials: List[str]` persist across sessions via `mark_trial_unlocked()` and `set_trial_completed()`.
 
 ### C. `src/route_engine.py`
-* Loads all per-Act JSON files (`data/acts/act1.json` .. `act10.json`, `103` steps total) in numerical Act order and all 12 Labyrinth Trials (`data/labyrinth_trials.json`).
+* Loads all per-Act JSON files (`data/acts/act1.json` .. `act10.json`, `104` steps total) in numerical Act order and all 12 Labyrinth Trials (`data/labyrinth_trials.json`).
 * **`RouteEngine.on_zone_entered(zone_name: str) -> RouteStep`**:
-  1. Searches forward up to 8 steps from `current_index` first (so revisiting hubs like `The Submerged Passage` or `The Crossroads` advances to the next logical pass).
+  1. Searches forward up to 16 steps from `current_index` first (so revisiting town hubs like `The Forest Encampment` or hubs like `The Submerged Passage` / `The Crossroads` advances to the next logical pass).
   2. Falls back to the nearest matching step across the campaign.
   3. If the player enters an unmapped zone or Endgame Map (e.g., `Dunes`), sets `active_fallback` via `build_fallback_step()` without losing `current_index`.
 * **`RouteEngine.get_trial_status(trial, unlocked_ids, completed_ids) -> str`**:
   Computes `'locked' | 'unlocked' | 'completed'` for each of the 12 Labyrinth Trials (`6` Normal, `3` Cruel, `3` Merciless), automatically unlocking trials when the player reaches their `unlock_zone` or progresses past their Act.
 
-### D. `src/ui/map_canvas.py` (`TopologyMapWidget`)
+### D. `src/ui/dashboard_window.py` & `src/ui/overlay_window.py`
+* **Global In-Game Hotkeys (`Alt+L`, `Alt+]`, `Alt+[`):**
+  * `DashboardWindow._poll_global_key_states` polls Win32 `GetAsyncKeyState` on a `40ms` timer with rising-edge detection and a `180ms` debounce (`_trigger_hotkey`), allowing the player to toggle the overlay (`Alt+L`) or step forward/backward (`Alt+]` / `Alt+[`) directly inside Path of Exile without Alt-Tabbing.
+  * Avoid overriding `QWidget.nativeEvent` or calling `self.winId()` during `QMainWindow.__init__` on PyQt6 Windows.
+* **Dynamic Word-Wrap Height Sync (`OverlayWindow._sync_overlay_height`):**
+  * Keeps `OverlayWindow` at a fixed `560px` width (`OVERLAY_WIDTH = 560`), explicitly calls `.show()` on newly created checklist/extra pills, locks each label's `minimumHeight` to `heightForWidth(width)`, and resizes the overlay to `totalSizeHint().height()` so multi-line checklist pills never get squashed when switching steps.
+
+### E. `src/ui/map_canvas.py` (`TopologyMapWidget`)
 * **Live Vector Rendering (`paintEvent` on step change / resize):**
   * On startup, `RouteEngine` loads the lightweight `topology` dicts (`nodes` and `edges`) from `data/acts/act1.json` .. `act10.json` into memory with zero graphics pre-rendering overhead.
   * When the active step changes (`set_topology`) or the window resizes, `paintEvent` dynamically maps normalized `0.0 .. 1.0` coordinates to the widget's exact current pixel dimensions using `QPainter` vector graphics (`< 0.5ms`), keeping node circles perfectly round and pill text crisp at any aspect ratio.

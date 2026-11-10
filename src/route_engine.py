@@ -257,7 +257,7 @@ class RouteEngine:
             return self.current_step
 
         # 1. Forward lookahead window (handles revisiting zones or skipping optional sub-steps)
-        lookahead_limit = min(len(self.steps), self.current_index + 9)
+        lookahead_limit = min(len(self.steps), self.current_index + 16)
         for idx in range(self.current_index, lookahead_limit):
             if self.steps[idx].zone_name.strip().lower() == normalized:
                 self.current_index = idx

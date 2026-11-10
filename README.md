@@ -10,7 +10,7 @@ Instead of alt-tabbing to read long paragraphs from a walkthrough, this app tail
 
 * **100% ToS-Compliant Real-Time Zone Detection:**
   * Reads Path of Exile's official `logs/Client.txt` log file (`: You have entered <Zone>.`) — no screen capture, no OCR lag, and no memory reading.
-* **Dual-Mode Interface (Switch Anytime with `F9`):**
+* **Dual-Mode Interface (Switch Anytime with `Alt+L`):**
   1. **Second-Screen Tactical Dashboard ("Mission Control"):** Full companion window for a second monitor showing your current zone's action checklist, speedrunner layout tell, large vector topology schematic, portal/logout reminders, and an interactive Act route timeline.
   2. **In-Game Click-Through HUD Overlay:** Topmost, frameless transparent HUD that floats over Path of Exile (in *Windowed Fullscreen* mode). Uses Windows `WS_EX_TRANSPARENT` (`WindowTransparentForInput`) so your mouse clicks pass straight through into the game.
 * **Zero-Paragraph Visual System:**
@@ -23,11 +23,11 @@ Instead of alt-tabbing to read long paragraphs from a walkthrough, this app tail
   * **Speedrunner "Layout Tell":** 1-line heuristic explaining how to read the zone's random seed generation (e.g., *"The 3 small stones next to The Ledge Waypoint always point toward The Climb exit"*).
   * **Collision-Free Vector Topology Map:** Antialiased live QPainter vector schematic showing `N / S / W / E` compass guides, directional path arrows, and non-overlapping tooltip pills at native widget resolution.
 * **Complete Acts 1–10 Campaign Route & Dedicated Labyrinth Trials Tracker:**
-  * **Modular Per-Act Route (`data/acts/act1.json` .. `act10.json`):** `103` zone-by-zone steps covering all 10 Acts, all 24 Passive Skill Point quests, and major Pantheon bosses.
+  * **Modular Per-Act Route (`data/acts/act1.json` .. `act10.json`):** `104` zone-by-zone steps covering all 10 Acts, town hubs, all 24 Passive Skill Point quests, and major Pantheon bosses.
   * **Run-Anytime Labyrinth Trials Tracker (`Normal 0/6`, `Cruel 0/3`, `Merciless 0/3`):** Tracks `🔒 Locked` → `🔓 Unlocked — Ready to Run` → `✅ Completed` states across all 12 campaign trials, displaying the exact **Waypoint Hint** and **Trap Type** for any unlocked/skipped trials.
 * **Overlay-Only Opacity Slider & Optional Extra Info (Off by Default):**
   * Window mode (`DashboardWindow`) is always locked at **100% opacity** for maximum readability.
-  * When **Overlay Mode** is active (`F9`), an **Overlay Opacity Slider (`25%–100%`)** appears in **⚙️ Settings & Opacity** to adjust the In-Game HUD transparency in real time.
+  * When **Overlay Mode** is active (`Alt+L`), an **Overlay Opacity Slider (`25%–100%`)** appears in **⚙️ Settings & Opacity** to adjust the In-Game HUD transparency in real time.
   * Optional extra details are hidden by default to keep the UI clean, and can be toggled on anytime inside **⚙️ Settings**:
     * `🛡️ Boss Damage & Resist Warnings`
     * `💎 Quest Gem & Vendor Rewards`
@@ -47,9 +47,9 @@ Instead of alt-tabbing to read long paragraphs from a walkthrough, this app tail
 
 ### 2. Using the App While Playing Path of Exile 1
 1. **Automatic Sync:** Start the companion app and play Path of Exile normally. Whenever you enter a zone, the Dashboard and Overlay automatically jump to that step in the campaign route.
-2. **Using the In-Game Overlay (`F9`):**
+2. **Using the In-Game Overlay (`Alt+L`):**
    * Make sure Path of Exile's display mode is set to **Windowed Fullscreen** (Borderless Windowed) in-game so overlays can render above it.
-   * Press **`F9`** (or click **🖥️ Show In-Game Overlay (F9)** in the top bar) to toggle the in-game HUD.
+   * Press **`Alt + L`** in-game (or click **🖥️ Show In-Game Overlay (Alt+L)** in the top bar) to toggle the in-game HUD without alt-tabbing.
 3. **Repositioning the In-Game Overlay:**
    * Open **⚙️ Settings & Opacity** in the Dashboard.
    * Uncheck **🔒 Lock Overlay Click-Through**.
@@ -62,11 +62,11 @@ Instead of alt-tabbing to read long paragraphs from a walkthrough, this app tail
 
 ---
 
-## Keyboard Shortcuts
+## Global In-Game Keyboard Shortcuts
 
-| Shortcut | Action |
+| Global Shortcut (No Alt-Tab Needed) | Action |
 | :--- | :--- |
-| **`F9`** | Show / Hide the In-Game Click-Through HUD Overlay |
+| **`Alt + L`** | Show / Hide the In-Game Click-Through HUD Overlay |
 | **`Alt + ]`** | Manually advance to the **Next** campaign step |
 | **`Alt + [`** | Manually go back to the **Previous** campaign step |
 
@@ -87,11 +87,12 @@ poe1-campaign-companion/
 │   │   └── act1.json .. act10.json # Per-Act declarative steps, layout tells & compass-accurate nodes
 │   └── labyrinth_trials.json       # All 12 Campaign Labyrinth Trials (Locked → Unlocked → Completed)
 ├── src/
+│   ├── logger.py             # File & console logging + faulthandler crash diagnostics (logs/companion.log)
 │   ├── log_watcher.py        # Non-blocking Client.txt regex parser & incremental tailer
 │   ├── route_engine.py       # Stateful campaign step tracker with forward-lookahead matching
 │   ├── settings_manager.py   # Persistent user settings (opacity, mode, default-off toggles)
 │   └── ui/
-│       ├── dashboard_window.py # Second-Screen Tactical Dashboard window
+│       ├── dashboard_window.py # Second-Screen Tactical Dashboard + global in-game hotkeys
 │       ├── overlay_window.py   # Frameless click-through In-Game HUD Overlay
 │       └── map_canvas.py       # Custom QPainter vector topology map widget
 └── tests/

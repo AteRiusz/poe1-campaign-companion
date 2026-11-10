@@ -13,11 +13,17 @@ Provides:
 
 from __future__ import annotations
 
+import ctypes
+import logging
 from pathlib import Path
+import sys
+import time
 from typing import Dict, Optional
 
+logger = logging.getLogger("poe_companion")
+
 from PyQt6.QtCore import QTimer, Qt
-from PyQt6.QtGui import QKeySequence, QShortcut
+from PyQt6.QtGui import QGuiApplication, QKeySequence, QShortcut
 from PyQt6.QtWidgets import (
     QCheckBox,
     QFileDialog,
@@ -29,6 +35,7 @@ from PyQt6.QtWidgets import (
     QMainWindow,
     QPushButton,
     QScrollArea,
+    QSizePolicy,
     QSlider,
     QVBoxLayout,
     QWidget,
@@ -44,6 +51,13 @@ from src.ui.overlay_window import OverlayWindow, TAG_STYLES
 class DashboardWindow(QMainWindow):
     """Main Second-Screen Companion Window & Controller for the In-Game HUD Overlay."""
 
+    VK_L = 0x4C
+    VK_MENU = 0x12
+
+    HOTKEY_TOGGLE_OVERLAY = 1
+    HOTKEY_NEXT_STEP = 2
+    HOTKEY_PREV_STEP = 3
+
     def __init__(
         self,
         engine: RouteEngine,
@@ -58,6 +72,8 @@ class DashboardWindow(QMainWindow):
         self.selected_lab_tier: str = "Normal"
         self._user_overrode_lab_tier: bool = False
         self.lab_tier_buttons: Dict[str, QPushButton] = {}
+        self._last_hotkey_time: Dict[int, float] = {}
+        self._prev_key_down: Dict[int, bool] = {}
 
         self.setWindowTitle("PoE1 Campaign Speedrun Companion — Tactical Dashboard")
         self.resize(1180, 760)
@@ -73,23 +89,91 @@ class DashboardWindow(QMainWindow):
         self.poll_timer.timeout.connect(self.poll_client_log)
         self.poll_timer.start()
 
-        if self.settings_mgr.settings.ui_mode in ("overlay", "both"):
-            self.overlay.show()
-
-        # Do initial poll & UI render
+        # Do initial poll & UI render before showing overlay so height is pre-calculated
         self.poll_client_log()
-        self._update_overlay_button_state()
         self.refresh_ui()
 
+        if self.settings_mgr.settings.ui_mode in ("overlay", "both"):
+            self.overlay.show()
+        self._update_overlay_button_state()
+
     def _bind_shortcuts(self) -> None:
-        shortcut_next = QShortcut(QKeySequence("Alt+]"), self)
-        shortcut_next.activated.connect(self.on_next_step)
+        """Bind local window QShortcuts and OS-wide Win32 global key-state polling (works in-game without Alt-Tab)."""
+        self.shortcut_overlay = QShortcut(QKeySequence("Alt+L"), self)
+        self.shortcut_overlay.activated.connect(
+            lambda: self._trigger_hotkey(self.HOTKEY_TOGGLE_OVERLAY)
+        )
 
-        shortcut_prev = QShortcut(QKeySequence("Alt+["), self)
-        shortcut_prev.activated.connect(self.on_prev_step)
+        self.shortcut_next = QShortcut(QKeySequence("Alt+]"), self)
+        self.shortcut_next.activated.connect(
+            lambda: self._trigger_hotkey(self.HOTKEY_NEXT_STEP)
+        )
 
-        shortcut_overlay = QShortcut(QKeySequence("F9"), self)
-        shortcut_overlay.activated.connect(self.toggle_overlay)
+        self.shortcut_prev = QShortcut(QKeySequence("Alt+["), self)
+        self.shortcut_prev.activated.connect(
+            lambda: self._trigger_hotkey(self.HOTKEY_PREV_STEP)
+        )
+
+        if sys.platform == "win32":
+            user32 = ctypes.windll.user32
+            self._vk_next = (user32.VkKeyScanW(ord("]")) & 0xFF) or 0xDD
+            self._vk_prev = (user32.VkKeyScanW(ord("[")) & 0xFF) or 0xDB
+
+            if QGuiApplication.platformName() != "offscreen":
+                self.hotkey_timer = QTimer(self)
+                self.hotkey_timer.setInterval(40)
+                self.hotkey_timer.timeout.connect(self._poll_global_key_states)
+                self.hotkey_timer.start()
+                logger.info(
+                    "Global in-game hotkeys active (Alt+L, Alt+], Alt+[; vk_next=0x%x, vk_prev=0x%x)",
+                    self._vk_next,
+                    self._vk_prev,
+                )
+
+    def _trigger_hotkey(self, hk_id: int) -> bool:
+        """Execute a hotkey action with a 180ms debounce so local QShortcut and global polling never double-fire."""
+        now = time.monotonic()
+        if now - self._last_hotkey_time.get(hk_id, 0.0) < 0.18:
+            return False
+        self._last_hotkey_time[hk_id] = now
+
+        if hk_id == self.HOTKEY_TOGGLE_OVERLAY:
+            logger.debug("Hotkey triggered: Toggle Overlay (Alt+L)")
+            self.toggle_overlay()
+            return True
+        if hk_id == self.HOTKEY_NEXT_STEP:
+            logger.debug("Hotkey triggered: Next Step (Alt+])")
+            self.on_next_step()
+            return True
+        if hk_id == self.HOTKEY_PREV_STEP:
+            logger.debug("Hotkey triggered: Prev Step (Alt+[)")
+            self.on_prev_step()
+            return True
+        return False
+
+    def _poll_global_key_states(self, key_state_fn: Optional[object] = None) -> None:
+        """Rising-edge global key check via Win32 GetAsyncKeyState so hotkeys work in-game without Alt-Tab."""
+        if key_state_fn is None:
+            if sys.platform != "win32" or QGuiApplication.platformName() == "offscreen":
+                return
+            get_state = ctypes.windll.user32.GetAsyncKeyState
+        else:
+            get_state = key_state_fn  # type: ignore[assignment]
+
+        alt_down = bool(get_state(self.VK_MENU) & 0x8000)
+        overlay_down = alt_down and bool(get_state(self.VK_L) & 0x8000)
+        next_down = alt_down and bool(get_state(getattr(self, "_vk_next", 0xDD)) & 0x8000)
+        prev_down = alt_down and bool(get_state(getattr(self, "_vk_prev", 0xDB)) & 0x8000)
+
+        for hk_id, is_down in (
+            (self.HOTKEY_TOGGLE_OVERLAY, overlay_down),
+            (self.HOTKEY_NEXT_STEP, next_down),
+            (self.HOTKEY_PREV_STEP, prev_down),
+        ):
+            was_down = self._prev_key_down.get(hk_id, False)
+            self._prev_key_down[hk_id] = is_down
+            if is_down and not was_down:
+                self._trigger_hotkey(hk_id)
 
     def _build_ui(self) -> None:
         central = QWidget(self)
@@ -168,7 +252,7 @@ class DashboardWindow(QMainWindow):
         top_layout.addWidget(banner_frame)
 
         # Mode & Settings Buttons
-        self.btn_toggle_overlay = QPushButton("🖥️ Show In-Game Overlay (F9)")
+        self.btn_toggle_overlay = QPushButton("🖥️ Show In-Game Overlay (Alt+L)")
         self.btn_toggle_overlay.clicked.connect(self.toggle_overlay)
         top_layout.addWidget(self.btn_toggle_overlay)
 
@@ -495,31 +579,37 @@ class DashboardWindow(QMainWindow):
             bg, fg, border = TAG_STYLES.get(act.get("color", "emerald"), TAG_STYLES["emerald"])
             lbl = QLabel(f"[{act.get('tag', 'STEP')}]  {act.get('text', '')}")
             lbl.setWordWrap(True)
+            lbl.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
             lbl.setStyleSheet(
                 f"background-color: {bg}; color: {fg}; border: 1px solid {border}; "
                 "border-radius: 6px; padding: 6px 10px; font-size: 12px; font-weight: 600;"
             )
             self.actions_layout.addWidget(lbl)
+            lbl.show()
 
         # Rebuild Optional Extra Info (OFF by default)
         self._clear_layout(self.extra_info_layout)
         if cfg.show_boss_info and step.boss_info:
             b_lbl = QLabel(f"🛡️ Boss & Resist Warning:\n{step.boss_info}")
             b_lbl.setWordWrap(True)
+            b_lbl.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
             b_lbl.setStyleSheet(
                 "background-color: #4c0519; color: #fecdd3; border: 1px solid #f43f5e; "
                 "border-radius: 6px; padding: 8px; font-size: 12px;"
             )
             self.extra_info_layout.addWidget(b_lbl)
+            b_lbl.show()
 
         if cfg.show_gem_rewards and step.gem_reward:
             g_lbl = QLabel(f"💎 Quest Gem & Vendor Reward:\n{step.gem_reward}")
             g_lbl.setWordWrap(True)
+            g_lbl.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
             g_lbl.setStyleSheet(
                 "background-color: #2e1065; color: #ddd6fe; border: 1px solid #8b5cf6; "
                 "border-radius: 6px; padding: 8px; font-size: 12px;"
             )
             self.extra_info_layout.addWidget(g_lbl)
+            g_lbl.show()
 
         if cfg.show_variants and step.variants:
             lines = [f"• {v.get('title')}: {v.get('desc')}" for v in step.variants]
@@ -657,10 +747,10 @@ class DashboardWindow(QMainWindow):
         self.opacity_group.setVisible(in_overlay_mode)
         self.chk_click_through.setVisible(in_overlay_mode)
         if in_overlay_mode:
-            self.btn_toggle_overlay.setText("🟢 Hide In-Game Overlay (F9)")
+            self.btn_toggle_overlay.setText("🟢 Hide In-Game Overlay (Alt+L)")
             self.btn_toggle_settings.setText("⚙️ Settings & Opacity")
         else:
-            self.btn_toggle_overlay.setText("🖥️ Show In-Game Overlay (F9)")
+            self.btn_toggle_overlay.setText("🖥️ Show In-Game Overlay (Alt+L)")
             self.btn_toggle_settings.setText("⚙️ Settings")
 
     def on_next_step(self) -> None:
@@ -699,4 +789,6 @@ class DashboardWindow(QMainWindow):
             item = layout.takeAt(0)
             widget = item.widget()
             if widget is not None:
+                widget.hide()
+                widget.setParent(None)
                 widget.deleteLater()

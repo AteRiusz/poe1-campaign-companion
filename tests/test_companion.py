@@ -285,3 +285,103 @@ def test_topology_compass_quadrants_across_all_103_steps() -> None:
                     assert 0.35 <= x <= 0.65 and 0.35 <= y <= 0.65, f"{sid} '{lbl}' at ({x},{y}) must be near Center"
 
 
+def test_overlay_and_dashboard_checklist_items_never_squash_when_switching_steps(
+    qapp: QApplication, tmp_path: Path
+) -> None:
+    sm = SettingsManager(tmp_path / "settings.json")
+    sm.settings.show_boss_info = True
+    sm.settings.show_gem_rewards = True
+    sm.settings.show_variants = True
+    engine = RouteEngine()
+    dash = DashboardWindow(engine, sm, ClientLogTailer(tmp_path / "Client.txt"))
+    dash.show()
+    dash.overlay.show()
+    qapp.processEvents()
+
+    # Check a representative set of steps across Acts 1-10 (including Lioneye's Watch)
+    test_indices = [0, 1, 2, 4, 5, 10, 15, 22, 35, 50, 75, 100, 102]
+    for idx in test_indices:
+        engine.select_index(idx)
+        dash.refresh_ui()
+        qapp.processEvents()
+
+        assert dash.overlay.width() == dash.overlay.OVERLAY_WIDTH
+
+        for i in range(dash.overlay.actions_container.count()):
+            pill = dash.overlay.actions_container.itemAt(i).widget()
+            assert pill is not None
+            needed = pill.heightForWidth(pill.width())
+            assert pill.height() >= needed, (
+                f"Overlay pill {i} squashed on {engine.current_step.step_id}: "
+                f"height={pill.height()} < needed={needed}"
+            )
+
+        for i in range(dash.overlay.extra_container.count()):
+            extra = dash.overlay.extra_container.itemAt(i).widget()
+            assert extra is not None
+            needed = extra.heightForWidth(extra.width())
+            assert extra.height() >= needed, (
+                f"Overlay extra {i} squashed on {engine.current_step.step_id}: "
+                f"height={extra.height()} < needed={needed}"
+            )
+
+        for i in range(dash.actions_layout.count()):
+            dpill = dash.actions_layout.itemAt(i).widget()
+            assert dpill is not None
+            needed = dpill.heightForWidth(dpill.width())
+            assert dpill.height() >= needed, (
+                f"Dashboard pill {i} squashed on {engine.current_step.step_id}: "
+                f"height={dpill.height()} < needed={needed}"
+            )
+
+    dash.close()
+
+
+def test_global_hotkeys_trigger_overlay_and_step_navigation(
+    qapp: QApplication, tmp_path: Path
+) -> None:
+    sm = SettingsManager(tmp_path / "settings.json")
+    engine = RouteEngine()
+    dash = DashboardWindow(engine, sm, ClientLogTailer(tmp_path / "Client.txt"))
+    dash.show()
+    qapp.processEvents()
+
+    assert not dash.overlay.isVisible()
+    assert engine.current_index == 0
+
+    pressed: set[int] = set()
+    key_fn = lambda vk: 0x8000 if vk in pressed else 0
+
+    # Simulate pressing Alt+L globally in-game
+    pressed = {DashboardWindow.VK_MENU, DashboardWindow.VK_L}
+    dash._poll_global_key_states(key_state_fn=key_fn)
+    assert dash.overlay.isVisible()
+
+    # Holding the key down or immediate duplicate within 180ms should not re-toggle
+    dash._poll_global_key_states(key_state_fn=key_fn)
+    assert dash.overlay.isVisible()
+
+    # Release keys
+    pressed = set()
+    dash._poll_global_key_states(key_state_fn=key_fn)
+
+    # Simulate pressing Alt+] (Next Step) globally in-game
+    vk_next = getattr(dash, "_vk_next", 0xDD)
+    pressed = {DashboardWindow.VK_MENU, vk_next}
+    dash._poll_global_key_states(key_state_fn=key_fn)
+    assert engine.current_index == 1
+
+    pressed = set()
+    dash._poll_global_key_states(key_state_fn=key_fn)
+
+    # Simulate pressing Alt+[ (Previous Step) globally in-game
+    vk_prev = getattr(dash, "_vk_prev", 0xDB)
+    pressed = {DashboardWindow.VK_MENU, vk_prev}
+    dash._poll_global_key_states(key_state_fn=key_fn)
+    assert engine.current_index == 0
+
+    dash.close()
+
+
+
+

@@ -9,8 +9,9 @@ __pycache__/
 *$py.class
 .pytest_cache/
 
-# Local user settings (auto-generated on first run)
+# Local user settings & runtime logs (auto-generated)
 config/user_settings.json
+logs/
 
 # OS / IDE files
 .DS_Store

@@ -11,11 +11,12 @@ from __future__ import annotations
 from typing import Optional
 
 from PyQt6.QtCore import QPoint, Qt
-from PyQt6.QtGui import QMouseEvent
+from PyQt6.QtGui import QMouseEvent, QShowEvent
 from PyQt6.QtWidgets import (
     QFrame,
     QHBoxLayout,
     QLabel,
+    QSizePolicy,
     QVBoxLayout,
     QWidget,
 )
@@ -35,6 +36,8 @@ TAG_STYLES = {
 class OverlayWindow(QWidget):
     """Topmost, frameless HUD overlay window that updates automatically on zone change."""
 
+    OVERLAY_WIDTH = 560
+
     def __init__(self, settings_mgr: SettingsManager, parent: Optional[QWidget] = None) -> None:
         super().__init__(parent)
         self.settings_mgr = settings_mgr
@@ -44,7 +47,8 @@ class OverlayWindow(QWidget):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self._apply_window_flags(self.settings_mgr.settings.overlay_click_through)
 
-        self.resize(560, 250)
+        self.setFixedWidth(self.OVERLAY_WIDTH)
+        self.resize(self.OVERLAY_WIDTH, 250)
         self.move(
             self.settings_mgr.settings.overlay_x,
             self.settings_mgr.settings.overlay_y,
@@ -72,6 +76,7 @@ class OverlayWindow(QWidget):
         self.settings_mgr.save()
         self._apply_window_flags(bool(enabled))
         self.drag_hint_label.setVisible(not enabled)
+        self._sync_overlay_height()
 
     def set_overlay_opacity(self, opacity: float) -> None:
         """Update window opacity in real time (0.25 to 1.00)."""
@@ -142,8 +147,9 @@ class OverlayWindow(QWidget):
         card_layout.addWidget(self.drag_hint_label)
 
         # Compass 1-line summary
-        self.summary_label = QLabel("")
+        self.summary_label = QLabel("", self.card)
         self.summary_label.setWordWrap(True)
+        self.summary_label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.summary_label.setStyleSheet("font-size: 12px; color: #6ee7b7; font-weight: 600;")
         card_layout.addWidget(self.summary_label)
 
@@ -158,8 +164,9 @@ class OverlayWindow(QWidget):
         self.actions_container.setSpacing(4)
         left_col.addLayout(self.actions_container)
 
-        self.tell_label = QLabel("")
+        self.tell_label = QLabel("", self.card)
         self.tell_label.setWordWrap(True)
+        self.tell_label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.tell_label.setStyleSheet(
             "background-color: #1c1917; color: #fde68a; border-left: 3px solid #f59e0b; "
             "padding: 4px 6px; font-size: 11px; border-radius: 3px;"
@@ -196,46 +203,96 @@ class OverlayWindow(QWidget):
         self._clear_layout(self.actions_container)
         for act in step.actions:
             bg, fg, border = TAG_STYLES.get(act.get("color", "emerald"), TAG_STYLES["emerald"])
-            pill = QLabel(f"[{act.get('tag', 'STEP')}]  {act.get('text', '')}")
+            pill = QLabel(f"[{act.get('tag', 'STEP')}]  {act.get('text', '')}", self.card)
             pill.setWordWrap(True)
+            pill.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
             pill.setStyleSheet(
                 f"background-color: {bg}; color: {fg}; border: 1px solid {border}; "
                 "border-radius: 5px; padding: 3px 7px; font-size: 11px; font-weight: 600;"
             )
             self.actions_container.addWidget(pill)
+            pill.show()
 
         # Rebuild Optional Extra Info (Only shown when corresponding setting is True)
         self._clear_layout(self.extra_container)
         if cfg.show_boss_info and step.boss_info:
-            boss_lbl = QLabel(f"🛡️ Boss: {step.boss_info}")
+            boss_lbl = QLabel(f"🛡️ Boss: {step.boss_info}", self.card)
             boss_lbl.setWordWrap(True)
+            boss_lbl.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
             boss_lbl.setStyleSheet(
                 "background-color: #4c0519; color: #fecdd3; border: 1px solid #f43f5e; "
                 "border-radius: 4px; padding: 3px 6px; font-size: 11px;"
             )
             self.extra_container.addWidget(boss_lbl)
+            boss_lbl.show()
 
         if cfg.show_gem_rewards and step.gem_reward:
-            gem_lbl = QLabel(f"💎 Gems: {step.gem_reward}")
+            gem_lbl = QLabel(f"💎 Gems: {step.gem_reward}", self.card)
             gem_lbl.setWordWrap(True)
+            gem_lbl.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
             gem_lbl.setStyleSheet(
                 "background-color: #2e1065; color: #ddd6fe; border: 1px solid #8b5cf6; "
                 "border-radius: 4px; padding: 3px 6px; font-size: 11px;"
             )
             self.extra_container.addWidget(gem_lbl)
+            gem_lbl.show()
 
         if cfg.show_variants and step.variants:
             var_text = " | ".join(f"{v.get('title')}: {v.get('desc')}" for v in step.variants)
-            var_lbl = QLabel(f"🗺️ Variants: {var_text}")
+            var_lbl = QLabel(f"🗺️ Variants: {var_text}", self.card)
             var_lbl.setWordWrap(True)
+            var_lbl.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
             var_lbl.setStyleSheet(
                 "background-color: #1c1917; color: #d6d3d1; border: 1px solid #44403c; "
                 "border-radius: 4px; padding: 3px 6px; font-size: 11px;"
             )
             self.extra_container.addWidget(var_lbl)
+            var_lbl.show()
 
         self.map_widget.set_topology(step.topology, compass_label=step.compass)
-        self.adjustSize()
+        self._sync_overlay_height()
+
+    def _sync_overlay_height(self) -> None:
+        """Compute exact word-wrapped label heights at the fixed overlay width so items never squash."""
+        outer_layout = self.layout()
+        card_layout = self.card.layout()
+        if outer_layout is None or card_layout is None:
+            return
+
+        wrapped_labels = [self.summary_label, self.tell_label]
+        for container in (self.actions_container, self.extra_container):
+            for i in range(container.count()):
+                w = container.itemAt(i).widget()
+                if isinstance(w, QLabel):
+                    wrapped_labels.append(w)
+
+        for lbl in wrapped_labels:
+            lbl.setMinimumHeight(0)
+
+        # Activate outer layout first so self.card gets the full OVERLAY_WIDTH (even when hidden)
+        outer_layout.invalidate()
+        outer_layout.activate()
+        card_layout.invalidate()
+        card_layout.activate()
+
+        for lbl in wrapped_labels:
+            lbl.ensurePolished()
+            avail_w = lbl.width() if lbl.width() > 100 else 305
+            req_h = lbl.heightForWidth(avail_w) if lbl.hasHeightForWidth() else lbl.sizeHint().height()
+            if req_h > 0:
+                lbl.setMinimumHeight(req_h)
+
+        card_layout.invalidate()
+        card_layout.activate()
+        outer_layout.invalidate()
+        outer_layout.activate()
+
+        target_h = max(230, card_layout.totalSizeHint().height())
+        self.setFixedSize(self.OVERLAY_WIDTH, target_h)
+
+    def showEvent(self, event: QShowEvent) -> None:
+        super().showEvent(event)
+        self._sync_overlay_height()
 
     @staticmethod
     def _clear_layout(layout: QVBoxLayout) -> None:
@@ -243,6 +300,8 @@ class OverlayWindow(QWidget):
             item = layout.takeAt(0)
             widget = item.widget()
             if widget is not None:
+                widget.hide()
+                widget.setParent(None)
                 widget.deleteLater()
 
     # Allow dragging the HUD when Click-Through is temporarily unlocked
